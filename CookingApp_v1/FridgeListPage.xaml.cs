@@ -24,7 +24,9 @@ namespace CookingApp_v1
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul FridgeCategories care ne arata categoriile de ingrediente
 
-            await Navigation.PushAsync(new FridgeCategoriesPage());
+            //await Navigation.PushAsync(new FridgeCategoriesPage());
+            // imi trimite informatii la pagina FridgeRecipesTabbedPage care imi inchide pagina curenta si
+            // deschide FridgeCategoriesPage
         }
         async void OnSearchListButtonClicked(object sender, EventArgs e)
         {
@@ -34,6 +36,5 @@ namespace CookingApp_v1
 
             await Navigation.PushAsync(new SearchListPage());
         }
-        
     }
 }
