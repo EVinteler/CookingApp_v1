@@ -10,6 +10,8 @@ namespace CookingApp_v1
         {
             InitializeComponent();
 
+            // incepem stack-ul de pagini de navigare si adaugam o pagina de tipul StartPage
+            
             MainPage = new NavigationPage(new StartPage());
         }
 

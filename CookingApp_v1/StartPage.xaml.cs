@@ -16,5 +16,21 @@ namespace CookingApp_v1
         {
             InitializeComponent();
         }
+        async void OnRegisterButtonClicked(object sender, EventArgs e)
+        {
+            // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
+            // adaugam o pagina de tipul Register pentru Inregistrare
+
+            //await DisplayAlert("OnRegisterButtonClicked", "Opened [OnRegisterButtonClicked].", "Ok.");
+            await Navigation.PushAsync(new RegisterPage());
+        }
+        async void OnLoginButtonClicked(object sender, EventArgs e)
+        {
+            // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
+            // adaugam o pagina de tipul Login pentru Autentificare
+
+            //await DisplayAlert("OnLoginButtonClicked", "Opened [OnLoginButtonClicked].", "Ok.");
+            await Navigation.PushAsync(new LoginPage());
+        }
     }
 }
