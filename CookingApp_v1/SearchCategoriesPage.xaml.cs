@@ -30,6 +30,7 @@ namespace CookingApp_v1
                 });
             */
 
+            await Navigation.PopAsync();
             await Navigation.PushAsync(new SearchListPage());
         }
     }

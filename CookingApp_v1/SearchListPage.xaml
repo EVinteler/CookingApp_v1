@@ -4,7 +4,7 @@
              x:Class="CookingApp_v1.SearchListPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label Text="Search Page"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
             <Button Text="Search Categories" Clicked="OnSearchCategoriesButtonClicked" />
