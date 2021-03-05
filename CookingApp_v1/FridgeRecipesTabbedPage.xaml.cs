@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace CookingApp_v1
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TabbedPage1 : TabbedPage
+    public partial class FridgeRecipesTabbedPage : TabbedPage
     {
-        public TabbedPage1()
+        public FridgeRecipesTabbedPage()
         {
             InitializeComponent();
         }

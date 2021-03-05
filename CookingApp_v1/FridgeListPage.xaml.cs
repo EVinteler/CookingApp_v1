@@ -31,7 +31,7 @@ namespace CookingApp_v1
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul FridgeCategories care ne arata categoriile de ingrediente
 
-            await Navigation.PushAsync(new RecipesPage());
+            await Navigation.PushAsync(new FridgeCategoriesPage());
         }
         
     }

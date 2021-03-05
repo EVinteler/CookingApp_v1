@@ -25,7 +25,7 @@ namespace CookingApp_v1
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul Fridge pentru Frigider deoarece initial dupa reg/login ne va trimite la pagina cu ingredientele
 
-            await Navigation.PushAsync(new FridgeListPage());
+            await Navigation.PushAsync(new FridgeRecipesTabbedPage());
         }
     }
 }

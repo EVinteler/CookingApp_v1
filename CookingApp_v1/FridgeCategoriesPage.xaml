@@ -4,7 +4,7 @@
              x:Class="CookingApp_v1.FridgeCategoriesPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label Text="Fridge Categories List"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
             <Button Text="FridgeList" Clicked="OnFridgeListButtonClicked" />
