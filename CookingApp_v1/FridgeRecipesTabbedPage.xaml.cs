@@ -15,8 +15,8 @@ namespace CookingApp_v1
         public FridgeRecipesTabbedPage()
         {
             InitializeComponent();
-                this.Children.Add(new FridgeListPage() { Title = "Fridge List" });
-                this.Children.Add(new RecipesPage() { Title = "Recipes" });
+            this.Children.Add(new FridgeListPage() { Title = "Fridge List" });
+            this.Children.Add(new RecipesPage() { Title = "Recipes" });
         }
     }
 }

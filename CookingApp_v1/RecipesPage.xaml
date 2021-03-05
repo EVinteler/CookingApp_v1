@@ -7,7 +7,6 @@
             <Label Text="Recipes Page"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Button Text="FridgeList" Clicked="OnFridgeListButtonClicked" />
             <Button Text="RecipeDetail" Clicked="OnRecipeDetailButtonClicked" />
         </StackLayout>
     </ContentPage.Content>
