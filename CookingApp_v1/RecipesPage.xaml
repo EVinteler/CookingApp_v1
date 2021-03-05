@@ -2,12 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CookingApp_v1.RecipesPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Priority="0" Text="Fridge" Clicked="OnFridgeListButtonClicked"/>
+        <ToolbarItem  Priority="1" Text="Recipes"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Recipes Page"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Button Text="RecipeDetail" Clicked="OnRecipeDetailButtonClicked" />
+            <Button Text="Recipe Detail" Clicked="OnRecipeDetailButtonClicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -17,7 +17,8 @@ namespace CookingApp_v1
         public FridgeRecipesTabbedPage()
         {
             InitializeComponent();
-            On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
+            On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom); // vroiam sa fie jos la android :(
+
             Children.Add(new FridgeListPage() { Title = "Fridge List" });
             Children.Add(new RecipesPage() { Title = "Recipes" });
         }

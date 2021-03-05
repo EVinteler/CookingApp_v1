@@ -19,14 +19,19 @@ namespace CookingApp_v1
         {
             InitializeComponent();
         }
+        async void OnRecipesButtonClicked(object sender, EventArgs e)
+        {
+            // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
+            // adaugam o pagina de tipul Recipes care ne arat lista de retete disponibile
+
+            await Navigation.PushAsync(new RecipesPage());
+        }
         async void OnFridgeCategoriesButtonClicked(object sender, EventArgs e)
         {
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul FridgeCategories care ne arata categoriile de ingrediente
 
-            //await Navigation.PushAsync(new FridgeCategoriesPage());
-            // imi trimite informatii la pagina FridgeRecipesTabbedPage care imi inchide pagina curenta si
-            // deschide FridgeCategoriesPage
+            await Navigation.PushAsync(new FridgeCategoriesPage());
         }
         async void OnSearchListButtonClicked(object sender, EventArgs e)
         {
