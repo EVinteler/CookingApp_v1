@@ -28,7 +28,7 @@ namespace CookingApp_v1
                     {
                         BindingContext = new World()
                     });
-                */
+                */ 
 
             await Navigation.PushAsync(new RecipeDetailPage());
         }
