@@ -9,6 +9,9 @@ using Xamarin.Forms.Xaml;
 
 namespace CookingApp_v1
 {
+    /*
+     * LOGIN.PAGE este pagina de autentificare
+     */
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {

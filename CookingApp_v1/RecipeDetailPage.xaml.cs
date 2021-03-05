@@ -9,6 +9,9 @@ using Xamarin.Forms.Xaml;
 
 namespace CookingApp_v1
 {
+    /*
+     * RECIPE.DETAIL.PAGE ne va arata detaliile retetei alese din pagina RecipesPage
+     */
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RecipeDetailPage : ContentPage
     {

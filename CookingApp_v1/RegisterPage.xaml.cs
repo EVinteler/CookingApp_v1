@@ -10,6 +10,9 @@ using Xamarin.Forms.Xaml;
 
 namespace CookingApp_v1
 {
+    /*
+     * REGISTER.PAGE este pagina de inregistrare
+     */
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage
     {
