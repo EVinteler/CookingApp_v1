@@ -30,7 +30,9 @@ namespace CookingApp_v1
                 });
             */
 
-            await Navigation.PopAsync();
+            // facem Pop pentru a nu intra intr-un loop de Search Pages
+            // nu facem await pt ca atunci nu continua cu Push
+            Navigation.PopAsync();
             await Navigation.PushAsync(new SearchListPage());
         }
     }

@@ -24,7 +24,9 @@ namespace CookingApp_v1
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul SearchCategories care ne lasa sa alegem categoria de ingredient cautat
 
-            await Navigation.PopAsync();
+            // facem Pop pentru a nu intra intr-un loop de Search Pages
+            // nu facem await pt ca atunci nu continua cu Push
+            Navigation.PopAsync();
             await Navigation.PushAsync(new SearchCategoriesPage());
         }
     }
