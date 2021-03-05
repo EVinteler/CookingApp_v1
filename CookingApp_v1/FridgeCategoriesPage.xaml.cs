@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace CookingApp_v1
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FridgeListPage : ContentPage
+    public partial class FridgeCategoriesPage : ContentPage
     {
-        public FridgeListPage()
+        public FridgeCategoriesPage()
         {
             InitializeComponent();
         }
