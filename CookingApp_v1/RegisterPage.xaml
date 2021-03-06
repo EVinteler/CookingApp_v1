@@ -8,6 +8,7 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
             <Button Text="Submit" Clicked="OnSubmitButtonClicked" />
+            <Button Text="Modal Page" Clicked="OnErrorButtonClicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -27,5 +27,12 @@ namespace CookingApp_v1
 
             await Navigation.PushAsync(new FridgeListPage());
         }
+        async void OnErrorButtonClicked(object sender, EventArgs e)
+        {
+            // pushMODALasync ne adauga o noua pagina de tip modal pe stack-ul de pagini de navigare
+            // aceasta pagina ii spune utilizatorului ca a aparut o eroare
+
+            await Navigation.PushModalAsync(new RegisterErrorPage());
+        }
     }
 }
