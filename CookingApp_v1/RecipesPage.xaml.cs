@@ -39,5 +39,7 @@ namespace CookingApp_v1
 
             await Navigation.PushAsync(new FridgeListPage());
         }
+
+
     }
 }
