@@ -37,6 +37,9 @@ namespace CookingApp_v1.Data
         {
             // returneaza o lista de obiecte Frigider din categoria trimisa
             
+            //!toreview!
+            // teoretic ai o lista de liste deci o sa ai un fel de double query (foloseste afisarea unei liste pe elemente de la Ingrediente v)
+
         }
         public Task<List<Frigidere>> GetFrigiderListAsync()
         {
