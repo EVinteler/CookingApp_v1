@@ -29,18 +29,103 @@ namespace CookingApp_v1.Data
         // functii pt utilizatori: add/save (register, pt a retine filtrele si frigiderele)
         // check pt nume, email si parola (register&login)
         // save (pentru a retine filtrele si id-ul frigiderului)
+
+
+        public int CheckRegisterAsync(string nume_utilizator, string email, string parola)
+        {
+            // dorim sa nu mai existe numele de utilizator si email-ul
+            // daca exista, returnam 0
+            // daca nu exista, inseram parola in tabelul Utilizatori
+
+            //!toreview!
+
+            _database.Table<Utilizatori>()
+                     .Where(i => i.U_nume == nume_utilizator)
+                     .FirstAsync();
+            _database.Table<Utilizatori>()
+                     .Where(i => i.U_email == email)
+                     .FirstAsync();
+
+            if(false)
+            {
+                Utilizatori utilizator;
+                utilizator.U_nume = nume_utilizator;
+                utilizator.U_email = email;
+                utilizator.U_parola = parola;
+                _database.UpdateAsync(utilizator);
+            }
+
+            return 0;      
+        }
+        public int CheckLoginAsync(string nume_utilizator, string email, string parola)
+        {
+
+            //!toreview!
+
+            // dorim sa returneze 1 daca s-a gasit utilizatorul cu parola corespunzatoare
+            // 0 daca nu s-a gasit utilizatorul cu numele sau email-ul
+            // si -1 daca nu corespunde parola cu numele de utilizator sau email-ul
+
+            //!toreview!
+            //Utilizatori utilizator;
+            //utilizator=_database.Table<Utilizatori>()
+            //         .Where(i => i.U_nume == nume_utilizator || i.U_email == email)
+              //       .FirstAsync();
+
+            if (false) //(utilizator is null)
+                return 0;
+
+            // verificarea pt parola
+
+            return 1;
+        }
+
+        public Task<int> SaveUtilizatorAsync(Utilizatori utilizator)
+         {
+            // pentru updatare in cazul in care se adauga un filtru&frigider
+            if (utilizator.U_id != 0)
+            {
+                return _database.UpdateAsync(utilizator);
+            }
+                // pentru adaugarea unui utilizator nou la register:
+            else
+            {
+                return _database.InsertAsync(utilizator);
+            }
+         }
+
         /*** FRIGIDERE ***/
         // functii pt frigidere: save, update si delete (pt ingrediente); afisam toate ingredientele ca lista
         // afisam toate ingredientele dintr-o categorie
 
+        /* //!toreview!
+        public Task<int> SaveFrigiderAsync(???)
+        {
+            // va fi facut automat la adaugarea unui ingredient nou
+            if (story.StoryID != 0)
+                {
+                    // in cazul in care exista un element Story cu id-ul resp, doar facem update la Story in loc sa cream unul nou
+                    return _database.UpdateAsync(story);
+                }
+                else
+                {
+                    // in cazut in care nu mai exista element Story cu id-ul resp, il cream
+                    return _database.InsertAsync(story);
+                }
+            }
+        }
+        public Task<int> DeleteIngredientFrigiderAsync(???)
+        {
+            // nu cred ca e un delete ci un update la lista ingredientului respectiv din frigider?
+            return _database.DeleteAsync(???);
+        }
         public Task<List<Frigidere>> GetFrigiderCategorieListAsync(string categorie)
         {
             // returneaza o lista de obiecte Frigider din categoria trimisa
-            
-            //!toreview!
+          
             // teoretic ai o lista de liste deci o sa ai un fel de double query (foloseste afisarea unei liste pe elemente de la Ingrediente v)
 
-        }
+        }*/
         public Task<List<Frigidere>> GetFrigiderListAsync()
         {
             // returneaza o lista de obiecte Frigider
