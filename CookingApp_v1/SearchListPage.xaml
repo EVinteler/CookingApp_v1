@@ -4,9 +4,13 @@
              x:Class="CookingApp_v1.SearchListPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Search Page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <ListView x:Name="listViewIngredient" Margin="10" ItemSelected="OnIngredientViewItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding N_nume}" TextColor="Black" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Button Text="Search Categories" Clicked="OnSearchCategoriesButtonClicked" />
         </StackLayout>
     </ContentPage.Content>

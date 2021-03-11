@@ -14,5 +14,6 @@ namespace CookingApp_v1.Models
         public string N_categorie { get; set; }
         public string N_subcategorie { get; set; }
         public string N_descriere { get; set; }
+        public string N_link_imagine { get; set; }
     }
 }

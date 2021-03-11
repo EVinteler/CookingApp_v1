@@ -143,14 +143,22 @@ namespace CookingApp_v1.Data
 
 
 
-
-
-
         /*** INGREDIENTE ***/
         // functii pt ingrediente: afisam toate ingredientele ca lista; afisam toate ingredientele dintr-o categorie
         // returnam un singur ingredient (pt a il adauga la un frigider)
+        // cautare dupa nume, categorie si/sau subcategorie cu LIKE
+
 
         // Task returneaza un obiect async, in cazul nostru de tip Ingredient
+        public Task<Ingrediente> SearchIngredientAsync(string nume_inserat)
+        {
+            // !toreview!
+            // returneaza un obiect de tip Ingredient dupa id
+            return _database.Table<Ingrediente>()
+            .Where(i => i.N_nume == nume_inserat || i.N_categorie == nume_inserat || i.N_subcategorie == nume_inserat ||
+            i.N_descriere == nume_inserat) // !toreview! nume inserat e un string cu mai multe cuvinte, trebuie delimitat dupa caracterul space
+           .FirstOrDefaultAsync();
+        }
         public Task<Ingrediente> GetIngredientAsync(int id)
         {
             // returneaza un obiect de tip Ingredient dupa id

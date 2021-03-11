@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using CookingApp_v1.Models;
+
 namespace CookingApp_v1
 {
     /*
@@ -19,6 +21,18 @@ namespace CookingApp_v1
         {
             InitializeComponent();
         }
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            // pentru ca listView din .xaml sa stie care lista sa o afiseze, folosim functia din CookingDatabase
+            // care ne returneaza elemente de tip world, character si story
+
+            // elementele de la listViewIngredient vor avea valorile primite din GetIngredientListAsync, metoda din CookingDatabase
+
+            listViewIngredient.ItemsSource = await App.Database.GetIngredientListAsync();
+
+        }
         async void OnSearchCategoriesButtonClicked(object sender, EventArgs e)
         {
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
@@ -28,6 +42,12 @@ namespace CookingApp_v1
             // nu facem await pt ca atunci nu continua cu Push
             Navigation.PopAsync();
             await Navigation.PushAsync(new SearchCategoriesPage());
+        }
+        async void OnIngredientViewItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            await DisplayAlert("OnIngredientViewItemSelected", "Opened [OnIngredientViewItemSelected].", "Ok.");
+
+            // vom avea un buton de adaugat
         }
     }
 }
