@@ -8,7 +8,8 @@ namespace CookingApp_v1.Models
 {
     public class Filtre
     {
-        [PrimaryKey, AutoIncrement]
+        // id-urile pentru tipurile de filtre merg din 100 in 100 pentru a putea adauga mai multe
+        [PrimaryKey]
         public int FT_id { get; set; }
         public string FT_descriere { get; set; }
     }

@@ -19,20 +19,6 @@ namespace CookingApp_v1.Models
 
         // daca nu merge cu 1:M, schimba in string si converteste la cautare
         [OneToMany]
-        public List<Ingrediente> R_ingrediente_carne { get; set; }
-        [OneToMany]
-        public List<Ingrediente> R_ingrediente_lactate { get; set; }
-        [OneToMany]
-        public List<Ingrediente> R_ingrediente_pastecereale { get; set; }
-        [OneToMany]
-        public List<Ingrediente> R_ingrediente_legume { get; set; }
-        [OneToMany]
-        public List<Ingrediente> R_ingrediente_sosuri { get; set; }
-        [OneToMany]
-        public List<Ingrediente> R_ingrediente_condimente { get; set; }
-        [OneToMany]
-        public List<Ingrediente> R_ingrediente_fructe { get; set; }
-        [OneToMany]
-        public List<Ingrediente> R_ingrediente_dulciuri { get; set; }
+        public List<Ingrediente> R_ingrediente { get; set; }
     }
 }

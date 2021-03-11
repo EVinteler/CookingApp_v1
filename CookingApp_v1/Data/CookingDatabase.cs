@@ -23,6 +23,10 @@ namespace CookingApp_v1.Data
             _database.CreateTableAsync<Ingrediente>().Wait();
             _database.CreateTableAsync<Retete>().Wait();
             _database.CreateTableAsync<Utilizatori>().Wait();
+
+            // citim informatiile din fisiere excel si le copiem in tabele
+            // initial, frigidere si utilizatori sunt goale
+            // avem informatii doar in filtre, ingrediente si retete
         }
 
         /*** UTILIZATORI ***/
@@ -53,6 +57,11 @@ namespace CookingApp_v1.Data
                 utilizator.U_email = email;
                 utilizator.U_parola = parola;
                 _database.UpdateAsync(utilizator);
+                // cream un nou frigider care sa ii corespunda utilizatorului
+                Frigidere frigider_nou;
+                frigider_nou.F_id = utilizator.U_frigider;
+                frigider_nou.F_utilizator_id = utilizator.U_id;
+                _database.InsertAsync(frigider_nou);
             }
 
             return 0;      
