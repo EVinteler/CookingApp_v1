@@ -41,7 +41,7 @@ namespace CookingApp_v1.Data
             return _database.Table<Utilizatori>().ToListAsync();
         }
 
-        public int CheckRegisterAsync(string nume_utilizator, string email, string parola)
+        public Task<int> CheckRegisterAsync(string nume_utilizator, string email, string parola)
         {
             // dorim sa nu mai existe numele de utilizator si email-ul
             // daca exista, returnam 0
@@ -56,7 +56,10 @@ namespace CookingApp_v1.Data
                      .Where(i => i.U_email == email)
                      .FirstAsync();*/
 
-            var n = _database.QueryAsync<Utilizatori>(query: "select count(*) from Utilizatori where U_nume=nume_utilizator");
+            string query = "select count(*) from Utilizatori where U_nume=" + nume_utilizator;
+            var result = _database.ExecuteScalarAsync<int>(query);
+
+            return result;
 
 
 
@@ -74,7 +77,7 @@ namespace CookingApp_v1.Data
                 _database.InsertAsync(frigider_nou);
             }
 
-            return 0;      
+            //return 1;      
         }
         public int CheckLoginAsync(string nume_utilizator, string email, string parola)
         {

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +6,8 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
+using CookingApp_v1.Models;
 
 namespace CookingApp_v1
 {
@@ -25,7 +26,8 @@ namespace CookingApp_v1
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul Fridge pentru Frigider deoarece initial dupa reg/login ne va trimite la pagina cu ingredientele
 
-            await Navigation.PushAsync(new FridgeListPage());
+            await App.Database.CheckRegisterAsync(nume_utilizator.ToString(), email.ToString(), parola.ToString());
+            //await Navigation.PushAsync(new FridgeListPage());
         }
         async void OnErrorButtonClicked(object sender, EventArgs e)
         {
