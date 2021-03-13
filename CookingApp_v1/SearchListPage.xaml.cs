@@ -30,7 +30,8 @@ namespace CookingApp_v1
 
             // elementele de la listViewIngredient vor avea valorile primite din GetIngredientListAsync, metoda din CookingDatabase
 
-            listViewIngredient.ItemsSource = await App.Database.GetIngredientListAsync();
+            //listViewIngredient.ItemsSource = await App.Database.GetIngredientListAsync();
+            listViewUser.ItemsSource = await App.Database.GetUtilizatoriListAsync();
 
         }
         async void OnSearchCategoriesButtonClicked(object sender, EventArgs e)

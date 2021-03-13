@@ -35,6 +35,12 @@ namespace CookingApp_v1.Data
         // save (pentru a retine filtrele si id-ul frigiderului)
 
 
+        public Task<List<Utilizatori>> GetUtilizatoriListAsync()
+        {
+            // returneaza o lista de obiecte Frigider
+            return _database.Table<Utilizatori>().ToListAsync();
+        }
+
         public int CheckRegisterAsync(string nume_utilizator, string email, string parola)
         {
             // dorim sa nu mai existe numele de utilizator si email-ul
@@ -43,14 +49,18 @@ namespace CookingApp_v1.Data
 
             //!toreview!
 
-            _database.Table<Utilizatori>()
+            /*_database.Table<Utilizatori>()
                      .Where(i => i.U_nume == nume_utilizator)
                      .FirstAsync();
             _database.Table<Utilizatori>()
                      .Where(i => i.U_email == email)
-                     .FirstAsync();
+                     .FirstAsync();*/
 
-            if(false)
+            var n = _database.QueryAsync<Utilizatori>(query: "select count(*) from Utilizatori where U_nume=nume_utilizator");
+
+
+
+            if (false)
             {
                 Utilizatori utilizator;
                 utilizator.U_nume = nume_utilizator;
@@ -153,10 +163,20 @@ namespace CookingApp_v1.Data
         public Task<Ingrediente> SearchIngredientAsync(string nume_inserat)
         {
             // !toreview!
-            // returneaza un obiect de tip Ingredient dupa id
+            // returneaza un obiect de tip Ingredient dupa nume, categorie, subcategorie sau descriere
             return _database.Table<Ingrediente>()
             .Where(i => i.N_nume == nume_inserat || i.N_categorie == nume_inserat || i.N_subcategorie == nume_inserat ||
             i.N_descriere == nume_inserat) // !toreview! nume inserat e un string cu mai multe cuvinte, trebuie delimitat dupa caracterul space
+           .FirstOrDefaultAsync();
+        }
+        public Task<Ingrediente> SearchIngredientCategorieAsync(string categorie, string nume_inserat)
+        {
+            // !toreview!
+            // returneaza un obiect de tip Ingredient dupa nume/etc, dar doar din categoria dorita
+            return _database.Table<Ingrediente>()
+            .Where(i => i.N_categorie == categorie && ( i.N_nume == nume_inserat || i.N_categorie == nume_inserat 
+            || i.N_subcategorie == nume_inserat || i.N_descriere == nume_inserat)) 
+            // !toreview! nume inserat e un string cu mai multe cuvinte, trebuie delimitat dupa caracterul space
            .FirstOrDefaultAsync();
         }
         public Task<Ingrediente> GetIngredientAsync(int id)
