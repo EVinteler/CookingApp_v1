@@ -23,6 +23,7 @@ namespace CookingApp_v1.Data
             _database.CreateTableAsync<Frigidere>().Wait();
             _database.CreateTableAsync<Ingrediente>().Wait();
             _database.CreateTableAsync<Retete>().Wait();*/
+            _database.DropTableAsync<Utilizatori>().Wait();
             _database.CreateTableAsync<Utilizatori>().Wait();
             
             /*_database.DropTableAsync<Filtre>().Wait();
@@ -42,13 +43,13 @@ namespace CookingApp_v1.Data
         // save (pentru a retine filtrele si id-ul frigiderului)
 
 
-        /*public Task<List<Utilizatori>> GetUtilizatoriListAsync()
+        public Task<List<Utilizatori>> GetUtilizatoriListAsync()
         {
             // returneaza o lista de obiecte Frigider
             return _database.Table<Utilizatori>().ToListAsync();
-        }*/
+        }
 
-        public void CheckRegisterAsync(Utilizatori utilizator, string nume_utilizator, string email, string parola)
+        public void CheckRegisterAsync(Utilizatori utilizator)//, string nume_utilizator, string email, string parola)
         {
             // dorim sa nu mai existe numele de utilizator si email-ul
             // daca exista, returnam 0
@@ -63,11 +64,6 @@ namespace CookingApp_v1.Data
                      .Where(i => i.U_email == email)
                      .FirstAsync();*/
 
-            utilizator.U_id = 1;
-            utilizator.U_nume = nume_utilizator;
-            utilizator.U_email = email;
-            utilizator.U_parola = parola;
-            utilizator.U_frigider = 1;
             _database.InsertAsync(utilizator);
 
             //string query = "select count(*) from Utilizatori where U_nume=" + nume_utilizator;
@@ -79,6 +75,11 @@ namespace CookingApp_v1.Data
             /*
             if (false)
             {
+
+                // SCHIMBA SA FIE AUTO INCREMENT LA FRIGIDER PK SI APOI SA IL LUAM DE ACOLO
+                // pt al nostru 
+
+
                 Utilizatori utilizator;
                 utilizator.U_id = 1;
                 utilizator.U_frigider = 1;

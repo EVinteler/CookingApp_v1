@@ -6,17 +6,14 @@
         <StackLayout>
             <Label Text="Register Page"/>
             <Editor Placeholder="Nume de Utilizator"
-                    x:Name="nume_utilizator"
                     Text="{Binding U_nume}"
                     HeightRequest="40">
             </Editor>
             <Editor Placeholder="Email"
-                    x:Name="email"
                     Text="{Binding U_email}"
                     HeightRequest="40">
             </Editor>
             <Editor Placeholder="Parolă"
-                    x:Name="parola"
                     Text="{Binding U_parola}"
                     HeightRequest="40">
             </Editor>
