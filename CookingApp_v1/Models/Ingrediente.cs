@@ -8,7 +8,7 @@ namespace CookingApp_v1.Models
 {
     public class Ingrediente
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey]
         public int N_id { get; set; }
         public string N_nume { get; set; }
         public string N_categorie { get; set; }

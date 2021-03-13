@@ -18,11 +18,18 @@ namespace CookingApp_v1.Data
             _database = new SQLiteAsyncConnection(dbPath);
 
             // cream tabelele pentru filtre, frigidere, ingrediente, retete si utilizatori
-            _database.CreateTableAsync<Filtre>().Wait();
+
+            /*_database.CreateTableAsync<Filtre>().Wait();
             _database.CreateTableAsync<Frigidere>().Wait();
             _database.CreateTableAsync<Ingrediente>().Wait();
-            _database.CreateTableAsync<Retete>().Wait();
+            _database.CreateTableAsync<Retete>().Wait();*/
             _database.CreateTableAsync<Utilizatori>().Wait();
+            
+            /*_database.DropTableAsync<Filtre>().Wait();
+            _database.DropTableAsync<Frigidere>().Wait();
+            _database.DropTableAsync<Ingrediente>().Wait();
+            _database.DropTableAsync<Retete>().Wait();
+            _database.DropTableAsync<Utilizatori>().Wait();*/
 
             // citim informatiile din fisiere excel si le copiem in tabele
             // initial, frigidere si utilizatori sunt goale
@@ -35,13 +42,13 @@ namespace CookingApp_v1.Data
         // save (pentru a retine filtrele si id-ul frigiderului)
 
 
-        public Task<List<Utilizatori>> GetUtilizatoriListAsync()
+        /*public Task<List<Utilizatori>> GetUtilizatoriListAsync()
         {
             // returneaza o lista de obiecte Frigider
             return _database.Table<Utilizatori>().ToListAsync();
-        }
+        }*/
 
-        public Task<int> CheckRegisterAsync(string nume_utilizator, string email, string parola)
+        public void CheckRegisterAsync(Utilizatori utilizator, string nume_utilizator, string email, string parola)
         {
             // dorim sa nu mai existe numele de utilizator si email-ul
             // daca exista, returnam 0
@@ -56,16 +63,25 @@ namespace CookingApp_v1.Data
                      .Where(i => i.U_email == email)
                      .FirstAsync();*/
 
-            string query = "select count(*) from Utilizatori where U_nume=" + nume_utilizator;
-            var result = _database.ExecuteScalarAsync<int>(query);
+            utilizator.U_id = 1;
+            utilizator.U_nume = nume_utilizator;
+            utilizator.U_email = email;
+            utilizator.U_parola = parola;
+            utilizator.U_frigider = 1;
+            _database.InsertAsync(utilizator);
 
-            return result;
+            //string query = "select count(*) from Utilizatori where U_nume=" + nume_utilizator;
+            //var result = _database.ExecuteScalarAsync<int>(query);
+
+            //return result;
 
 
-
+            /*
             if (false)
             {
                 Utilizatori utilizator;
+                utilizator.U_id = 1;
+                utilizator.U_frigider = 1;
                 utilizator.U_nume = nume_utilizator;
                 utilizator.U_email = email;
                 utilizator.U_parola = parola;
@@ -75,10 +91,13 @@ namespace CookingApp_v1.Data
                 frigider_nou.F_id = utilizator.U_frigider;
                 frigider_nou.F_utilizator_id = utilizator.U_id;
                 _database.InsertAsync(frigider_nou);
-            }
+            }*/
 
             //return 1;      
         }
+
+
+        /*
         public int CheckLoginAsync(string nume_utilizator, string email, string parola)
         {
 
@@ -147,7 +166,7 @@ namespace CookingApp_v1.Data
           
             // teoretic ai o lista de liste deci o sa ai un fel de double query (foloseste afisarea unei liste pe elemente de la Ingrediente v)
 
-        }*/
+        }
         public Task<List<Frigidere>> GetFrigiderListAsync()
         {
             // returneaza o lista de obiecte Frigider
@@ -156,7 +175,7 @@ namespace CookingApp_v1.Data
 
 
 
-        /*** INGREDIENTE ***/
+        /*** INGREDIENTE 
         // functii pt ingrediente: afisam toate ingredientele ca lista; afisam toate ingredientele dintr-o categorie
         // returnam un singur ingredient (pt a il adauga la un frigider)
         // cautare dupa nume, categorie si/sau subcategorie cu LIKE
@@ -204,7 +223,7 @@ namespace CookingApp_v1.Data
 
 
 
-        /*** RETETE ***/
+        /*** RETETE 
         // functii pt retete: afisam toate retetele ca lista; (?) returnam o singura reteta
 
         // Task returneaza un obiect async, in cazul nostru de tip Reteta
@@ -222,7 +241,7 @@ namespace CookingApp_v1.Data
         }
 
 
-        /*** FILTRE ***/
+        /*** FILTRE 
         // functii pt filtre: afisam toate filtrele ca lista (vom schimba sa fie pe categorii dupa ce ma decid ce filtre sunt finale)
         // returnam un singur filtru (pt a il copia in tabelul utilizatori)
 
@@ -239,5 +258,6 @@ namespace CookingApp_v1.Data
             // returneaza o lista de obiecte Filtru
             return _database.Table<Filtre>().ToListAsync();
         }
+        */
     }
 }

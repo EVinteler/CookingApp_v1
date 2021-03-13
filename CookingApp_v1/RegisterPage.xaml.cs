@@ -23,11 +23,18 @@ namespace CookingApp_v1
         }
         async void OnSubmitButtonClicked(object sender, EventArgs e)
         {
+            // ne trebuie cuiva cui sa ii facem binding lol
+            // la world se deschidea o pagina noua unde ii trimiteam un world prin binding
+            // dar aici nu avem asa
+            var n_utilizator = (Utilizatori)BindingContext;
+            App.Database.CheckRegisterAsync(n_utilizator, nume_utilizator.ToString(), email.ToString(), parola.ToString());
+            await DisplayAlert("Did the function","WO","ok??");
+            
+            
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul Fridge pentru Frigider deoarece initial dupa reg/login ne va trimite la pagina cu ingredientele
-
-            await App.Database.CheckRegisterAsync(nume_utilizator.ToString(), email.ToString(), parola.ToString());
             //await Navigation.PushAsync(new FridgeListPage());
+
         }
         async void OnErrorButtonClicked(object sender, EventArgs e)
         {
