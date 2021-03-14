@@ -112,7 +112,7 @@ namespace CookingApp_v1.Data
             //Utilizatori utilizator;
             //utilizator=_database.Table<Utilizatori>()
             //         .Where(i => i.U_nume == nume_utilizator || i.U_email == email)
-              //       .FirstAsync();
+              //       .FirstAsync(); 
 
             if (false) //(utilizator is null)
                 return 0;
@@ -187,6 +187,8 @@ namespace CookingApp_v1.Data
         {
             // !toreview!
             // returneaza un obiect de tip Ingredient dupa nume, categorie, subcategorie sau descriere
+
+            // substring comparisons nu ==
             return _database.Table<Ingrediente>()
             .Where(i => i.N_nume == nume_inserat || i.N_categorie == nume_inserat || i.N_subcategorie == nume_inserat ||
             i.N_descriere == nume_inserat) // !toreview! nume inserat e un string cu mai multe cuvinte, trebuie delimitat dupa caracterul space
@@ -196,6 +198,8 @@ namespace CookingApp_v1.Data
         {
             // !toreview!
             // returneaza un obiect de tip Ingredient dupa nume/etc, dar doar din categoria dorita
+        
+            // substring comparisons nu ==
             return _database.Table<Ingrediente>()
             .Where(i => i.N_categorie == categorie && ( i.N_nume == nume_inserat || i.N_categorie == nume_inserat 
             || i.N_subcategorie == nume_inserat || i.N_descriere == nume_inserat)) 
