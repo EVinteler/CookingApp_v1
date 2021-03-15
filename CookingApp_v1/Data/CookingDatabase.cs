@@ -49,7 +49,7 @@ namespace CookingApp_v1.Data
         }
 
         //functia ne va returna un element de tip Task<int>
-        public async Task<int> CheckRegisterAsync(Utilizatori utilizator)
+        public async Task<int> CheckRegisterAsync(Utilizatori utilizator, Frigidere frigider)
         {
             // dorim sa nu mai existe numele de utilizator si email-ul
             // daca exista, returnam 0
@@ -89,10 +89,9 @@ namespace CookingApp_v1.Data
                     await _database.InsertAsync(utilizator);
 
                     // cream un nou frigider care sa ii corespunda utilizatorului
-                    // 
-                    //Frigidere frigider_nou;
-                    //frigider_nou.F_utilizator_id = utilizator.U_id;
-                    //_database.InsertAsync(frigider_nou);
+                    
+                    frigider.F_utilizator_id = utilizator.U_id;
+                    await _database.InsertAsync(frigider);
 
                     return 1;
                 }
@@ -106,37 +105,11 @@ namespace CookingApp_v1.Data
             }
             catch (Exception e)
             {
+                // daca apare o eroare returnam -1, care ne va da un mesaj de eroare
+                // specific pe pagina register
                 System.Diagnostics.Debug.WriteLine("No results whoopsie!" + e);
                 return -1;
             }
-
-
-            //_database.InsertAsync(utilizator);
-
-
-            /*
-            if (false)
-            {
-
-                // SCHIMBA SA FIE AUTO INCREMENT LA FRIGIDER PK SI APOI SA IL LUAM DE ACOLO
-                // pt al nostru 
-
-
-                Utilizatori utilizator;
-                utilizator.U_id = 1;
-                utilizator.U_frigider = 1;
-                utilizator.U_nume = nume_utilizator;
-                utilizator.U_email = email;
-                utilizator.U_parola = parola;
-                _database.UpdateAsync(utilizator);
-                // cream un nou frigider care sa ii corespunda utilizatorului
-                Frigidere frigider_nou;
-                frigider_nou.F_id = utilizator.U_frigider;
-                frigider_nou.F_utilizator_id = utilizator.U_id;
-                _database.InsertAsync(frigider_nou);
-            }*/
-
-            //return 1;      
         }
 
 

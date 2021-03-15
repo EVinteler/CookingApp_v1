@@ -26,13 +26,16 @@ namespace CookingApp_v1
             // am luat informatiile din transmise prin editoare din xaml convertite la
             // tipul unei inregistrari a tabelului Utilizatori si le-am pus in m_utilizator
             var m_utilizator = (Utilizatori)BindingContext;
+            // cream un frigider nou care il vom transmite la functie pentru a insera informatii
+            // de la utilizatorul nou in el
+            Frigidere m_frigider = null;
 
             // apelam functia de inregistrare cu informatiile transmise
             // vom "converti" (desface) de la Task<int> la int folosind await
             // in cazul in care result e 1, vom deschide pagina FridgeList
             // daca e 0, vom afisa un mesaj de eroare si vom deschide o pagina de eroare specifica
             // daca e -1, vom afisa un mesaj de eroare si vom deschide o alta pagina de eroare specifica
-            var result = await App.Database.CheckRegisterAsync(m_utilizator);
+            var result = await App.Database.CheckRegisterAsync(m_utilizator, m_frigider);
             
             if (result == 1)
             {
