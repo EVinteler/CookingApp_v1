@@ -138,6 +138,11 @@ namespace CookingApp_v1.Data
                     var result_p = _database.Table<Utilizatori>()
                                             .Where(i => i.U_nume == utilizator.U_nume && i.U_parola == utilizator.U_parola)
                                             .FirstAsync();
+                    // pentru criptare:
+                    // c_parola = fct_cript(utilizator.U_parola)
+                    //.Where(i => i.U_nume == utilizator.U_nume && i.U_parola == c_parola)
+
+
                     // daca exista utilizator cu numele si parola trimise vom return 1 (succes)
                     if (result_p != null)
                         return 1;
