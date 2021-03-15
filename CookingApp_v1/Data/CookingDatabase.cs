@@ -80,6 +80,20 @@ namespace CookingApp_v1.Data
                 if (result.Count == 0)
                 {
                     //System.Diagnostics.Debug.WriteLine("Output for result.Count == 0");
+
+                    // adaugam un utilizator nou
+                    // criptam parola
+                    //string c_parola = fct_cript(utilizator.U_parola);
+                    //utilizator.U_parola = c_parola;
+
+                    await _database.InsertAsync(utilizator);
+
+                    // cream un nou frigider care sa ii corespunda utilizatorului
+                    // 
+                    //Frigidere frigider_nou;
+                    //frigider_nou.F_utilizator_id = utilizator.U_id;
+                    //_database.InsertAsync(frigider_nou);
+
                     return 1;
                 }
                 // daca mai exista, atunci returnam 0, care ne va da un mesaj de eroare
