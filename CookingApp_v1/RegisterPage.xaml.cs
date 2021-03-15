@@ -27,8 +27,8 @@ namespace CookingApp_v1
             // tipul unei inregistrari a tabelului Utilizatori si le-am pus in m_utilizator
             var m_utilizator = (Utilizatori)BindingContext;
             // apelam functia de inregistrare cu informatiile transmise
-            var res = App.Database.CheckRegisterAsync(m_utilizator);
-            await DisplayAlert("Did the function","WO: " + res,"ok??");
+            App.Database.CheckRegisterAsync(m_utilizator);
+            await DisplayAlert("Did the function","WO: ","ok??");
             
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul Fridge pentru Frigider deoarece initial dupa reg/login ne va trimite la pagina cu ingredientele

@@ -49,7 +49,7 @@ namespace CookingApp_v1.Data
             return _database.Table<Utilizatori>().ToListAsync();
         }
 
-        public async Task<int> CheckRegisterAsync(Utilizatori utilizator)
+        public async void CheckRegisterAsync(Utilizatori utilizator)
         {
             // dorim sa nu mai existe numele de utilizator si email-ul
             // daca exista, returnam 0
@@ -64,14 +64,29 @@ namespace CookingApp_v1.Data
             // apelam functia care ne face comanda si ne returneaza o lista cu utilizatorii (<Utilizatori> va
             // iesi ca List<Utilizatori>) care indeplinesc cerintele de mai sus
             // care o vom salva in result
-            var result = await _database.QueryAsync<Utilizatori>(query);
+            try
+            {
+                var result = await _database.QueryAsync<Utilizatori>(query);
 
-            //Console.WriteLine("result: " + result.Count);
-            // result.Count va numara elementele din lista cu utilizatorii
-            if (result.Count == 0)
-                return 1;
-            else
-                return 0;
+                // result.Count va numara elementele din lista cu utilizatorii
+                int counter = (result.Count==null)?0:result.Count;
+                if (counter == 0)
+                {
+                    System.Diagnostics.Debug.WriteLine("Output for counter == 0");
+                    //return 1;
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("Output for counter != 0");
+                    //return 0;
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("No results whoopsie!" + e);
+                //return 0;
+            }
+
 
             //_database.InsertAsync(utilizator);
 
