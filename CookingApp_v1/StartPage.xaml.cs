@@ -37,7 +37,12 @@ namespace CookingApp_v1
             // adaugam o pagina de tipul Login pentru Autentificare
 
             //await DisplayAlert("OnLoginButtonClicked", "Opened [OnLoginButtonClicked].", "Ok.");
-            await Navigation.PushAsync(new LoginPage());
+
+            // vom crea o noua inregistrare de tip Utilizator care o vom "lega" de pagina LoginPage
+            await Navigation.PushAsync(new LoginPage
+            {
+                BindingContext = new Utilizatori()
+            });
         }
     }
 }

@@ -46,13 +46,12 @@ namespace CookingApp_v1
             }
             else if (result == 0)
             {
-                await DisplayAlert("ESEC!", "Mai exista numele de utilizator sau email-ul", "Ok.");
+                await DisplayAlert("ESEC!", "Mai exista numele de utilizator sau email-ul.", "Ok.");
             }
             else
             {
                 await DisplayAlert("ESEC!", "Eroare nespecificata. Incercati din nou.", "Ok.");
             }
-
         }
         async void OnErrorButtonClicked(object sender, EventArgs e)
         {

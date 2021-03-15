@@ -70,16 +70,17 @@ namespace CookingApp_v1.Data
                 // functia SQL va selecta toti utilizatorii care au numele sau email-ul
                 // trimis prin elementul la care i-am facut bind (utilizator)
                 // apelam functia care ne face comanda si ne returneaza o lista cu utilizatorii (<Utilizatori>
-                // va iesi ca List<Utilizatori>) care indeplinesc cerintele de mai sus
+                // va iesi ca List<Utilizatori>) care indeplinesc
                 // care o vom salva in result
                 var result = await _database.QueryAsync<Utilizatori>("select * from Utilizatori where U_nume=? OR U_email=?",utilizator.U_nume,utilizator.U_email);
 
                 // result.Count va numara elementele din lista cu utilizatorii
+                var counter = (result==null)?0:result.Count;
                 // daca nu mai exista persoana cu numele sau email-ul dat atunci o inseram
                 // in tabel si returnam 1, care ne va lasa sa trecem pe pagina urmatoare
-                if (result.Count == 0)
+                if (counter == 0)
                 {
-                    //System.Diagnostics.Debug.WriteLine("Output for result.Count == 0");
+                    //System.Diagnostics.Debug.WriteLine("Output for counter == 0");
 
                     // adaugam un utilizator nou
                     // criptam parola
@@ -89,7 +90,6 @@ namespace CookingApp_v1.Data
                     await _database.InsertAsync(utilizator);
 
                     // cream un nou frigider care sa ii corespunda utilizatorului
-                    
                     frigider.F_utilizator_id = utilizator.U_id;
                     await _database.InsertAsync(frigider);
 
@@ -99,7 +99,7 @@ namespace CookingApp_v1.Data
                 // specific pe pagina register
                 else
                 {
-                    //System.Diagnostics.Debug.WriteLine("Output for result.Count != 0");
+                    //System.Diagnostics.Debug.WriteLine("Output for counter != 0");
                     return 0;
                 }
             }
@@ -113,30 +113,57 @@ namespace CookingApp_v1.Data
         }
 
 
-        /*
-        public int CheckLoginAsync(string nume_utilizator, string email, string parola)
+        public async Task<int> CheckLoginAsync(Utilizatori utilizator)
         {
+            // functia va returna 1 daca s-a gasit utilizatorul cu parola corespunzatoare
+            // va returna 0 daca nu corespunde parola cu numele dat
+            // va returna -1 daca nu s-a gasit utilizatorul cu numele dat
+            // va returna -2 in caz de eroare generala
+            
+            try
+            {
+                // functia SQL va selecta utilizatorul care are numele
+                // trimis prin elementul la care i-am facut bind (utilizator)
+                // apelam functia care ne face comanda si ne returneaza un element
+                // de tip Utilizator
+                var result_r = await _database.Table<Utilizatori>()
+                                   .Where(i => i.U_nume == utilizator.U_nume)
+                                   .FirstAsync();
 
-            //!toreview!
-
-            // dorim sa returneze 1 daca s-a gasit utilizatorul cu parola corespunzatoare
-            // 0 daca nu s-a gasit utilizatorul cu numele sau email-ul
-            // si -1 daca nu corespunde parola cu numele de utilizator sau email-ul
-
-            //!toreview!
-            //Utilizatori utilizator;
-            //utilizator=_database.Table<Utilizatori>()
-            //         .Where(i => i.U_nume == nume_utilizator || i.U_email == email)
-              //       .FirstAsync(); 
-
-            if (false) //(utilizator is null)
-                return 0;
-
-            // verificarea pt parola
-
-            return 1;
+                // daca exista persoana cu numele dat atunci
+                // vom trece la verificarea parolei
+                if (result_r != null)
+                {
+                    // functia SQL va selecta utilizatorul cu numele si parola trimise
+                    var result_p = _database.Table<Utilizatori>()
+                                            .Where(i => i.U_nume == utilizator.U_nume && i.U_parola == utilizator.U_parola)
+                                            .FirstAsync();
+                    // daca exista utilizator cu numele si parola trimise vom return 1 (succes)
+                    if (result_p != null)
+                        return 1;
+                    // altfel vom returna -1, care ne va da un mesaj de eroare
+                    // specific pe pagina login
+                    else
+                        return -1;
+                }
+                // daca nu exista, atunci returnam 0, care ne va da un mesaj de eroare
+                // specific pe pagina login
+                else
+                {
+                    //System.Diagnostics.Debug.WriteLine("Output for counter != 0");
+                    return 0;
+                }
+            }
+            catch (Exception e)
+            {
+                // daca apare o eroare returnam -2, care ne va da un mesaj de eroare
+                // specific pe pagina logare
+                System.Diagnostics.Debug.WriteLine("No results whoopsie!" + e);
+                return -2;
+            }
         }
 
+        /*
         public Task<int> SaveUtilizatorAsync(Utilizatori utilizator)
          {
             // pentru updatare in cazul in care se adauga un filtru&frigider

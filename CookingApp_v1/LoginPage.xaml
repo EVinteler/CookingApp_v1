@@ -4,9 +4,15 @@
              x:Class="CookingApp_v1.LoginPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Login Page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Login Page"/>
+            <Editor Placeholder="Nume"
+                    Text="{Binding U_nume}"
+                    HeightRequest="40">
+            </Editor>
+            <Editor Placeholder="Parolă"
+                    Text="{Binding U_parola}"
+                    HeightRequest="40">
+            </Editor>
             <Button Text="Submit" Clicked="OnSubmitButtonClicked" />
             <Button Text="Modal Page" Clicked="OnErrorButtonClicked" />
         </StackLayout>
