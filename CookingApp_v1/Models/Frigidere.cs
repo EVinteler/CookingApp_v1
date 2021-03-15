@@ -11,7 +11,7 @@ namespace CookingApp_v1.Models
     {
         // id-ul la frigider nu va fi autoincrement deoarece odata ce este creat
         // un nou utilizator, vom crea si un frigider pentru el
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
         public int F_id { get; set; }
         public int F_utilizator_id { get; set; }
 

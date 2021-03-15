@@ -19,11 +19,10 @@ namespace CookingApp_v1.Data
 
             // cream tabelele pentru filtre, frigidere, ingrediente, retete si utilizatori
 
-            /*_database.CreateTableAsync<Filtre>().Wait();
+            _database.CreateTableAsync<Filtre>().Wait();
             _database.CreateTableAsync<Frigidere>().Wait();
             _database.CreateTableAsync<Ingrediente>().Wait();
-            _database.CreateTableAsync<Retete>().Wait();*/
-            //_database.DropTableAsync<Utilizatori>().Wait();
+            _database.CreateTableAsync<Retete>().Wait();
             _database.CreateTableAsync<Utilizatori>().Wait();
             
             /*_database.DropTableAsync<Filtre>().Wait();
@@ -49,42 +48,52 @@ namespace CookingApp_v1.Data
             return _database.Table<Utilizatori>().ToListAsync();
         }
 
-        public async void CheckRegisterAsync(Utilizatori utilizator)
+        //functia ne va returna un element de tip Task<int>
+        public async Task<int> CheckRegisterAsync(Utilizatori utilizator)
         {
             // dorim sa nu mai existe numele de utilizator si email-ul
             // daca exista, returnam 0
-            // daca nu exista, inseram parola in tabelul Utilizatori
+            // daca nu exista, inseram parola in tabelul Utilizatori si returnam 1
+            // daca apare o eroare, returnam -1
 
             //!toreview!
 
-            // salvam o comanda in query
-            // comanda va selecta toti utilizatorii care au numele sau email-ul
-            // trimis prin elementul la care i-am facut bind (utilizator)
-            string query = "select * from Utilizatori where U_nume=" + utilizator.U_nume;
-            // apelam functia care ne face comanda si ne returneaza o lista cu utilizatorii (<Utilizatori> va
-            // iesi ca List<Utilizatori>) care indeplinesc cerintele de mai sus
-            // care o vom salva in result
+            // vom folosi un try catch
+            // in cazul in care exista erori, sa nu intram in modul de break
+            // astfel vom transmite urmatoarele informatii prin try catch:
+                // pe partea de try: returneaza 1 daca inregistrarea a avut succes
+                // returneaza 0 daca a fost gasit macar un utilizator cu numele sau emailul respectiv
+                // pe partea de catch: in cazul unei erori nespecificate, dorim ca tot sa nu se
+                // poata face inregistrarea
             try
             {
-                var result = await _database.QueryAsync<Utilizatori>(query);
+                // functia SQL va selecta toti utilizatorii care au numele sau email-ul
+                // trimis prin elementul la care i-am facut bind (utilizator)
+                // apelam functia care ne face comanda si ne returneaza o lista cu utilizatorii (<Utilizatori>
+                // va iesi ca List<Utilizatori>) care indeplinesc cerintele de mai sus
+                // care o vom salva in result
+                var result = await _database.QueryAsync<Utilizatori>("select * from Utilizatori where U_nume=? OR U_email=?",utilizator.U_nume,utilizator.U_email);
 
                 // result.Count va numara elementele din lista cu utilizatorii
-                int counter = (result.Count==null)?0:result.Count;
-                if (counter == 0)
+                // daca nu mai exista persoana cu numele sau email-ul dat atunci o inseram
+                // in tabel si returnam 1, care ne va lasa sa trecem pe pagina urmatoare
+                if (result.Count == 0)
                 {
-                    System.Diagnostics.Debug.WriteLine("Output for counter == 0");
-                    //return 1;
+                    //System.Diagnostics.Debug.WriteLine("Output for result.Count == 0");
+                    return 1;
                 }
+                // daca mai exista, atunci returnam 0, care ne va da un mesaj de eroare
+                // specific pe pagina register
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("Output for counter != 0");
-                    //return 0;
+                    //System.Diagnostics.Debug.WriteLine("Output for result.Count != 0");
+                    return 0;
                 }
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine("No results whoopsie!" + e);
-                //return 0;
+                return -1;
             }
 
 
