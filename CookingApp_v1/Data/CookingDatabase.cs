@@ -23,7 +23,7 @@ namespace CookingApp_v1.Data
             _database.CreateTableAsync<Frigidere>().Wait();
             _database.CreateTableAsync<Ingrediente>().Wait();
             _database.CreateTableAsync<Retete>().Wait();*/
-            _database.DropTableAsync<Utilizatori>().Wait();
+            //_database.DropTableAsync<Utilizatori>().Wait();
             _database.CreateTableAsync<Utilizatori>().Wait();
             
             /*_database.DropTableAsync<Filtre>().Wait();
@@ -49,7 +49,7 @@ namespace CookingApp_v1.Data
             return _database.Table<Utilizatori>().ToListAsync();
         }
 
-        public void CheckRegisterAsync(Utilizatori utilizator)//, string nume_utilizator, string email, string parola)
+        public async Task<int> CheckRegisterAsync(Utilizatori utilizator)
         {
             // dorim sa nu mai existe numele de utilizator si email-ul
             // daca exista, returnam 0
@@ -57,19 +57,23 @@ namespace CookingApp_v1.Data
 
             //!toreview!
 
-            /*_database.Table<Utilizatori>()
-                     .Where(i => i.U_nume == nume_utilizator)
-                     .FirstAsync();
-            _database.Table<Utilizatori>()
-                     .Where(i => i.U_email == email)
-                     .FirstAsync();*/
+            // salvam o comanda in query
+            // comanda va selecta toti utilizatorii care au numele sau email-ul
+            // trimis prin elementul la care i-am facut bind (utilizator)
+            string query = "select * from Utilizatori where U_nume=" + utilizator.U_nume;
+            // apelam functia care ne face comanda si ne returneaza o lista cu utilizatorii (<Utilizatori> va
+            // iesi ca List<Utilizatori>) care indeplinesc cerintele de mai sus
+            // care o vom salva in result
+            var result = await _database.QueryAsync<Utilizatori>(query);
 
-            _database.InsertAsync(utilizator);
+            //Console.WriteLine("result: " + result.Count);
+            // result.Count va numara elementele din lista cu utilizatorii
+            if (result.Count == 0)
+                return 1;
+            else
+                return 0;
 
-            //string query = "select count(*) from Utilizatori where U_nume=" + nume_utilizator;
-            //var result = _database.ExecuteScalarAsync<int>(query);
-
-            //return result;
+            //_database.InsertAsync(utilizator);
 
 
             /*

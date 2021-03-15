@@ -24,6 +24,8 @@ namespace CookingApp_v1
             // adaugam o pagina de tipul Register pentru Inregistrare
 
             //await DisplayAlert("OnRegisterButtonClicked", "Opened [OnRegisterButtonClicked].", "Ok.");
+
+            // vom crea o noua inregistrare de tip Utilizator care o vom "lega" de pagina RegisterPage
             await Navigation.PushAsync(new RegisterPage
             {
                 BindingContext = new Utilizatori()
