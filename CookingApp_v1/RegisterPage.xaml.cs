@@ -28,7 +28,7 @@ namespace CookingApp_v1
             var m_utilizator = (Utilizatori)BindingContext;
             // cream un frigider nou care il vom transmite la functie pentru a insera informatii
             // de la utilizatorul nou in el
-            Frigidere m_frigider = null;
+            Frigidere m_frigider = new Frigidere();
 
             // apelam functia de inregistrare cu informatiile transmise
             // vom "converti" (desface) de la Task<int> la int folosind await
@@ -47,6 +47,10 @@ namespace CookingApp_v1
             else if (result == 0)
             {
                 await DisplayAlert("ESEC!", "Mai exista numele de utilizator sau email-ul.", "Ok.");
+            }
+            else if (result == -2)
+            {
+                await DisplayAlert("ESEC!", "Va rugam introduceti informatii in toate campurile.", "Ok.");
             }
             else
             {

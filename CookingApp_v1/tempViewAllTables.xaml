@@ -14,8 +14,8 @@
                                     <Label Text="{Binding U_id}" FontAttributes="Bold" />
                                     <Label Grid.Column="1" Text="{Binding U_nume}" />
                                     <Label Grid.Column="2" Text="{Binding U_email}"/>
-                                    <Label Grid.Column="2" Text="{Binding U_parola}"/>
-                                    <Label Grid.Column="2" Text="{Binding U_frigider}"/>
+                                    <Label Grid.Column="3" Text="{Binding U_parola}"/>
+                                    <Label Grid.Column="4" Text="{Binding U_frigider}"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
@@ -28,10 +28,10 @@
                                 <Grid>
                                     <Label Text="{Binding N_id}" FontAttributes="Bold" />
                                     <Label Grid.Column="1" Text="{Binding N_nume}" />
-                                    <Label Grid.Column="1" Text="{Binding N_categorie}" />
-                                    <Label Grid.Column="1" Text="{Binding N_subcategorie}" />
-                                    <Label Grid.Column="1" Text="{Binding N_descriere}" />
-                                    <Label Grid.Column="1" Text="{Binding N_link_imagine}" />
+                                    <Label Grid.Column="2" Text="{Binding N_categorie}" />
+                                    <Label Grid.Column="3" Text="{Binding N_subcategorie}" />
+                                    <Label Grid.Column="4" Text="{Binding N_descriere}" />
+                                    <Label Grid.Column="5" Text="{Binding N_link_imagine}" />
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
@@ -44,9 +44,9 @@
                                 <Grid>
                                     <Label Text="{Binding R_id}" FontAttributes="Bold" />
                                     <Label Grid.Column="1" Text="{Binding R_nume}" />
-                                    <Label Grid.Column="1" Text="{Binding R_link}" />
-                                    <Label Grid.Column="1" Text="{Binding R_cultura}" />
-                                    <Label Grid.Column="1" Text="{Binding R_descriere}" />
+                                    <Label Grid.Column="2" Text="{Binding R_link}" />
+                                    <Label Grid.Column="3" Text="{Binding R_cultura}" />
+                                    <Label Grid.Column="4" Text="{Binding R_descriere}" />
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>

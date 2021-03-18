@@ -52,22 +52,28 @@ namespace CookingApp_v1.Data
         //functia ne va returna un element de tip Task<int>
         public async Task<int> CheckRegisterAsync(Utilizatori utilizator, Frigidere frigider)
         {
+            
             // dorim sa nu mai existe numele de utilizator si email-ul
             // daca exista, returnam 0
             // daca nu exista, inseram parola in tabelul Utilizatori si returnam 1
             // daca apare o eroare, returnam -1
+            // daca utilizatorul nu a introdus nimic, returnam -2
 
-            //!toreview!
 
             // vom folosi un try catch
             // in cazul in care exista erori, sa nu intram in modul de break
             // astfel vom transmite urmatoarele informatii prin try catch:
-                // pe partea de try: returneaza 1 daca inregistrarea a avut succes
-                // returneaza 0 daca a fost gasit macar un utilizator cu numele sau emailul respectiv
-                // pe partea de catch: in cazul unei erori nespecificate, dorim ca tot sa nu se
-                // poata face inregistrarea
+            // pe partea de try: returneaza 1 daca inregistrarea a avut succes
+            // returneaza 0 daca a fost gasit macar un utilizator cu numele sau emailul respectiv
+            // pe partea de catch: in cazul unei erori nespecificate, dorim ca tot sa nu se
+            // poata face inregistrarea
             try
             {
+                // daca nu a fost introdus nimic, afisam un mesaj de eroare specific pe
+                // pagina de register
+                if (utilizator.U_nume == null || utilizator.U_email == null || utilizator.U_parola == null)
+                    return -2;
+
                 // functia SQL va selecta toti utilizatorii care au numele sau email-ul
                 // trimis prin elementul la care i-am facut bind (utilizator)
                 // apelam functia care ne face comanda si ne returneaza o lista cu utilizatorii (<Utilizatori>
