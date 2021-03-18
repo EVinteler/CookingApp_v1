@@ -6,49 +6,78 @@
         <ScrollView>
         <StackLayout>
                 <Label Text="Toate Tabelele"/>
-                <ListView x:Name="listViewUtilizatori" BackgroundColor="LightSalmon" Margin="10">
+                <ListView x:Name="listViewUtilizatori" BackgroundColor="LightSalmon" Margin="20">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                            <Grid>
-                                <Label Text="{Binding U_id}" FontAttributes="Bold" />
-                                <Label Grid.Column="1" Text="{Binding U_nume}" />
-                                <Label Grid.Column="2" Text="{Binding U_email}"/>
-                            </Grid>
+                                <Grid>
+                                    <Label Text="{Binding U_id}" FontAttributes="Bold" />
+                                    <Label Grid.Column="1" Text="{Binding U_nume}" />
+                                    <Label Grid.Column="2" Text="{Binding U_email}"/>
+                                    <Label Grid.Column="2" Text="{Binding U_parola}"/>
+                                    <Label Grid.Column="2" Text="{Binding U_frigider}"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ListView x:Name="listViewIngrediente" BackgroundColor="LightGoldenrodYellow" Margin="20">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Label Text="{Binding N_id}" FontAttributes="Bold" />
+                                    <Label Grid.Column="1" Text="{Binding N_nume}" />
+                                    <Label Grid.Column="1" Text="{Binding N_categorie}" />
+                                    <Label Grid.Column="1" Text="{Binding N_subcategorie}" />
+                                    <Label Grid.Column="1" Text="{Binding N_descriere}" />
+                                    <Label Grid.Column="1" Text="{Binding N_link_imagine}" />
+                                </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
             </ListView>
-            <ListView x:Name="listViewFrigidere" BackgroundColor="PeachPuff" Margin="10">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding StoryName}" TextColor="Black" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+            <ListView x:Name="listViewRetete" BackgroundColor="PaleGreen" Margin="20">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Label Text="{Binding R_id}" FontAttributes="Bold" />
+                                    <Label Grid.Column="1" Text="{Binding R_nume}" />
+                                    <Label Grid.Column="1" Text="{Binding R_link}" />
+                                    <Label Grid.Column="1" Text="{Binding R_cultura}" />
+                                    <Label Grid.Column="1" Text="{Binding R_descriere}" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
             </ListView>
-            <ListView x:Name="listViewIngrediente" BackgroundColor="LightGoldenrodYellow" Margin="10">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding StoryName}" TextColor="Black" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+            <ListView x:Name="listViewFiltre" BackgroundColor="PaleTurquoise" Margin="20">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Label Text="{Binding F_id}" FontAttributes="Bold" />
+                                    <Label Grid.Column="1" Text="{Binding F_utilizator_id}" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
             </ListView>
-            <ListView x:Name="listViewRetete" BackgroundColor="PaleGreen" Margin="10">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding StoryName}" TextColor="Black" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <ListView x:Name="listViewFiltre" BackgroundColor="PaleTurquoise" Margin="10">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding StoryName}" TextColor="Black" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                <ListView x:Name="listViewFrigidere" BackgroundColor="Lavender" Margin="10">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Label Text="{Binding F_id}" FontAttributes="Bold" />
+                                    <Label Grid.Column="1" Text="{Binding F_utilizator_id}" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             
-        </StackLayout>
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

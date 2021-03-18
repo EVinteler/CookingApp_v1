@@ -19,7 +19,7 @@ namespace CookingApp_v1.Data
 
             // cream tabelele pentru filtre, frigidere, ingrediente, retete si utilizatori
 
-            _database.DropTableAsync<Filtre>().Wait();
+            /*_database.DropTableAsync<Filtre>().Wait();
             _database.DropTableAsync<Ingrediente>().Wait();
             _database.DropTableAsync<Retete>().Wait();
             //_database.DropTableAsync<Frigidere>().Wait();
