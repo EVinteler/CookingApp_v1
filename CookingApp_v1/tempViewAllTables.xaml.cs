@@ -31,12 +31,5 @@ namespace CookingApp_v1
             listViewRetete.ItemsSource = await App.Database.GetRetetaListAsync();
             //listViewFrigidere.ItemsSource = await App.Database.GetFrigiderListAsync();
         }
-
-        // cand selectam un element, dorim sa primim o alerta cu informatiile care le contine
-        /*async void OnUtilizatoriViewItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            await DisplayAlert("OnCharacterViewItemSelected", 
-                "Opened [OnCharacterViewItemSelected].", "Ok.");
-        }*/
     }
 }

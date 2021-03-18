@@ -3,14 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CookingApp_v1.tempViewAllTables">
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout>
-            <Label Text="Toate Tabelele"/>
-            <ListView x:Name="listViewUtilizatori" ItemSelected="OnUtilizatoriViewItemSelected" BackgroundColor="LightSalmon" Margin="10">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding U_id}" TextColor="Black" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+                <Label Text="Toate Tabelele"/>
+                <ListView x:Name="listViewUtilizatori" BackgroundColor="LightSalmon" Margin="10">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                            <Grid>
+                                <Label Text="{Binding U_id}" FontAttributes="Bold" />
+                                <Label Grid.Column="1" Text="{Binding U_nume}" />
+                                <Label Grid.Column="2" Text="{Binding U_email}"/>
+                            </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
             </ListView>
             <ListView x:Name="listViewFrigidere" BackgroundColor="PeachPuff" Margin="10">
                 <ListView.ItemTemplate>
@@ -42,5 +49,6 @@
             </ListView>
             
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

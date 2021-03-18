@@ -53,12 +53,5 @@ namespace CookingApp_v1
                 await DisplayAlert("ESEC!", "Eroare nespecificata. Incercati din nou.", "Ok.");
             }
         }
-        async void OnErrorButtonClicked(object sender, EventArgs e)
-        {
-            // pushMODALasync ne adauga o noua pagina de tip modal pe stack-ul de pagini de navigare
-            // aceasta pagina ii spune utilizatorului ca a aparut o eroare
-
-            await Navigation.PushModalAsync(new RegisterErrorPage());
-        }
     }
 }
