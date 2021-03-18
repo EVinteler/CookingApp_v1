@@ -9,7 +9,8 @@ namespace CookingApp_v1.Models
 {
     public class Retete
     {
-        [PrimaryKey]
+        // dupa ce facem adaugare automata, stergem autoincrement
+        [PrimaryKey,AutoIncrement]
         public int R_id { get; set; }
         public string R_nume { get; set; }
         public string R_link { get; set; }

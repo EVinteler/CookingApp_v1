@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CookingApp_v1.tempViewAllTables">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Toate Tabelele"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -44,5 +44,30 @@ namespace CookingApp_v1
                 BindingContext = new Utilizatori()
             });
         }
+        async void OntempAddReteteButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new tempReteteInsert
+            {
+                BindingContext = new Retete()
+            });
+        }
+        async void OntempAddIngredienteButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new tempIngredienteInsert
+            {
+                BindingContext = new Ingrediente()
+            });
+        }
+        async void OntempAddFiltreButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new tempFiltreInsert
+            {
+                BindingContext = new Filtre()
+            });
+        }
+        async void OntempViewAllButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new tempViewAllTables());
+        }
     }
 }

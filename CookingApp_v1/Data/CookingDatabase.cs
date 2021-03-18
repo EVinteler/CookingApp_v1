@@ -19,17 +19,18 @@ namespace CookingApp_v1.Data
 
             // cream tabelele pentru filtre, frigidere, ingrediente, retete si utilizatori
 
+            _database.DropTableAsync<Filtre>().Wait();
+            _database.DropTableAsync<Ingrediente>().Wait();
+            _database.DropTableAsync<Retete>().Wait();
+            //_database.DropTableAsync<Frigidere>().Wait();
+            //_database.DropTableAsync<Utilizatori>().Wait();*/
+
             _database.CreateTableAsync<Filtre>().Wait();
             _database.CreateTableAsync<Frigidere>().Wait();
             _database.CreateTableAsync<Ingrediente>().Wait();
             _database.CreateTableAsync<Retete>().Wait();
             _database.CreateTableAsync<Utilizatori>().Wait();
             
-            /*_database.DropTableAsync<Filtre>().Wait();
-            _database.DropTableAsync<Frigidere>().Wait();
-            _database.DropTableAsync<Ingrediente>().Wait();
-            _database.DropTableAsync<Retete>().Wait();
-            _database.DropTableAsync<Utilizatori>().Wait();*/
 
             // citim informatiile din fisiere excel si le copiem in tabele
             // initial, frigidere si utilizatori sunt goale
@@ -211,13 +212,14 @@ namespace CookingApp_v1.Data
         public Task<List<Frigidere>> GetFrigiderCategorieListAsync(string categorie)
         {
             // returneaza o lista de obiecte Frigider din categoria trimisa
-          
             // teoretic ai o lista de liste deci o sa ai un fel de double query (foloseste afisarea unei liste pe elemente de la Ingrediente v)
-
+        
+            //!toreview! + schimba tipul de return, ar trebui sa fie o lista de ingrediente
         }
         public Task<List<Frigidere>> GetFrigiderListAsync()
         {
             // returneaza o lista de obiecte Frigider
+            //!toreview! + schimba tipul de return, ar trebui sa fie o lista de ingrediente
             return _database.Table<Frigidere>().ToListAsync();
         }
 
@@ -266,7 +268,7 @@ namespace CookingApp_v1.Data
             return _database.Table<Ingrediente>()
             .Where(i => i.N_categorie == categorie)
             .ToListAsync();
-        }
+        }*/
         public Task<List<Ingrediente>> GetIngredientListAsync()
         {
             // returneaza o lista de obiecte Ingredient
@@ -274,8 +276,7 @@ namespace CookingApp_v1.Data
         }
 
 
-
-        /*** RETETE 
+        /*** RETETE ***/
         // functii pt retete: afisam toate retetele ca lista; (?) returnam o singura reteta
 
         // Task returneaza un obiect async, in cazul nostru de tip Reteta
@@ -293,7 +294,7 @@ namespace CookingApp_v1.Data
         }
 
 
-        /*** FILTRE 
+        /*** FILTRE ***/
         // functii pt filtre: afisam toate filtrele ca lista (vom schimba sa fie pe categorii dupa ce ma decid ce filtre sunt finale)
         // returnam un singur filtru (pt a il copia in tabelul utilizatori)
 
@@ -310,6 +311,21 @@ namespace CookingApp_v1.Data
             // returneaza o lista de obiecte Filtru
             return _database.Table<Filtre>().ToListAsync();
         }
-        */
+
+        /* temp: INSERARE TEMPORARA (manuala) */
+        // inseram in tabelul Filtre, Ingrediente si Retete
+
+        public Task<int> tempAddFiltreAsync(Filtre filtru)
+        {
+            return _database.InsertAsync(filtru);
+        }
+        public Task<int> tempAddReteteAsync(Retete reteta)
+        {
+            return _database.InsertAsync(reteta);
+        }
+        public Task<int> tempAddIngredienteAsync(Ingrediente ingredient)
+        {
+            return _database.InsertAsync(ingredient);
+        }
     }
 }

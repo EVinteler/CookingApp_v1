@@ -4,11 +4,13 @@
              x:Class="CookingApp_v1.StartPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="This is the start page!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="This is the start page!"/>
             <Button Text="Înregistrare" Clicked="OnRegisterButtonClicked" />
             <Button Text="Autentificare" Clicked="OnLoginButtonClicked" />
+            <Button Text="ADD Retete" Clicked="OntempAddReteteButtonClicked" />
+            <Button Text="ADD Ingrediente" Clicked="OntempAddIngredienteButtonClicked" />
+            <Button Text="ADD Filtre" Clicked="OntempAddFiltreButtonClicked" />
+            <Button Text="VIEW ALL TABLES" Clicked="OntempViewAllButtonClicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

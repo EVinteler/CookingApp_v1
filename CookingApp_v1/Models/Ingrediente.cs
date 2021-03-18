@@ -8,7 +8,8 @@ namespace CookingApp_v1.Models
 {
     public class Ingrediente
     {
-        [PrimaryKey]
+        // la inserare automata stergem AutoIncrement
+        [PrimaryKey,AutoIncrement]
         public int N_id { get; set; }
         public string N_nume { get; set; }
         public string N_categorie { get; set; }

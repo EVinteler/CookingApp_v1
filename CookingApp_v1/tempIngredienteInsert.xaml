@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CookingApp_v1.tempIngredienteInsert">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Inserare Ingrediente" />
+            <Editor Placeholder="Nume Ingredient"
+                    Text="{Binding N_nume}"
+                    HeightRequest="40">
+            </Editor>
+            <Editor Placeholder="Categorie"
+                    Text="{Binding N_categorie}"
+                    HeightRequest="40">
+            </Editor>
+            <Editor Placeholder="Subcategorie"
+                    Text="{Binding N_subcategorie}"
+                    HeightRequest="40">
+            </Editor>
+            <Editor Placeholder="Descriere"
+                    Text="{Binding N_descriere}"
+                    HeightRequest="40">
+            </Editor>
+            <Editor Placeholder="Link Imagine"
+                    Text="{Binding N_link_imagine}"
+                    HeightRequest="40">
+            </Editor>
+            <Button Text="Submit" Clicked="OnSubmitButtonClicked" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
