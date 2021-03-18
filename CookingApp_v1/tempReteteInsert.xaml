@@ -5,15 +5,15 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Inserare Retete"/>
-            <Editor Placeholder="Nume Ingredient"
+            <Editor Placeholder="Nume Reteta"
                     Text="{Binding R_nume}"
                     HeightRequest="40">
             </Editor>
-            <Editor Placeholder="Categorie"
+            <Editor Placeholder="Link"
                     Text="{Binding R_link}"
                     HeightRequest="40">
             </Editor>
-            <Editor Placeholder="Subcategorie"
+            <Editor Placeholder="Cultura"
                     Text="{Binding R_cultura}"
                     HeightRequest="40">
             </Editor>

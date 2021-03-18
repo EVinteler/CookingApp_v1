@@ -6,6 +6,7 @@
         <ScrollView>
         <StackLayout>
                 <Label Text="Toate Tabelele"/>
+                <Label Text="UTILIZATORI"/>
                 <ListView x:Name="listViewUtilizatori" BackgroundColor="LightSalmon" Margin="20">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -21,6 +22,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <Label Text="INGREDIENTE"/>
                 <ListView x:Name="listViewIngrediente" BackgroundColor="LightGoldenrodYellow" Margin="20">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -36,8 +38,9 @@
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-            </ListView>
-            <ListView x:Name="listViewRetete" BackgroundColor="PaleGreen" Margin="20">
+                </ListView>
+                <Label Text="RETETE"/>
+                <ListView x:Name="listViewRetete" BackgroundColor="PaleGreen" Margin="20">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -51,20 +54,22 @@
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-            </ListView>
-            <ListView x:Name="listViewFiltre" BackgroundColor="PaleTurquoise" Margin="20">
+                </ListView>
+                <Label Text="FILTRE"/>
+                <ListView x:Name="listViewFiltre" BackgroundColor="PaleTurquoise" Margin="20">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <Grid>
-                                    <Label Text="{Binding F_id}" FontAttributes="Bold" />
-                                    <Label Grid.Column="1" Text="{Binding F_utilizator_id}" />
+                                    <Label Text="{Binding FT_id}" FontAttributes="Bold" />
+                                    <Label Grid.Column="1" Text="{Binding FT_descriere}" />
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-            </ListView>
-                <ListView x:Name="listViewFrigidere" BackgroundColor="Lavender" Margin="10">
+                </ListView>
+                <Label Text="FRIGIDERE"/>
+                <ListView x:Name="listViewFrigidere" BackgroundColor="Lavender" Margin="20">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>

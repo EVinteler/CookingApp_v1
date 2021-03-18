@@ -52,7 +52,9 @@ namespace CookingApp_v1.Data
         //functia ne va returna un element de tip Task<int>
         public async Task<int> CheckRegisterAsync(Utilizatori utilizator, Frigidere frigider)
         {
-            
+
+            /*//await _database.ExecuteAsync("DELETE FROM Utilizatori");*/
+
             // dorim sa nu mai existe numele de utilizator si email-ul
             // daca exista, returnam 0
             // daca nu exista, inseram parola in tabelul Utilizatori si returnam 1

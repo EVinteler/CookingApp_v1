@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Inserare Filtre"/>
-            <Editor Placeholder="Nume Filtru"
+            <Editor Placeholder="Descriere Filtru"
                     Text="{Binding FT_descriere}"
                     HeightRequest="40">
             </Editor>
