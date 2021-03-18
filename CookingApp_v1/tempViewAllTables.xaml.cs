@@ -16,5 +16,27 @@ namespace CookingApp_v1
         {
             InitializeComponent();
         }
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            // pentru ca listView din .xaml sa stie care lista sa o afiseze, folosim functia din CookingDatabase
+            // care ne returneaza elemente de tip world, character si story
+
+            // elementele de la listViewIngredient vor avea valorile primite din GetIngredientListAsync, metoda din CookingDatabase
+
+            listViewUtilizatori.ItemsSource = await App.Database.GetUtilizatoriListAsync();
+            listViewIngrediente.ItemsSource = await App.Database.GetIngredientListAsync();
+            listViewFiltre.ItemsSource = await App.Database.GetFiltruListAsync();
+            listViewRetete.ItemsSource = await App.Database.GetRetetaListAsync();
+            //listViewFrigidere.ItemsSource = await App.Database.GetFrigiderListAsync();
+        }
+
+        // cand selectam un element, dorim sa primim o alerta cu informatiile care le contine
+        /*async void OnUtilizatoriViewItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            await DisplayAlert("OnCharacterViewItemSelected", 
+                "Opened [OnCharacterViewItemSelected].", "Ok.");
+        }*/
     }
 }

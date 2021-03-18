@@ -3,21 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CookingApp_v1.SearchListPage">
     <ContentPage.Content>
-        <!--<StackLayout>
+        <StackLayout>
             <ListView x:Name="listViewIngredient" Margin="10" ItemSelected="OnIngredientViewItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding N_nume}" TextColor="Black" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Button Text="Search Categories" Clicked="OnSearchCategoriesButtonClicked" />
-        </StackLayout> -->
-        <StackLayout>
-            <ListView x:Name="listViewUser" Margin="10">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding U_nume}" TextColor="Black" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

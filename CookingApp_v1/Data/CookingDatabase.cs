@@ -207,6 +207,7 @@ namespace CookingApp_v1.Data
         public Task<int> DeleteIngredientFrigiderAsync(???)
         {
             // nu cred ca e un delete ci un update la lista ingredientului respectiv din frigider?
+        //!toreview!
             return _database.DeleteAsync(???);
         }
         public Task<List<Frigidere>> GetFrigiderCategorieListAsync(string categorie)

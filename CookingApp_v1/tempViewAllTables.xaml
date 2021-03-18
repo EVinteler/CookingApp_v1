@@ -5,6 +5,42 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Toate Tabelele"/>
+            <ListView x:Name="listViewUtilizatori" ItemSelected="OnUtilizatoriViewItemSelected" BackgroundColor="LightSalmon" Margin="10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding U_id}" TextColor="Black" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView x:Name="listViewFrigidere" BackgroundColor="PeachPuff" Margin="10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding StoryName}" TextColor="Black" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView x:Name="listViewIngrediente" BackgroundColor="LightGoldenrodYellow" Margin="10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding StoryName}" TextColor="Black" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView x:Name="listViewRetete" BackgroundColor="PaleGreen" Margin="10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding StoryName}" TextColor="Black" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView x:Name="listViewFiltre" BackgroundColor="PaleTurquoise" Margin="10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding StoryName}" TextColor="Black" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
