@@ -8,9 +8,7 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Fridge Categories List"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Fridge Categories List"/>
             <Button Text="Fridge List Item" Clicked="OnFridgeListItemButtonClicked" />
         </StackLayout>
     </ContentPage.Content>

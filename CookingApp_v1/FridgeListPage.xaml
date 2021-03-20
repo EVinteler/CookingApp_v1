@@ -11,7 +11,7 @@
             <Label Text="Fridge List Page"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Button Text="Search Page" Clicked="OnSearchListButtonClicked" />
+            <Button Text="+" Clicked="OnSearchListButtonClicked" />
             <Button Text="Fridge Categories" Clicked="OnFridgeCategoriesButtonClicked" />
         </StackLayout>
     </ContentPage.Content>

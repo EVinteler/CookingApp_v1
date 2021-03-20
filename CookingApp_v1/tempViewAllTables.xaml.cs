@@ -31,7 +31,7 @@ namespace CookingApp_v1
             listViewIngrediente.ItemsSource = await App.Database.GetIngredientListAsync();
             listViewFiltre.ItemsSource = await App.Database.GetFiltruListAsync();
             listViewRetete.ItemsSource = await App.Database.GetRetetaListAsync();
-            //listViewFrigidere.ItemsSource = await App.Database.GetFrigiderListAsync();
+            listViewFrigidere.ItemsSource = await App.Database.GetFrigiderListAsync();
         }
     }
 }

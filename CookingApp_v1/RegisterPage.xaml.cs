@@ -26,19 +26,27 @@ namespace CookingApp_v1
             // am luat informatiile din transmise prin editoare din xaml convertite la
             // tipul unei inregistrari a tabelului Utilizatori si le-am pus in m_utilizator
             var m_utilizator = (Utilizatori)BindingContext;
-            // cream un frigider nou care il vom transmite la functie pentru a insera informatii
-            // de la utilizatorul nou in el
-            Frigidere m_frigider = new Frigidere();
 
             // apelam functia de inregistrare cu informatiile transmise
             // vom "converti" (desface) de la Task<int> la int folosind await
             // in cazul in care result e 1, vom deschide pagina FridgeList
             // daca e 0, vom afisa un mesaj de eroare si vom deschide o pagina de eroare specifica
             // daca e -1, vom afisa un mesaj de eroare si vom deschide o alta pagina de eroare specifica
-            var result = await App.Database.CheckRegisterAsync(m_utilizator, m_frigider);
+            var result = await App.Database.CheckRegisterAsync(m_utilizator);
             
             if (result == 1)
             {
+                // cream un frigider nou care il vom insera in tabelul frigiderelor
+                // si apoi il vom transmite la o functie pentru a updata utilizatorul curent
+                // si a ii adauga acest frigider (trebuie intai sa adaugam frigiderul in tabel
+                // pentru a folosi proprietatea frigider.F_id)
+                Frigidere m_frigider = new Frigidere();
+                m_frigider.F_utilizator_id = m_utilizator.U_id;
+                await App.Database.AddSaveFrigiderAsync(m_frigider);
+                m_utilizator.U_frigider = m_frigider.F_id;
+                await App.Database.SaveUtilizatorAsync(m_utilizator);
+
+
                 await DisplayAlert("SUCCES!","Inregistrarea a avut succes!","Ok.");
                 // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
                 // adaugam o pagina de tipul Fridge pentru Frigider deoarece initial dupa reg/login ne va trimite la pagina cu ingredientele
