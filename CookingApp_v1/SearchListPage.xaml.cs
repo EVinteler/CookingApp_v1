@@ -43,25 +43,37 @@ namespace CookingApp_v1
         }
         async void OnIngredientAddItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            await DisplayAlert("OnIngredientAddItemSelected", "Opened [OnIngredientAddItemSelected].", "Ok.");
+            //await DisplayAlert("OnIngredientAddItemSelected", "Opened [OnIngredientAddItemSelected].", "Ok.");
 
+            // luam utilizatorul transmis prin binding context
+            Utilizatori m_utilizator = (Utilizatori)BindingContext;
+            // folosim functia pentru a selecta frigiderul care corespunde utilizatorului curent
+            Frigidere m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);
+
+            //await DisplayAlert("Alerta:","nume: " + m_utilizator.U_nume,"okae");
             if (e.SelectedItem != null) // daca elementul Ingredient selectat nu este null
             {
-                /*
-                // worldd va contine itemul selectat sub forma de/convertit ca element de tip World
-                var worldd = (World)e.SelectedItem;
-                // vstory va fi elementul de tip Story de pe pagina curenta, luat de la pagina anterioara,
-                // ListEntryPage care a transmis elementul respectiv story cand a creat o pagina (/noua) de tip ListPageStories
-                var vstory = (Story)BindingContext;
+                // preluam elementul ingredient selectat de pe view in m_ingredient
+                Ingrediente m_ingredient = e.SelectedItem as Ingrediente;
 
-                //await DisplayAlert("OnWorldChooseButtonClicked", "World: " + worldd.WorldID + " Story: " + vstory.StoryID, "Ok.");
+                await App.Database.AddSaveFrigiderAsync(m_frigider,m_ingredient);
 
-                // apelam functia de mai jos si transmitem ca argumente numele elementului World si elementul Story curent
-                // pe care vrem sa il updatam
-                await App.Database.SelectFromWorldListAsync(worldd.WorldName, vstory);
-                */
+                // cream un element nou de tip Ingredient in care vom copia informatiile din m_ingredient
+                /*var new_ingredient = new Ingrediente()
+                {
+                    N_id = m_ingredient.N_id,
+                    N_nume = m_ingredient.N_nume,
+                    N_categorie = m_ingredient.N_categorie,
+                    N_subcategorie = m_ingredient.N_subcategorie,
+                    N_descriere = m_ingredient.N_descriere,
+                    N_link_imagine = m_ingredient.N_link_imagine
+                };
+                // 
+                m_frigider.F_ingrediente = new List<Ingrediente> { m_ingredient };
+                await App.Database.AddSaveFrigiderAsync(m_frigider);
+                await Navigation.PopAsync();*/
+                //await DisplayAlert("Alerta:","m_ID: " + m_ingredient.N_id + " n_ID: " + new_ingredient.N_id,"okae");
             }
-
         }
     }
 }

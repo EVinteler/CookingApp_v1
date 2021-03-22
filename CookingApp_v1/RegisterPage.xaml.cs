@@ -42,7 +42,7 @@ namespace CookingApp_v1
                 // pentru a folosi proprietatea frigider.F_id)
                 Frigidere m_frigider = new Frigidere();
                 m_frigider.F_utilizator_id = m_utilizator.U_id;
-                await App.Database.AddSaveFrigiderAsync(m_frigider);
+                await App.Database.NewFrigiderAsync(m_frigider);
                 m_utilizator.U_frigider = m_frigider.F_id;
                 await App.Database.SaveUtilizatorAsync(m_utilizator);
 

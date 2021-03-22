@@ -192,21 +192,30 @@ namespace CookingApp_v1.Data
         // functii pt frigidere: save, update si delete (pt ingrediente); afisam toate ingredientele ca lista
         // afisam toate ingredientele dintr-o categorie
 
-         //!toreview!
-        public async Task<int> AddSaveFrigiderAsync(Frigidere frigider)
+        //!toreview!
+        public Task<int> NewFrigiderAsync(Frigidere frigider)
         {
-            // va fi facut automat la adaugarea unui ingredient nou
             if (frigider.F_id != 0)
-                {
-                    // in cazul in care exista un element Frigider cu id-ul resp
-                    // doar facem update la Frigider in loc sa cream unul nou
-                    return await _database.UpdateAsync(frigider);
-                }
-                else
-                {
-                    // in cazut in care nu mai exista element Frigider cu id-ul resp, il cream
-                    return await _database.InsertAsync(frigider);
-                }
+            {
+                return _database.UpdateAsync(frigider);
+            }
+            else
+            {
+                return _database.InsertAsync(frigider);
+            }
+        }
+        public async Task<int> AddSaveFrigiderAsync(Frigidere frigider, Ingrediente ingredient)
+        {
+            // gasim inregistrarea m_ingredient cu id-ul luat din elementul transmis de la view
+            Ingrediente m_ingredient = await _database.Table<Ingrediente>()
+                                     .Where(i => i.N_id == ingredient.N_id)
+                                     .FirstAsync();
+
+            // inseram ingredientul in lista din frigider
+            frigider.F_ingrediente = new List<Ingrediente> { m_ingredient };
+
+            // updatam frigiderul
+            return await _database.UpdateAsync(frigider);
         }
         /*
         public Task<int> DeleteIngredientFrigiderAsync(???)
@@ -214,18 +223,9 @@ namespace CookingApp_v1.Data
             // nu cred ca e un delete ci un update la lista ingredientului respectiv din frigider?
         //!toreview!
             return _database.DeleteAsync(???);
-        }
-        public Task<List<Frigidere>> GetFrigiderIngredientCategorieListAsync(string categorie)
-        {
-            // returneaza o lista de obiecte Frigider din categoria trimisa
-            // teoretic ai o lista de liste deci o sa ai un fel de double query (foloseste afisarea unei liste pe elemente de la Ingrediente v)
-        
-            //!toreview! + schimba tipul de return, ar trebui sa fie o lista de ingrediente
         }*/
-       public async Task<List<Ingrediente>> GetFrigiderIngredientListAsync(Utilizatori utilizator)
+        public async Task<Frigidere> GetFrigiderFromUtilizatorAsync(Utilizatori utilizator)
         {
-            // returneaza o lista de obiecte Ingredient
-
             //System.Diagnostics.Debug.WriteLine("AAAAAAA NUME:" + utilizator.U_nume);
 
             // binding context nu ne transmite si u_frigider, el e in tabel
@@ -246,8 +246,22 @@ namespace CookingApp_v1.Data
                ("select * from Frigidere where F_id = " + m_utilizator.U_frigider);
             var m_frigider = m_frigidere.FirstOrDefault();
 
+            return m_frigider;
+        }
+
+        /*public Task<List<Frigidere>> GetFrigiderIngredientCategorieListAsync(string categorie)
+        {
+            // returneaza o lista de obiecte Frigider din categoria trimisa
+            // teoretic ai o lista de liste deci o sa ai un fel de double query (foloseste afisarea unei liste pe elemente de la Ingrediente v)
+        
+            //!toreview! + schimba tipul de return, ar trebui sa fie o lista de ingrediente
+        }*/
+        public List<Ingrediente> GetFrigiderIngredientListAsync(Frigidere frigider)
+        {
+            // returneaza o lista de obiecte Ingredient
+
             // apoi vom returna lista de ingrediente salvata in frigider
-            var m_ingrediente = m_frigider.F_ingrediente;
+            var m_ingrediente = frigider.F_ingrediente;
 
             return m_ingrediente;
         }
