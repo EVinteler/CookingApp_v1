@@ -35,8 +35,8 @@ namespace CookingApp_v1
 
             var m_utilizator = (Utilizatori)BindingContext;
             //await DisplayAlert("Alerta:","ID:" + m_utilizator.U_nume,"ok??");
-            App.Database.GetFrigiderIngredientListAsync(m_utilizator);
-            //listViewIngredient.ItemsSource = await App.Database.GetFrigiderIngredientListAsync(m_utilizator);
+            //App.Database.GetFrigiderIngredientListAsync(m_utilizator);
+            listViewIngredient.ItemsSource = await App.Database.GetFrigiderIngredientListAsync(m_utilizator);
         }
         async void OnRecipesButtonClicked(object sender, EventArgs e)
         {

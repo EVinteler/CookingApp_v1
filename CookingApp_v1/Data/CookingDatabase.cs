@@ -222,7 +222,7 @@ namespace CookingApp_v1.Data
         
             //!toreview! + schimba tipul de return, ar trebui sa fie o lista de ingrediente
         }*/
-       public async void /*Task<List<Ingrediente>>*/ GetFrigiderIngredientListAsync(Utilizatori utilizator)
+       public async Task<List<Ingrediente>> GetFrigiderIngredientListAsync(Utilizatori utilizator)
         {
             // returneaza o lista de obiecte Ingredient
 
@@ -249,7 +249,7 @@ namespace CookingApp_v1.Data
             // apoi vom returna lista de ingrediente salvata in frigider
             var m_ingrediente = m_frigider.F_ingrediente;
 
-            //return result;
+            return m_ingrediente;
         }
 
 

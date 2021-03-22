@@ -11,7 +11,19 @@
             <Label Text="Fridge List Page" />
             <!--<Label Text="{Binding U_nume}" />-->
 
-            
+            <ListView x:Name="listViewIngredient" Margin="10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <!--<Label Grid.Column="5" Text="{Binding N_link_imagine}" />-->
+                                <Label Grid.Column="1" Text="{Binding N_nume}" />
+                                <!--<Button Text="x" Clicked="OnIngredientDeleteItemSelected"/>-->
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
             <Button Text="+" Clicked="OnSearchListButtonClicked" />
             <Button Text="Fridge Categories" Clicked="OnFridgeCategoriesButtonClicked" />
