@@ -8,9 +8,8 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Fridge List Page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Fridge List Page" />
+            <Label Text="{Binding U_nume}" />
             <Button Text="+" Clicked="OnSearchListButtonClicked" />
             <Button Text="Fridge Categories" Clicked="OnFridgeCategoriesButtonClicked" />
         </StackLayout>

@@ -26,7 +26,6 @@ namespace CookingApp_v1
             // am luat informatiile din transmise prin editoare din xaml convertite la
             // tipul unei inregistrari a tabelului Utilizatori si le-am pus in m_utilizator
             var m_utilizator = (Utilizatori)BindingContext;
-
             
             // apelam functia de autentificare cu informatiile transmise
             // vom "converti" (desface) de la Task<int> la int folosind await
@@ -40,7 +39,12 @@ namespace CookingApp_v1
                 await DisplayAlert("SUCCES!", "Logarea a avut succes!", "Ok.");
                 // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
                 // adaugam o pagina de tipul Fridge pentru Frigider deoarece initial dupa reg/login ne va trimite la pagina cu ingredientele
-                await Navigation.PushAsync(new FridgeListPage());
+                await Navigation.PushAsync(new FridgeListPage
+                {
+                    // vom transmite informatiile cu care s-a logat utilizatorul spre pagina Frigider
+                    // (si in continuare pe parcursul aplicatiei)
+                    BindingContext = m_utilizator
+                });
             }
             else if (result == 0)
             {
