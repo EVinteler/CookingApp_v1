@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using CookingApp_v1.Models;
+
 namespace CookingApp_v1
 {
     /*
@@ -24,22 +26,30 @@ namespace CookingApp_v1
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul RecipeDetailPage pentru detalii despre o reteta
             // mai tarziu o vom schimba sa ne arate detailul in functie de reteta anume aleasa
-                /*await Navigation.PushAsync(new ListPage
-                    {
-                        BindingContext = new World()
-                    });
-                */ 
+            /*await Navigation.PushAsync(new ListPage
+                {
+                    BindingContext = new World()
+                });
+            */
 
-            await Navigation.PushAsync(new RecipeDetailPage());
+            Utilizatori m_utilizator = (Utilizatori)BindingContext;
+            await Navigation.PushAsync(new RecipeDetailPage
+            {
+                // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
+                BindingContext = m_utilizator
+            });
         }
         async void OnFridgeListButtonClicked(object sender, EventArgs e)
         {
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul FridgeCategories care ne arata categoriile de ingrediente
 
-            await Navigation.PushAsync(new FridgeListPage());
+            Utilizatori m_utilizator = (Utilizatori)BindingContext;
+            await Navigation.PushAsync(new FridgeListPage
+            {
+                // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
+                BindingContext = m_utilizator
+            });
         }
-
-
     }
 }

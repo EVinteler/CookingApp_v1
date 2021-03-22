@@ -41,11 +41,27 @@ namespace CookingApp_v1
             Navigation.PopAsync();
             await Navigation.PushAsync(new SearchCategoriesPage());
         }
-        async void OnIngredientAddItemSelected(object sender, EventArgs e)
+        async void OnIngredientAddItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             await DisplayAlert("OnIngredientAddItemSelected", "Opened [OnIngredientAddItemSelected].", "Ok.");
 
-            // vom avea un buton de adaugat
+            if (e.SelectedItem != null) // daca elementul Ingredient selectat nu este null
+            {
+                /*
+                // worldd va contine itemul selectat sub forma de/convertit ca element de tip World
+                var worldd = (World)e.SelectedItem;
+                // vstory va fi elementul de tip Story de pe pagina curenta, luat de la pagina anterioara,
+                // ListEntryPage care a transmis elementul respectiv story cand a creat o pagina (/noua) de tip ListPageStories
+                var vstory = (Story)BindingContext;
+
+                //await DisplayAlert("OnWorldChooseButtonClicked", "World: " + worldd.WorldID + " Story: " + vstory.StoryID, "Ok.");
+
+                // apelam functia de mai jos si transmitem ca argumente numele elementului World si elementul Story curent
+                // pe care vrem sa il updatam
+                await App.Database.SelectFromWorldListAsync(worldd.WorldName, vstory);
+                */
+            }
+
         }
     }
 }

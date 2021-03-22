@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using CookingApp_v1.Models;
+
 namespace CookingApp_v1
 {
     /*
@@ -33,7 +35,13 @@ namespace CookingApp_v1
             // facem Pop pentru a nu intra intr-un loop de Search Pages
             // nu facem await pt ca atunci nu continua cu Push
             Navigation.PopAsync();
-            await Navigation.PushAsync(new SearchListPage());
+
+            Utilizatori m_utilizator = (Utilizatori)BindingContext;
+            await Navigation.PushAsync(new SearchListPage
+            {
+                // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
+                BindingContext = m_utilizator
+            });
         }
     }
 }

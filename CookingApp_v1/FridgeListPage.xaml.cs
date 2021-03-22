@@ -43,14 +43,24 @@ namespace CookingApp_v1
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul Recipes care ne arat lista de retete disponibile
 
-            await Navigation.PushAsync(new RecipesPage());
+            Utilizatori m_utilizator = (Utilizatori)BindingContext;
+            await Navigation.PushAsync(new RecipesPage
+            {
+                // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
+                BindingContext = m_utilizator
+            });
         }
         async void OnFridgeCategoriesButtonClicked(object sender, EventArgs e)
         {
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul FridgeCategories care ne arata categoriile de ingrediente
 
-            await Navigation.PushAsync(new FridgeCategoriesPage());
+            Utilizatori m_utilizator = (Utilizatori)BindingContext;
+            await Navigation.PushAsync(new FridgeCategoriesPage
+            {
+                // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
+                BindingContext = m_utilizator
+            });
         }
         async void OnSearchListButtonClicked(object sender, EventArgs e)
         {
@@ -58,13 +68,18 @@ namespace CookingApp_v1
             // adaugam o pagina de tipul SearchList care ne arata o lista de ingrediente
             // initial, ne trimite spre o lista generala de ingrediente
 
-            await Navigation.PushAsync(new SearchListPage());
+            Utilizatori m_utilizator = (Utilizatori)BindingContext;
+            await Navigation.PushAsync(new SearchListPage
+            {
+                // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
+                BindingContext = m_utilizator
+            });
         }
-        /*async void OnIngredientDeleteItemSelected(object sender, EventArgs e)
+        async void OnIngredientDeleteItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             await DisplayAlert("OnIngredientDeleteItemSelected", "Opened [OnIngredientDeleteItemSelected].", "Ok.");
 
             // vom avea un buton de adaugat
-        }*/
+        }
     }
 }
