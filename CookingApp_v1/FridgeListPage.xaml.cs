@@ -34,7 +34,9 @@ namespace CookingApp_v1
             // si il transmitem la functia care ne afiseaza ingredientele din frigiderul utilizatorului nostru
 
             var m_utilizator = (Utilizatori)BindingContext;
-            listViewIngredient.ItemsSource = await App.Database.GetFrigiderIngredientListAsync(m_utilizator);
+            //await DisplayAlert("Alerta:","ID:" + m_utilizator.U_nume,"ok??");
+            App.Database.GetFrigiderIngredientListAsync(m_utilizator);
+            //listViewIngredient.ItemsSource = await App.Database.GetFrigiderIngredientListAsync(m_utilizator);
         }
         async void OnRecipesButtonClicked(object sender, EventArgs e)
         {
