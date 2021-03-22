@@ -240,14 +240,14 @@ namespace CookingApp_v1.Data
 
             var m_utilizator = m_utilizatori.FirstOrDefault();
 
-            System.Diagnostics.Debug.WriteLine("AAAAAAA FRIGIDER:" + m_utilizator.U_frigider);
+            // vom lua frigiderul cu id-ul corespunzator utilizatorului trimis (folosim firstordefault deoarece
+            // id-urile sunt unice)
+            var m_frigidere = await _database.QueryAsync<Frigidere>
+               ("select * from Frigidere where F_id = " + m_utilizator.U_frigider);
+            var m_frigider = m_frigidere.FirstOrDefault();
 
-            await _database.QueryAsync<Ingrediente>
-               ("select F_ingrediente from Frigidere where F_id = ", 4);
-
-            // apoi vom afisa lista de ingrediente salvata in frigiderul care corespunde utilizatorului trimis
-            //var result = await _database.QueryAsync<Ingrediente>
-            //   ("select F_ingrediente from Frigidere where F_id = ", m_utilizator.U_frigider);
+            // apoi vom returna lista de ingrediente salvata in frigider
+            var m_ingrediente = m_frigider.F_ingrediente;
 
             //return result;
         }
