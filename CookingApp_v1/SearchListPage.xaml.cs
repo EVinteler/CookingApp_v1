@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using CookingApp_v1.Models;
+using System.Collections.ObjectModel;
 
 namespace CookingApp_v1
 {
@@ -21,16 +22,25 @@ namespace CookingApp_v1
         {
             InitializeComponent();
         }
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-
+            ShowPageData();
+        }
+        protected async void ShowPageData()
+        {
             // pentru ca listView din .xaml sa stie care lista sa o afiseze, folosim functia din CookingDatabase
-
             // elementele de la listViewIngredient vor avea valorile primite din GetIngredientListAsync, metoda din CookingDatabase
+
+            /*
+            // convertim lista la collection pentru ca sa se updatateze automat cand o modificam
+            List<Ingrediente> l_ingrediente = await App.Database.GetIngredientListAsync();
+            ObservableCollection<Ingrediente> c_ingrediente = new ObservableCollection<Ingrediente>(l_ingrediente);
+            */
 
             listViewIngredient.ItemsSource = await App.Database.GetIngredientListAsync();
         }
+
         async void OnSearchCategoriesButtonClicked(object sender, EventArgs e)
         {
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
@@ -51,28 +61,16 @@ namespace CookingApp_v1
             Frigidere m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);
 
             //await DisplayAlert("Alerta:","nume: " + m_utilizator.U_nume,"okae");
+            //await DisplayAlert("Alerta:","nume: " + m_frigider.F_id,"okae");
             if (e.SelectedItem != null) // daca elementul Ingredient selectat nu este null
             {
                 // preluam elementul ingredient selectat de pe view in m_ingredient
                 Ingrediente m_ingredient = e.SelectedItem as Ingrediente;
-
-                await App.Database.AddSaveFrigiderAsync(m_frigider,m_ingredient);
-
-                // cream un element nou de tip Ingredient in care vom copia informatiile din m_ingredient
-                /*var new_ingredient = new Ingrediente()
-                {
-                    N_id = m_ingredient.N_id,
-                    N_nume = m_ingredient.N_nume,
-                    N_categorie = m_ingredient.N_categorie,
-                    N_subcategorie = m_ingredient.N_subcategorie,
-                    N_descriere = m_ingredient.N_descriere,
-                    N_link_imagine = m_ingredient.N_link_imagine
-                };
-                // 
-                m_frigider.F_ingrediente = new List<Ingrediente> { m_ingredient };
-                await App.Database.AddSaveFrigiderAsync(m_frigider);
-                await Navigation.PopAsync();*/
-                //await DisplayAlert("Alerta:","m_ID: " + m_ingredient.N_id + " n_ID: " + new_ingredient.N_id,"okae");
+                
+                // il transmitem functiei care il va copia intr-un nou element si il va adauga frigiderului
+                await App.Database.AddIngredientFrigiderAsync(m_frigider,m_ingredient);
+                //ShowPageData();
+                //await Navigation.PopAsync();
             }
         }
     }

@@ -193,7 +193,7 @@ namespace CookingApp_v1.Data
         // afisam toate ingredientele dintr-o categorie
 
         //!toreview!
-        public Task<int> NewFrigiderAsync(Frigidere frigider)
+        public Task<int> AddUpdateFrigiderAsync(Frigidere frigider)
         {
             if (frigider.F_id != 0)
             {
@@ -204,18 +204,45 @@ namespace CookingApp_v1.Data
                 return _database.InsertAsync(frigider);
             }
         }
-        public async Task<int> AddSaveFrigiderAsync(Frigidere frigider, Ingrediente ingredient)
+        public Task<int> AddIngredientFrigiderAsync(Frigidere frigider, Ingrediente ingredient)
         {
-            // gasim inregistrarea m_ingredient cu id-ul luat din elementul transmis de la view
-            Ingrediente m_ingredient = await _database.Table<Ingrediente>()
-                                     .Where(i => i.N_id == ingredient.N_id)
-                                     .FirstAsync();
+            //System.Diagnostics.Debug.WriteLine(">>>Informatii din ingredient: " + ingredient.N_nume);
+            //System.Diagnostics.Debug.WriteLine(">>>Informatii din Frigider: " + frigider.F_id);
+
+            // cream un nou m_ingredient cu informatiile preluate de la ingredientul transmis
+            var m_ingredient = new Ingrediente()
+            {
+                N_id = ingredient.N_id,
+                N_nume = ingredient.N_nume,
+                N_categorie = ingredient.N_categorie,
+                N_subcategorie = ingredient.N_subcategorie,
+                N_descriere = ingredient.N_descriere,
+                N_link_imagine = ingredient.N_link_imagine
+            };
+            /*var m_ingredient = new Ingrediente()
+            {
+                N_id = 1,
+                N_nume = "ingredient",
+                N_categorie = "ingredient",
+                N_subcategorie = "ingredient",
+                N_descriere = "ingredient",
+                N_link_imagine = "ingredient"
+            };*/
+
+            //System.Diagnostics.Debug.WriteLine(">>>Informatii din M_ingredient: " + m_ingredient.N_nume);
 
             // inseram ingredientul in lista din frigider
             frigider.F_ingrediente = new List<Ingrediente> { m_ingredient };
 
+            /*foreach (Ingrediente ing in frigider.F_ingrediente)
+                System.Diagnostics.Debug.WriteLine(">>>ing: " + ing.N_nume);*/
+
             // updatam frigiderul
-            return await _database.UpdateAsync(frigider);
+            return _database.UpdateAsync(frigider);
+        }
+        public async Task<int> AddIngredientAsync (Ingrediente ingredient)
+        {
+            return await _database.InsertAsync(ingredient);
         }
         /*
         public Task<int> DeleteIngredientFrigiderAsync(???)
@@ -259,6 +286,22 @@ namespace CookingApp_v1.Data
         public List<Ingrediente> GetFrigiderIngredientListAsync(Frigidere frigider)
         {
             // returneaza o lista de obiecte Ingredient
+            /*
+            var m_ingredient = new Ingrediente()
+            {
+                N_id = 1,
+                N_nume = "ingredient",
+                N_categorie = "ingredient",
+                N_subcategorie = "ingredient",
+                N_descriere = "ingredient",
+                N_link_imagine = "ingredient"
+            };
+
+            // inseram ingredientul in lista din frigider
+            frigider.F_ingrediente = new List<Ingrediente> { m_ingredient };
+
+            // updatam frigiderul
+            _database.UpdateAsync(frigider);*/
 
             // apoi vom returna lista de ingrediente salvata in frigider
             var m_ingrediente = frigider.F_ingrediente;
