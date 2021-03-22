@@ -131,7 +131,6 @@ namespace CookingApp_v1.Data
             }
         }
 
-
         public async Task<int> CheckLoginAsync(Utilizatori utilizator)
         {
             // functia va returna 1 daca s-a gasit utilizatorul cu parola corespunzatoare
@@ -215,18 +214,22 @@ namespace CookingApp_v1.Data
         //!toreview!
             return _database.DeleteAsync(???);
         }
-        public Task<List<Frigidere>> GetFrigiderCategorieListAsync(string categorie)
+        public Task<List<Frigidere>> GetFrigiderIngredientCategorieListAsync(string categorie)
         {
             // returneaza o lista de obiecte Frigider din categoria trimisa
             // teoretic ai o lista de liste deci o sa ai un fel de double query (foloseste afisarea unei liste pe elemente de la Ingrediente v)
         
             //!toreview! + schimba tipul de return, ar trebui sa fie o lista de ingrediente
-        }
-        public Task<List<Frigidere>> GetFrigiderListAsync()
+        }*/
+        public async Task<List<Ingrediente>> GetFrigiderIngredientListAsync(Utilizatori utilizator)
         {
-            // returneaza o lista de obiecte Frigider
-            //!toreview! + schimba tipul de return, ar trebui sa fie o lista de ingrediente
-            return _database.Table<Frigidere>().ToListAsync();
+            // returneaza o lista de obiecte Ingredient
+            
+            // apoi vom afisa lista de ingrediente salvata in frigiderul care corespunde utilizatorului trimis
+            var result = await _database.QueryAsync<Ingrediente>
+                ("select F_ingrediente from Frigidere where F_id=", utilizator.U_frigider);
+
+            return result;
         }
 
 

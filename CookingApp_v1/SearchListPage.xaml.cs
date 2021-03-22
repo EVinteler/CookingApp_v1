@@ -26,7 +26,6 @@ namespace CookingApp_v1
             base.OnAppearing();
 
             // pentru ca listView din .xaml sa stie care lista sa o afiseze, folosim functia din CookingDatabase
-            // care ne returneaza elemente de tip world, character si story
 
             // elementele de la listViewIngredient vor avea valorile primite din GetIngredientListAsync, metoda din CookingDatabase
 
@@ -42,9 +41,9 @@ namespace CookingApp_v1
             Navigation.PopAsync();
             await Navigation.PushAsync(new SearchCategoriesPage());
         }
-        async void OnIngredientViewItemSelected(object sender, SelectedItemChangedEventArgs e)
+        async void OnIngredientAddItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            await DisplayAlert("OnIngredientViewItemSelected", "Opened [OnIngredientViewItemSelected].", "Ok.");
+            await DisplayAlert("OnIngredientAddItemSelected", "Opened [OnIngredientAddItemSelected].", "Ok.");
 
             // vom avea un buton de adaugat
         }

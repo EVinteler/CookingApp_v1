@@ -59,5 +59,6 @@ namespace CookingApp_v1
                 await DisplayAlert("ESEC!", "Eroare nespecificata. Incercati din nou.", "Ok.");
             }
         }
+
     }
 }

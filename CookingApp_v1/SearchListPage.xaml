@@ -4,10 +4,16 @@
              x:Class="CookingApp_v1.SearchListPage">
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="listViewIngredient" Margin="10" ItemSelected="OnIngredientViewItemSelected">
+            <ListView x:Name="listViewIngredient" Margin="10">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding N_nume}" TextColor="Black" />
+                        <ViewCell>
+                            <Grid>
+                                <!--<Label Grid.Column="5" Text="{Binding N_link_imagine}" />-->
+                                <Label Grid.Column="1" Text="{Binding N_nume}" />
+                                <Button Text="+" Clicked="OnIngredientAddItemSelected" />
+                            </Grid>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

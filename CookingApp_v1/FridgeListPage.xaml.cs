@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using CookingApp_v1.Models;
+
 namespace CookingApp_v1
 {
     /*
      * FRIDGE.LIST.PAGE ne va arata ingredientele utilizatorului sub forma de lista
+     * FUNCTII:
+     *      - scrie o lista cu functiile continute si ce face fiecare
      */
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FridgeListPage : ContentPage
@@ -18,6 +22,18 @@ namespace CookingApp_v1
         public FridgeListPage()
         {
             InitializeComponent();
+        }
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            // pentru ca listView din .xaml sa stie care lista sa o afiseze, folosim functia din CookingDatabase
+
+            // elementele de la listViewIngredient vor avea valorile primite din GetFrigiderIngredientListAsync, metoda din CookingDatabase
+
+            Utilizatori m_utilizator = (Utilizatori)BindingContext;
+
+            listViewIngredient.ItemsSource = await App.Database.GetFrigiderIngredientListAsync(m_utilizator);
         }
         async void OnRecipesButtonClicked(object sender, EventArgs e)
         {
@@ -40,6 +56,12 @@ namespace CookingApp_v1
             // initial, ne trimite spre o lista generala de ingrediente
 
             await Navigation.PushAsync(new SearchListPage());
+        }
+        async void OnIngredientDeleteItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            await DisplayAlert("OnIngredientDeleteItemSelected", "Opened [OnIngredientDeleteItemSelected].", "Ok.");
+
+            // vom avea un buton de adaugat
         }
     }
 }
