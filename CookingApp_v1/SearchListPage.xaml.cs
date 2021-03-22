@@ -41,7 +41,7 @@ namespace CookingApp_v1
             Navigation.PopAsync();
             await Navigation.PushAsync(new SearchCategoriesPage());
         }
-        async void OnIngredientAddItemSelected(object sender, SelectedItemChangedEventArgs e)
+        async void OnIngredientAddItemSelected(object sender, EventArgs e)
         {
             await DisplayAlert("OnIngredientAddItemSelected", "Opened [OnIngredientAddItemSelected].", "Ok.");
 

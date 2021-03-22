@@ -47,6 +47,9 @@ namespace CookingApp_v1
                 await App.Database.SaveUtilizatorAsync(m_utilizator);
 
 
+               // await DisplayAlert("Alerta:", "m_utilizator:" + m_utilizator.U_frigider, "ok??");
+
+
                 await DisplayAlert("SUCCES!","Inregistrarea a avut succes!","Ok.");
 
                 // vom iesi de pe pagina de register

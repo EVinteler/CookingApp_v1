@@ -26,13 +26,14 @@ namespace CookingApp_v1
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-
-            // pentru ca listView din .xaml sa stie care lista sa o afiseze, folosim functia din CookingDatabase
+            // pentru ca listView... din .xaml sa stie care lista sa o afiseze, folosim functia din CookingDatabase
 
             // elementele de la listViewIngredient vor avea valorile primite din GetFrigiderIngredientListAsync, metoda din CookingDatabase
 
-            Utilizatori m_utilizator = (Utilizatori)BindingContext;
+            // luam utilizatorul transmis prin binding context de la pagina de Login
+            // si il transmitem la functia care ne afiseaza ingredientele din frigiderul utilizatorului nostru
 
+            var m_utilizator = (Utilizatori)BindingContext;
             listViewIngredient.ItemsSource = await App.Database.GetFrigiderIngredientListAsync(m_utilizator);
         }
         async void OnRecipesButtonClicked(object sender, EventArgs e)
@@ -57,11 +58,11 @@ namespace CookingApp_v1
 
             await Navigation.PushAsync(new SearchListPage());
         }
-        async void OnIngredientDeleteItemSelected(object sender, SelectedItemChangedEventArgs e)
+        /*async void OnIngredientDeleteItemSelected(object sender, EventArgs e)
         {
             await DisplayAlert("OnIngredientDeleteItemSelected", "Opened [OnIngredientDeleteItemSelected].", "Ok.");
 
             // vom avea un buton de adaugat
-        }
+        }*/
     }
 }

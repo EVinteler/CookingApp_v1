@@ -26,7 +26,7 @@ namespace CookingApp_v1
             // am luat informatiile din transmise prin editoare din xaml convertite la
             // tipul unei inregistrari a tabelului Utilizatori si le-am pus in m_utilizator
             var m_utilizator = (Utilizatori)BindingContext;
-            
+
             // apelam functia de autentificare cu informatiile transmise
             // vom "converti" (desface) de la Task<int> la int folosind await
             // in cazul in care result e 1, vom deschide pagina FridgeList

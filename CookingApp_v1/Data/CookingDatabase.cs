@@ -5,6 +5,7 @@ using System.Text;
 using SQLite;
 using System.Threading.Tasks; // pt async
 using CookingApp_v1.Models;
+using System.Linq;
 
 namespace CookingApp_v1.Data
 {
@@ -221,13 +222,24 @@ namespace CookingApp_v1.Data
         
             //!toreview! + schimba tipul de return, ar trebui sa fie o lista de ingrediente
         }*/
-        public async Task<List<Ingrediente>> GetFrigiderIngredientListAsync(Utilizatori utilizator)
+       public async Task<List<Ingrediente>> GetFrigiderIngredientListAsync(Utilizatori utilizator)
         {
             // returneaza o lista de obiecte Ingredient
-            
+
+            // binding context nu ne transmite si u_frigider, el e in tabel
+            // asa ca intai va trebui sa gasim frigiderul utilizatorului cu id-ul transmis
+
+            // QueryAsync ne va returna toate elementele Utilizatori care indeplinesc conditia, insa deoarece
+            // id-ul este unic, stim ca exista doar un rezultat, asa ca il putem converti
+            // cu .FirstOrDefault()
+            var m_utilizatori = await _database.QueryAsync<Utilizatori>
+                ("select U_frigider from Utilizatori where F_id=", utilizator.U_id);
+
+            var m_utilizator = m_utilizatori.FirstOrDefault();
+
             // apoi vom afisa lista de ingrediente salvata in frigiderul care corespunde utilizatorului trimis
             var result = await _database.QueryAsync<Ingrediente>
-                ("select F_ingrediente from Frigidere where F_id=", utilizator.U_frigider);
+                ("select F_ingrediente from Frigidere where F_id=", m_utilizator.U_frigider);
 
             return result;
         }
