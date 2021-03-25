@@ -21,15 +21,16 @@ namespace CookingApp_v1
     {
         Utilizatori m_utilizator;
         Frigidere m_frigider;
-        public FridgeListPage(Utilizatori utilizator)
+        public FridgeListPage(Utilizatori utilizator, Frigidere frigider)
         {
             InitializeComponent();
             m_utilizator = utilizator;
+            m_frigider = frigider;
         }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);
+            //m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);
             await DisplayAlert("ONAPP FRIDGE","m_frigider id: " + m_frigider.F_id,"oke.");
             showPageData(m_frigider);
         }

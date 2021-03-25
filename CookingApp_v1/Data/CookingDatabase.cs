@@ -214,13 +214,13 @@ namespace CookingApp_v1.Data
 
                 // inseram ingredientul in lista din frigider
                 frigider.F_ingrediente = new List<Ingrediente> { m_ingredient };*/
-                foreach (Ingrediente ing in frigider.F_ingrediente)
+                /*foreach (Ingrediente ing in frigider.F_ingrediente)
                     System.Diagnostics.Debug.WriteLine(">>>FCTing: " + ing.N_nume);
 
                 _database.InsertAsync(frigider);
 
                 foreach (Ingrediente ing in frigider.F_ingrediente)
-                    System.Diagnostics.Debug.WriteLine(">>>2FCTing: " + ing.N_nume);
+                    System.Diagnostics.Debug.WriteLine(">>>2FCTing: " + ing.N_nume);*/
 
                 return _database.InsertAsync(frigider);
             }
@@ -291,6 +291,7 @@ namespace CookingApp_v1.Data
 
             System.Diagnostics.Debug.WriteLine(">>>0000PAS3: ");
 
+
             // vom lua frigiderul cu id-ul corespunzator utilizatorului trimis (folosim firstordefault deoarece
             // id-urile sunt unice)
             var m_frigidere = await _database.QueryAsync<Frigidere>
@@ -301,6 +302,10 @@ namespace CookingApp_v1.Data
             var m_frigider = m_frigidere.First();
 
             System.Diagnostics.Debug.WriteLine(">>>0000PAS5: " + m_frigider.F_id);
+
+            m_frigider.F_ingrediente = new List<Ingrediente>{
+                    {new Ingrediente { N_id = 0, N_nume = "temp2" } }
+                };
 
 
             foreach (Ingrediente ing in m_frigider.F_ingrediente)
