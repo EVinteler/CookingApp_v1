@@ -82,8 +82,21 @@ namespace CookingApp_v1
                 //await App.Database.AddIngredientFrigiderAsync(m_frigider,m_ingredient);
 
                 // merge daca cream o lista noua pe pagina asta, because fuck me thats why :)
-                //m_frigider.F_ingrediente = new List<Ingrediente> { };
-                m_frigider.F_ingrediente.Add(m_ingredient);
+                //m_frigider.F_ingrediente = new List<Ingrediente> { m_ingredient };
+                //m_frigider.F_ingrediente.Add(m_ingredient);
+
+
+                await DisplayAlert(">>>Alerta:", "before getFrig", "okae");
+                List<Ingrediente> m_lista_ingr_1 = App.Database.GetFrigiderIngredientListAsync(m_frigider);
+
+                foreach (Ingrediente ing in m_lista_ingr_1)
+                    System.Diagnostics.Debug.WriteLine(">>>ing: " + ing.N_nume);
+
+                await DisplayAlert(">>>Alerta:", "before list 2", "okae");
+                List<Ingrediente> m_lista_ingr_2 = new List<Ingrediente> { m_ingredient };
+                await DisplayAlert(">>>Alerta:", "before copy", "okae");
+                // merge pana la partea asta cu f_ingrediente ??? cred ca nu il vede??? idfk
+                m_frigider.F_ingrediente = m_lista_ingr_1.Concat(m_lista_ingr_2).ToList();
 
                 await DisplayAlert(">>>Alerta:", "added ingr?", "okae");
 

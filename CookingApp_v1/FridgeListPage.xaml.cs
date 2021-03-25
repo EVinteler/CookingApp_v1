@@ -29,6 +29,12 @@ namespace CookingApp_v1
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);
+            await DisplayAlert("ONAPP FRIDGE","m_frigider id: " + m_frigider.F_id,"oke.");
+            showPageData(m_frigider);
+        }
+        void showPageData (Frigidere m_frigider)
+        {
             // pentru ca listView... din .xaml sa stie care lista sa o afiseze, folosim functia din CookingDatabase
 
             // elementele de la listViewIngredient vor avea valorile primite din GetFrigiderIngredientListAsync, metoda din CookingDatabase
@@ -37,7 +43,6 @@ namespace CookingApp_v1
             // folosim functia getFrigiderFromUtilizator sa selectam frigiderul care corespunde utilizatorului curent
             // si il transmitem la functia care ne afiseaza ingredientele din frigider
 
-            m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);
             listViewIngredient.ItemsSource = App.Database.GetFrigiderIngredientListAsync(m_frigider);
 
             /*

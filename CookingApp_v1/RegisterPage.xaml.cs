@@ -42,7 +42,13 @@ namespace CookingApp_v1
                 // pentru a folosi proprietatea frigider.F_id)
                 Frigidere m_frigider = new Frigidere();
                 m_frigider.F_utilizator_id = m_utilizator.U_id;
-                m_frigider.F_ingrediente = new List<Ingrediente>{};
+                m_frigider.F_ingrediente = new List<Ingrediente>{
+                    {new Ingrediente { N_id = 0, N_nume = "temp" } } 
+                };
+
+                foreach (Ingrediente ing in m_frigider.F_ingrediente)
+                    System.Diagnostics.Debug.WriteLine(">>>REGing: " + ing.N_nume);
+
                 await App.Database.AddUpdateFrigiderAsync(m_frigider);
                 m_utilizator.U_frigider = m_frigider.F_id;
                 await App.Database.SaveUtilizatorAsync(m_utilizator);

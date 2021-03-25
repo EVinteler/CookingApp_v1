@@ -27,6 +27,16 @@ namespace CookingApp_v1
             // tipul unei inregistrari a tabelului Utilizatori si le-am pus in m_utilizator
             var m_utilizator = (Utilizatori)BindingContext;
 
+
+            var m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);
+            await DisplayAlert("be4 FRIDGE", "m_frigider id: " + m_frigider.F_id, "oke.");
+
+            foreach (Ingrediente ing in m_frigider.F_ingrediente)
+                System.Diagnostics.Debug.WriteLine(">>>LOGing: " + ing.N_nume);
+
+            var first = m_frigider.F_ingrediente.First();
+            await DisplayAlert("be4 FRIDGE", "m_frigider id: " + m_frigider.F_id + " " + first.N_id, "oke.");
+
             // apelam functia de autentificare cu informatiile transmise
             // vom "converti" (desface) de la Task<int> la int folosind await
             // in cazul in care result e 1, vom deschide pagina FridgeList
@@ -39,7 +49,18 @@ namespace CookingApp_v1
                 await DisplayAlert("SUCCES!", "Logarea a avut succes!", "Ok.");
                 // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
                 // adaugam o pagina de tipul Fridge pentru Frigider deoarece initial dupa reg/login ne va trimite la pagina cu ingredientele
-                await Navigation.PushAsync(new FridgeListPage(m_utilizator));
+
+                /*
+                var m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);
+                await DisplayAlert("ONAPP FRIDGE", "m_frigider id: " + m_frigider.F_id, "oke.");
+
+                foreach (Ingrediente ing in m_frigider.F_ingrediente)
+                    System.Diagnostics.Debug.WriteLine(">>>LOGing: " + ing.N_nume);
+
+                var first = m_frigider.F_ingrediente.First();
+                await DisplayAlert("ONAPP FRIDGE", "m_frigider id: " + m_frigider.F_id + " " + first.N_id, "oke.");
+                */
+                //await Navigation.PushAsync(new FridgeListPage(m_utilizator));
             }
             else if (result == 0)
             {
