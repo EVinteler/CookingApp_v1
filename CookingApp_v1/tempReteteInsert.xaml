@@ -21,6 +21,21 @@
                     Text="{Binding R_descriere}"
                     HeightRequest="40">
             </Editor>
+
+            <ListView x:Name="listViewIngredient" ItemSelected="OnIngredientAddItemSelected" Margin="10" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <!--<Label Grid.Column="5" Text="{Binding N_link_imagine}" />-->
+                                <Label Grid.Column="1" Text="{Binding N_nume}" />
+                                <Label Grid.Column="2" Text="+" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
             <Button Text="Submit" Clicked="OnSubmitButtonClicked" />
         </StackLayout>
     </ContentPage.Content>

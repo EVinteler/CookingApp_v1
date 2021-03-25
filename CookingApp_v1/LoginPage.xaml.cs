@@ -39,12 +39,7 @@ namespace CookingApp_v1
                 await DisplayAlert("SUCCES!", "Logarea a avut succes!", "Ok.");
                 // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
                 // adaugam o pagina de tipul Fridge pentru Frigider deoarece initial dupa reg/login ne va trimite la pagina cu ingredientele
-                await Navigation.PushAsync(new FridgeListPage
-                {
-                    // vom transmite informatiile cu care s-a logat utilizatorul spre pagina Frigider
-                    // (si in continuare pe parcursul aplicatiei)
-                    BindingContext = m_utilizator
-                });
+                await Navigation.PushAsync(new FridgeListPage(m_utilizator));
             }
             else if (result == 0)
             {

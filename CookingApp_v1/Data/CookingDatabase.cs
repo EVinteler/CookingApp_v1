@@ -6,6 +6,7 @@ using SQLite;
 using System.Threading.Tasks; // pt async
 using CookingApp_v1.Models;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace CookingApp_v1.Data
 {
@@ -23,8 +24,8 @@ namespace CookingApp_v1.Data
             /*_database.DropTableAsync<Filtre>().Wait();
             _database.DropTableAsync<Ingrediente>().Wait();
             _database.DropTableAsync<Retete>().Wait();
-            //_database.DropTableAsync<Frigidere>().Wait();
-            //_database.DropTableAsync<Utilizatori>().Wait();*/
+            _database.DropTableAsync<Utilizatori>().Wait();
+            _database.DropTableAsync<Frigidere>().Wait();*/
 
             _database.CreateTableAsync<Filtre>().Wait();
             _database.CreateTableAsync<Frigidere>().Wait();
@@ -206,11 +207,11 @@ namespace CookingApp_v1.Data
         }
         public Task<int> AddIngredientFrigiderAsync(Frigidere frigider, Ingrediente ingredient)
         {
-            //System.Diagnostics.Debug.WriteLine(">>>Informatii din ingredient: " + ingredient.N_nume);
-            //System.Diagnostics.Debug.WriteLine(">>>Informatii din Frigider: " + frigider.F_id);
+            System.Diagnostics.Debug.WriteLine(">>>Informatii din ingredient: " + ingredient.N_nume);
+            System.Diagnostics.Debug.WriteLine(">>>Informatii din Frigider: " + frigider.F_id);
 
             // cream un nou m_ingredient cu informatiile preluate de la ingredientul transmis
-            var m_ingredient = new Ingrediente()
+            /*var m_ingredient = new Ingrediente()
             {
                 N_id = ingredient.N_id,
                 N_nume = ingredient.N_nume,
@@ -219,7 +220,7 @@ namespace CookingApp_v1.Data
                 N_descriere = ingredient.N_descriere,
                 N_link_imagine = ingredient.N_link_imagine
             };
-            /*var m_ingredient = new Ingrediente()
+            var m_ingredient = new Ingrediente()
             {
                 N_id = 1,
                 N_nume = "ingredient",
@@ -229,20 +230,17 @@ namespace CookingApp_v1.Data
                 N_link_imagine = "ingredient"
             };*/
 
-            //System.Diagnostics.Debug.WriteLine(">>>Informatii din M_ingredient: " + m_ingredient.N_nume);
+            System.Diagnostics.Debug.WriteLine(">>>Informatii din M_ingredient: " + ingredient.N_nume);
 
             // inseram ingredientul in lista din frigider
-            frigider.F_ingrediente = new List<Ingrediente> { m_ingredient };
+            // NU, aici doar cream o lista noua lol: frigider.F_ingrediente = new List<Ingrediente> { m_ingredient };
+            frigider.F_ingrediente.Add(ingredient);
 
-            /*foreach (Ingrediente ing in frigider.F_ingrediente)
-                System.Diagnostics.Debug.WriteLine(">>>ing: " + ing.N_nume);*/
+            //foreach (Ingrediente ing in frigider.F_ingrediente)
+                //System.Diagnostics.Debug.WriteLine(">>>ing: " + ing.N_nume);
 
             // updatam frigiderul
             return _database.UpdateAsync(frigider);
-        }
-        public async Task<int> AddIngredientAsync (Ingrediente ingredient)
-        {
-            return await _database.InsertAsync(ingredient);
         }
         /*
         public Task<int> DeleteIngredientFrigiderAsync(???)
@@ -286,6 +284,7 @@ namespace CookingApp_v1.Data
         public List<Ingrediente> GetFrigiderIngredientListAsync(Frigidere frigider)
         {
             // returneaza o lista de obiecte Ingredient
+            
             /*
             var m_ingredient = new Ingrediente()
             {
@@ -316,7 +315,11 @@ namespace CookingApp_v1.Data
         // returnam un singur ingredient (pt a il adauga la un frigider)
         // cautare dupa nume, categorie si/sau subcategorie cu LIKE
 
-
+        
+        public async Task<int> AddIngredientAsync (Ingrediente ingredient)
+        {
+            return await _database.InsertAsync(ingredient);
+        }
         // Task returneaza un obiect async, in cazul nostru de tip Ingredient
         public Task<Ingrediente> SearchIngredientAsync(string nume_inserat)
         {
@@ -405,9 +408,12 @@ namespace CookingApp_v1.Data
         {
             return _database.InsertAsync(filtru);
         }
-        public Task<int> tempAddReteteAsync(Retete reteta)
+        public Task<int> tempAddUpdateReteteAsync(Retete reteta)
         {
-            return _database.InsertAsync(reteta);
+            if (reteta.R_id!=0)
+                return _database.InsertAsync(reteta);
+            else
+                return _database.UpdateAsync(reteta);
         }
         public Task<int> tempAddIngredienteAsync(Ingrediente ingredient)
         {

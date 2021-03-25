@@ -37,11 +37,11 @@ namespace CookingApp_v1
             Navigation.PopAsync();
 
             Utilizatori m_utilizator = (Utilizatori)BindingContext;
-            await Navigation.PushAsync(new SearchListPage
+            /*await Navigation.PushAsync(new SearchListPage
             {
                 // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
                 BindingContext = m_utilizator
-            });
+            });*/
         }
     }
 }

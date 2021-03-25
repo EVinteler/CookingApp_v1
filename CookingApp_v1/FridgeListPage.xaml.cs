@@ -19,9 +19,12 @@ namespace CookingApp_v1
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FridgeListPage : ContentPage
     {
-        public FridgeListPage()
+        Utilizatori m_utilizator;
+        Frigidere m_frigider;
+        public FridgeListPage(Utilizatori utilizator)
         {
             InitializeComponent();
+            m_utilizator = utilizator;
         }
         protected override async void OnAppearing()
         {
@@ -34,9 +37,14 @@ namespace CookingApp_v1
             // folosim functia getFrigiderFromUtilizator sa selectam frigiderul care corespunde utilizatorului curent
             // si il transmitem la functia care ne afiseaza ingredientele din frigider
 
-            var m_utilizator = (Utilizatori)BindingContext;
-            var m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);
+            m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);
             listViewIngredient.ItemsSource = App.Database.GetFrigiderIngredientListAsync(m_frigider);
+
+            /*
+            // convertim lista la collection pentru ca sa se updatateze automat cand o modificam
+            List<Ingrediente> l_ingrediente = await App.Database.GetIngredientListAsync();
+            ObservableCollection<Ingrediente> c_ingrediente = new ObservableCollection<Ingrediente>(l_ingrediente);
+            */
 
             //await DisplayAlert("Alerta:","ID:" + m_utilizator.U_nume,"ok??");
             //App.Database.GetFrigiderIngredientListAsync(m_utilizator);
@@ -46,7 +54,6 @@ namespace CookingApp_v1
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul Recipes care ne arat lista de retete disponibile
 
-            Utilizatori m_utilizator = (Utilizatori)BindingContext;
             await Navigation.PushAsync(new RecipesPage
             {
                 // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
@@ -58,7 +65,6 @@ namespace CookingApp_v1
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul FridgeCategories care ne arata categoriile de ingrediente
 
-            Utilizatori m_utilizator = (Utilizatori)BindingContext;
             await Navigation.PushAsync(new FridgeCategoriesPage
             {
                 // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
@@ -71,12 +77,8 @@ namespace CookingApp_v1
             // adaugam o pagina de tipul SearchList care ne arata o lista de ingrediente
             // initial, ne trimite spre o lista generala de ingrediente
 
-            Utilizatori m_utilizator = (Utilizatori)BindingContext;
-            await Navigation.PushAsync(new SearchListPage
-            {
-                // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
-                BindingContext = m_utilizator
-            });
+            // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
+            await Navigation.PushAsync(new SearchListPage(m_utilizator,m_frigider));
         }
         async void OnIngredientDeleteItemSelected(object sender, SelectedItemChangedEventArgs e)
         {

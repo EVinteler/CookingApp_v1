@@ -19,6 +19,6 @@ namespace CookingApp_v1.Models
 
         // daca nu merge cu 1:M, schimba in string si converteste in functia de cautare
         [OneToMany]
-        public string U_filtre { get; set; }
+        public List<Filtre> U_filtre { get; set; }
     }
 }

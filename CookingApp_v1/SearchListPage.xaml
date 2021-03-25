@@ -4,7 +4,8 @@
              x:Class="CookingApp_v1.SearchListPage">
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="listViewIngredient" ItemSelected="OnIngredientAddItemSelected" Margin="10" >
+            
+            <ListView x:Name="listViewIngrediente" ItemSelected="OnIngredientAddItemSelected" Margin="10" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -17,6 +18,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            
             <Button Text="Search Categories" Clicked="OnSearchCategoriesButtonClicked" />
         </StackLayout>
     </ContentPage.Content>

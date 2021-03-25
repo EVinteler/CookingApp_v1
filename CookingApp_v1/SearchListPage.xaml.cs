@@ -18,9 +18,13 @@ namespace CookingApp_v1
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SearchListPage : ContentPage
     {
-        public SearchListPage()
+        Utilizatori m_utilizator;
+        Frigidere m_frigider;
+        public SearchListPage(Utilizatori utilizator, Frigidere frigider)
         {
             InitializeComponent();
+            m_utilizator = utilizator;
+            m_frigider = frigider;
         }
         protected override void OnAppearing()
         {
@@ -32,13 +36,7 @@ namespace CookingApp_v1
             // pentru ca listView din .xaml sa stie care lista sa o afiseze, folosim functia din CookingDatabase
             // elementele de la listViewIngredient vor avea valorile primite din GetIngredientListAsync, metoda din CookingDatabase
 
-            /*
-            // convertim lista la collection pentru ca sa se updatateze automat cand o modificam
-            List<Ingrediente> l_ingrediente = await App.Database.GetIngredientListAsync();
-            ObservableCollection<Ingrediente> c_ingrediente = new ObservableCollection<Ingrediente>(l_ingrediente);
-            */
-
-            listViewIngredient.ItemsSource = await App.Database.GetIngredientListAsync();
+            listViewIngrediente.ItemsSource = await App.Database.GetIngredientListAsync();
         }
 
         async void OnSearchCategoriesButtonClicked(object sender, EventArgs e)
@@ -56,21 +54,45 @@ namespace CookingApp_v1
             //await DisplayAlert("OnIngredientAddItemSelected", "Opened [OnIngredientAddItemSelected].", "Ok.");
 
             // luam utilizatorul transmis prin binding context
-            Utilizatori m_utilizator = (Utilizatori)BindingContext;
+            //Utilizatori m_utilizator = (Utilizatori)BindingContext;
             // folosim functia pentru a selecta frigiderul care corespunde utilizatorului curent
-            Frigidere m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);
+            //Frigidere m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);
 
-            //await DisplayAlert("Alerta:","nume: " + m_utilizator.U_nume,"okae");
-            //await DisplayAlert("Alerta:","nume: " + m_frigider.F_id,"okae");
+            await DisplayAlert("Alerta:","u_nume: " + m_utilizator.U_nume,"okae");
+            await DisplayAlert("Alerta:","f_id: " + m_frigider.F_id,"okae");
+
             if (e.SelectedItem != null) // daca elementul Ingredient selectat nu este null
             {
                 // preluam elementul ingredient selectat de pe view in m_ingredient
-                Ingrediente m_ingredient = e.SelectedItem as Ingrediente;
-                
+                Ingrediente ingredient = e.SelectedItem as Ingrediente;
+
+                var m_ingredient = new Ingrediente()
+                {
+                    N_id = ingredient.N_id,
+                    N_nume = ingredient.N_nume,
+                    N_categorie = ingredient.N_categorie,
+                    N_subcategorie = ingredient.N_subcategorie,
+                    N_descriere = ingredient.N_descriere,
+                    N_link_imagine = ingredient.N_link_imagine
+                };
+
+                //await DisplayAlert("Alerta:", "nume: " + m_ingredient.N_nume, "okae");
+
                 // il transmitem functiei care il va copia intr-un nou element si il va adauga frigiderului
-                await App.Database.AddIngredientFrigiderAsync(m_frigider,m_ingredient);
+                //await App.Database.AddIngredientFrigiderAsync(m_frigider,m_ingredient);
+
+                // merge daca cream o lista noua pe pagina asta, because fuck me thats why :)
+                //m_frigider.F_ingrediente = new List<Ingrediente> { };
+                m_frigider.F_ingrediente.Add(m_ingredient);
+
+                await DisplayAlert(">>>Alerta:", "added ingr?", "okae");
+
+                foreach (Ingrediente ing in m_frigider.F_ingrediente)
+                    System.Diagnostics.Debug.WriteLine(">>>ing: " + ing.N_nume);
+
+                    await App.Database.AddUpdateFrigiderAsync(m_frigider);
+                    await Navigation.PopAsync();
                 //ShowPageData();
-                //await Navigation.PopAsync();
             }
         }
     }

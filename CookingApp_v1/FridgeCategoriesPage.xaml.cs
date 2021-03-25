@@ -39,11 +39,11 @@ namespace CookingApp_v1
             // adaugam o pagina de tipul FridgeCategories care ne arata categoriile de ingrediente
 
             var m_utilizator = (Utilizatori)BindingContext;
-            await Navigation.PushAsync(new FridgeListPage
+            /*await Navigation.PushAsync(new FridgeListPage
             {
                 // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
                 BindingContext = m_utilizator
-            });
+            });*/
         }
         async void OnFridgeListItemButtonClicked(object sender, EventArgs e)
         {
@@ -57,11 +57,11 @@ namespace CookingApp_v1
             */
 
             var m_utilizator = (Utilizatori)BindingContext;
-            await Navigation.PushAsync(new FridgeListPage
+            /*await Navigation.PushAsync(new FridgeListPage
             {
                 // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
                 BindingContext = m_utilizator
-            });
+            });*/
         }
     }
 }
