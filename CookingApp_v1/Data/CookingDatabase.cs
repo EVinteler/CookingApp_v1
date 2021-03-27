@@ -27,6 +27,8 @@ namespace CookingApp_v1.Data
             _database.DropTableAsync<Utilizatori>().Wait();
             _database.DropTableAsync<Frigidere>().Wait();*/
 
+            //_database.ExecuteAsync("DELETE FROM Retete");
+
             _database.CreateTableAsync<Filtre>().Wait();
             _database.CreateTableAsync<Frigidere>().Wait();
             _database.CreateTableAsync<Ingrediente>().Wait();
@@ -428,6 +430,16 @@ namespace CookingApp_v1.Data
             return _database.Table<Retete>().ToListAsync();
         }
 
+        public List<Ingrediente> GetRetetaIngredientListAsync(Retete reteta)
+        {
+            // returneaza o lista de obiecte Ingredient
+
+            foreach (Ingrediente i in m_reteta.R_ingrediente)
+                System.Diagnostics.Debug.WriteLine(">>>1INGLISTing: " + i.N_nume);
+
+            return reteta.R_ingrediente;
+        }
+
 
         /*** FILTRE ***/
         // functii pt filtre: afisam toate filtrele ca lista (vom schimba sa fie pe categorii dupa ce ma decid ce filtre sunt finale)
@@ -456,10 +468,21 @@ namespace CookingApp_v1.Data
         }
         public Task<int> tempAddUpdateReteteAsync(Retete reteta)
         {
-            if (reteta.R_id!=0)
-                return _database.InsertAsync(reteta);
-            else
+            if (reteta.R_id != 0)
                 return _database.UpdateAsync(reteta);
+            else
+                return _database.InsertAsync(reteta);
+        }
+        public Retete tempGetNewReteta(Retete reteta)
+        {
+            reteta.R_ingrediente = new List<Ingrediente> { 
+                new Ingrediente{ N_id=5, N_nume="aaa"}
+            };
+
+            foreach (Ingrediente i in reteta.R_ingrediente)
+                System.Diagnostics.Debug.WriteLine(">>>TGNRing: " + i.N_nume);
+
+            return reteta;
         }
         public Task<int> tempAddIngredienteAsync(Ingrediente ingredient)
         {

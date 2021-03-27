@@ -27,7 +27,7 @@ namespace CookingApp_v1
             m_utilizator = utilizator;
             m_frigider = frigider;
         }
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
             //m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);

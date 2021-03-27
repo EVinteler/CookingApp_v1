@@ -39,7 +39,7 @@ namespace CookingApp_v1
                 BindingContext = m_utilizator
             });
         }
-        async void OnFridgeListButtonClicked(object sender, EventArgs e)
+        void OnFridgeListButtonClicked(object sender, EventArgs e)
         {
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul FridgeCategories care ne arata categoriile de ingrediente

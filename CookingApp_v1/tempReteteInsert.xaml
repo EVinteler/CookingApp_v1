@@ -7,22 +7,27 @@
             <Label Text="Inserare Retete"/>
             <Editor Placeholder="Nume Reteta"
                     Text="{Binding R_nume}"
+                    x:Name="e_nume"
                     HeightRequest="40">
             </Editor>
             <Editor Placeholder="Link"
                     Text="{Binding R_link}"
+                    x:Name="e_link"
                     HeightRequest="40">
             </Editor>
             <Editor Placeholder="Cultura"
                     Text="{Binding R_cultura}"
+                    x:Name="e_cultura"
                     HeightRequest="40">
             </Editor>
             <Editor Placeholder="Descriere"
                     Text="{Binding R_descriere}"
+                    x:Name="e_descriere"
                     HeightRequest="40">
             </Editor>
 
-            <ListView x:Name="listViewIngredient" ItemSelected="OnIngredientAddItemSelected" Margin="10" >
+            <Label Text="Inserare INGREDIENTE"/>
+            <ListView x:Name="listViewIngredient" ItemSelected="OnIngredientAddItemSelected" BackgroundColor="LightGreen" Margin="20" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -35,8 +40,22 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
+
             <Button Text="Submit" Clicked="OnSubmitButtonClicked" />
+
+            <Label Text="INGREDIENTE Continute"/>
+            <ListView x:Name="listViewRetetaIngredient" BackgroundColor="LightSalmon" Margin="20" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <!--<Label Grid.Column="5" Text="{Binding N_link_imagine}" />-->
+                                <Label Grid.Column="1" Text="{Binding N_nume}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

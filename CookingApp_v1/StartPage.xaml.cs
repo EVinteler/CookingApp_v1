@@ -46,10 +46,7 @@ namespace CookingApp_v1
         }
         async void OntempAddReteteButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new tempReteteInsert
-            {
-                BindingContext = new Retete()
-            });
+            await Navigation.PushAsync(new tempReteteInsert{ BindingContext = new Retete() });
         }
         async void OntempAddIngredienteButtonClicked(object sender, EventArgs e)
         {

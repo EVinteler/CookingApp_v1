@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-//using CookingApp_v1.Models;
+using CookingApp_v1.Models;
 
 namespace CookingApp_v1
 {
@@ -32,6 +32,24 @@ namespace CookingApp_v1
             listViewFiltre.ItemsSource = await App.Database.GetFiltruListAsync();
             listViewRetete.ItemsSource = await App.Database.GetRetetaListAsync();
             listViewFrigidere.ItemsSource = await App.Database.GetFrigiderListAsync();
+        }
+        async void OnRetetaItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem != null)
+            {
+                var m_reteta = e.SelectedItem as Retete;
+                //m_reteta.R_ingrediente = App.Database.GetRetetaIngredientListAsync(m_reteta);
+
+                //await DisplayAlert(">>>Alerta:", "before ModReteta", "okae");
+
+                // trimitem reteta curenta spre pagina de inserate retete pt a o modifica
+                await Navigation.PushAsync(new tempReteteInsert
+                {
+                    BindingContext = m_reteta
+                });
+
+                //await Navigation.PopAsync();
+            }
         }
     }
 }

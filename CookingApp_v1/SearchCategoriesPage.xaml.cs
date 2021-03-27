@@ -21,7 +21,7 @@ namespace CookingApp_v1
         {
             InitializeComponent();
         }
-        async void OnSearchListButtonClicked(object sender, EventArgs e)
+        void OnSearchListButtonClicked(object sender, EventArgs e)
         {
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul SearchList care cauta 

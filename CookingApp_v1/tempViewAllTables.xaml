@@ -40,7 +40,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
                 <Label Text="RETETE"/>
-                <ListView x:Name="listViewRetete" BackgroundColor="PaleGreen" Margin="20">
+                <ListView x:Name="listViewRetete" ItemSelected="OnRetetaItemSelected" BackgroundColor="PaleGreen" Margin="20">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
