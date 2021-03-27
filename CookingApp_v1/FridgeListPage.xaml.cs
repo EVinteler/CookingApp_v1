@@ -31,7 +31,7 @@ namespace CookingApp_v1
         {
             base.OnAppearing();
             //m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);
-            await DisplayAlert("ONAPP FRIDGE","m_frigider id: " + m_frigider.F_id,"oke.");
+            //await DisplayAlert("ONAPP FRIDGE","m_frigider id: " + m_frigider.F_id,"oke.");
             showPageData(m_frigider);
         }
         void showPageData (Frigidere m_frigider)

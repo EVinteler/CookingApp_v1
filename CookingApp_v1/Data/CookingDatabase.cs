@@ -280,16 +280,16 @@ namespace CookingApp_v1.Data
             // numele este unic, stim ca exista doar un rezultat, asa ca il putem converti
             // cu .FirstOrDefault()
 
-            System.Diagnostics.Debug.WriteLine(">>>0000PAS1: ");
+            //System.Diagnostics.Debug.WriteLine(">>>0000PAS1: ");
 
             var m_utilizatori = await _database.QueryAsync<Utilizatori>
                 ("select * from Utilizatori where U_nume = '" + utilizator.U_nume + "'");
 
-            System.Diagnostics.Debug.WriteLine(">>>0000PAS2: ");
+            //System.Diagnostics.Debug.WriteLine(">>>0000PAS2: ");
 
             var m_utilizator = m_utilizatori.First();
 
-            System.Diagnostics.Debug.WriteLine(">>>0000PAS3: ");
+            //System.Diagnostics.Debug.WriteLine(">>>0000PAS3: ");
 
 
             // vom lua frigiderul cu id-ul corespunzator utilizatorului trimis (folosim firstordefault deoarece
@@ -297,19 +297,18 @@ namespace CookingApp_v1.Data
             var m_frigidere = await _database.QueryAsync<Frigidere>
                ("select * from Frigidere where F_id = " + m_utilizator.U_frigider);
 
-            System.Diagnostics.Debug.WriteLine(">>>0000PAS4: ");
+            //System.Diagnostics.Debug.WriteLine(">>>0000PAS4: ");
 
             var m_frigider = m_frigidere.First();
 
-            System.Diagnostics.Debug.WriteLine(">>>0000PAS5: " + m_frigider.F_id);
+            //System.Diagnostics.Debug.WriteLine(">>>0000PAS5: " + m_frigider.F_id);
 
-            m_frigider.F_ingrediente = new List<Ingrediente>{
-                    {new Ingrediente { N_id = 0, N_nume = "temp2" } }
-                };
+            // cream lista inainte de a o afisa pt ca altfel nu merge, lmao
+            m_frigider.F_ingrediente = new List<Ingrediente>{};
 
 
-            foreach (Ingrediente ing in m_frigider.F_ingrediente)
-                System.Diagnostics.Debug.WriteLine(">>>LOGing: " + ing.N_nume);
+            //foreach (Ingrediente ing in m_frigider.F_ingrediente)
+                //System.Diagnostics.Debug.WriteLine(">>>LOGing: " + ing.N_nume);
 
             return m_frigider;
         }
@@ -346,11 +345,11 @@ namespace CookingApp_v1.Data
             /*
             var m_ingrediente = frigider.F_ingrediente;
 */
-            if (frigider.F_ingrediente != null)
+            /*if (frigider.F_ingrediente != null)
             {
                 foreach (Ingrediente ing in frigider.F_ingrediente)
                     System.Diagnostics.Debug.WriteLine(">>>GETing: " + ing.N_nume);
-            }
+            }*/
 
             return frigider.F_ingrediente;
         }

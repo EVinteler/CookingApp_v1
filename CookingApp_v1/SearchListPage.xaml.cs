@@ -58,8 +58,8 @@ namespace CookingApp_v1
             // folosim functia pentru a selecta frigiderul care corespunde utilizatorului curent
             //Frigidere m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);
 
-            await DisplayAlert("Alerta:","u_nume: " + m_utilizator.U_nume,"okae");
-            await DisplayAlert("Alerta:","f_id: " + m_frigider.F_id,"okae");
+            //await DisplayAlert("Alerta:","u_nume: " + m_utilizator.U_nume,"okae");
+            //await DisplayAlert("Alerta:","f_id: " + m_frigider.F_id,"okae");
 
             if (e.SelectedItem != null) // daca elementul Ingredient selectat nu este null
             {
@@ -86,26 +86,24 @@ namespace CookingApp_v1
                 //m_frigider.F_ingrediente.Add(m_ingredient);
 
 
-                await DisplayAlert(">>>Alerta:", "before getFrig", "okae");
+                //await DisplayAlert(">>>Alerta:", "before getFrig", "okae");
                 List<Ingrediente> m_lista_ingr_1 = App.Database.GetFrigiderIngredientListAsync(m_frigider);
 
-                foreach (Ingrediente ing in m_lista_ingr_1)
-                    System.Diagnostics.Debug.WriteLine(">>>ing: " + ing.N_nume);
+                //foreach (Ingrediente ing in m_lista_ingr_1)
+                //    System.Diagnostics.Debug.WriteLine(">>>ing: " + ing.N_nume);
 
-                await DisplayAlert(">>>Alerta:", "before list 2", "okae");
+                //await DisplayAlert(">>>Alerta:", "before list 2", "okae");
                 List<Ingrediente> m_lista_ingr_2 = new List<Ingrediente> { m_ingredient };
-                await DisplayAlert(">>>Alerta:", "before copy", "okae");
-                // merge pana la partea asta cu f_ingrediente ??? cred ca nu il vede??? idfk
+                //await DisplayAlert(">>>Alerta:", "before copy", "okae");
                 m_frigider.F_ingrediente = m_lista_ingr_1.Concat(m_lista_ingr_2).ToList();
 
-                await DisplayAlert(">>>Alerta:", "added ingr?", "okae");
+                    //await DisplayAlert(">>>Alerta:", "added ingr?", "okae");
 
-                foreach (Ingrediente ing in m_frigider.F_ingrediente)
-                    System.Diagnostics.Debug.WriteLine(">>>ing: " + ing.N_nume);
+                    //foreach (Ingrediente ing in m_frigider.F_ingrediente)
+                    //System.Diagnostics.Debug.WriteLine(">>>ing: " + ing.N_nume);
 
                     await App.Database.AddUpdateFrigiderAsync(m_frigider);
                     await Navigation.PopAsync();
-                //ShowPageData();
             }
         }
     }

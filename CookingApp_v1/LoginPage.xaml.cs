@@ -52,14 +52,18 @@ namespace CookingApp_v1
                 // adaugam o pagina de tipul Fridge pentru Frigider deoarece initial dupa reg/login ne va trimite la pagina cu ingredientele
 
                 
+                // vom lua frigiderul din functie la logare si il vom trimite in restul aplicatiei
+                // ca parametru la fiecare pagina, deoarece altfel se pierde lista de ingrediente
+                // (da, e ciudat, stiu, am testat)
                 var m_frigider = await App.Database.GetFrigiderFromUtilizatorAsync(m_utilizator);
-                await DisplayAlert("ONAPP FRIDGE", "m_frigider id: " + m_frigider.F_id, "oke.");
 
-                foreach (Ingrediente ing in m_frigider.F_ingrediente)
-                    System.Diagnostics.Debug.WriteLine(">>>2LOGing: " + ing.N_nume);
+                //await DisplayAlert("ONAPP FRIDGE", "m_frigider id: " + m_frigider.F_id, "oke.");
 
-                var first = m_frigider.F_ingrediente.First();
-                await DisplayAlert("ONAPP FRIDGE", "m_frigider id: " + m_frigider.F_id + " " + first.N_id, "oke.");
+                //foreach (Ingrediente ing in m_frigider.F_ingrediente)
+                    //System.Diagnostics.Debug.WriteLine(">>>2LOGing: " + ing.N_nume);
+
+                //var first = m_frigider.F_ingrediente.First();
+                //await DisplayAlert("ONAPP FRIDGE", "m_frigider id: " + m_frigider.F_id + " " + first.N_id, "oke.");
                 
                 await Navigation.PushAsync(new FridgeListPage(m_utilizator,m_frigider));
             }
