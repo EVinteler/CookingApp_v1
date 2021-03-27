@@ -48,7 +48,7 @@ namespace CookingApp_v1
         {
             await Navigation.PushAsync(new tempReteteInsert
             { 
-                BindingContext = new Retete{ R_ingrediente=new List<Ingrediente> { } } 
+                BindingContext = new Retete() //{ R_ingrediente=new List<Ingrediente> { } } 
             });
         }
         async void OntempAddIngredienteButtonClicked(object sender, EventArgs e)

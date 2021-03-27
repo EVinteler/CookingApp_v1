@@ -41,7 +41,7 @@ namespace CookingApp_v1
                 // cream o lista noua pt ca nu exista una in reteta luata din binding context 
                 // ii aceiasi situatie cu utilizatorul
                 
-                //m_reteta.R_ingrediente = new List<Ingrediente> { }; ;
+                m_reteta.R_ingrediente = new List<Ingrediente> { }; ;
 
                 //foreach (Ingrediente i in m_reteta.R_ingrediente)
                     //System.Diagnostics.Debug.WriteLine(">>>TVATing: " + i.N_nume);

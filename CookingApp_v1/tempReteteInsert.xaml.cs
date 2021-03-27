@@ -11,6 +11,12 @@ using CookingApp_v1.Models;
 
 namespace CookingApp_v1
 {
+    /***
+     * basically cum functioneaza prostia asta e ca tre sa alegi ingredientele
+     * fiecare pe rand FARA sa iesi de pe pg asta, de fiecare data cand dai click pe o reteta
+     * se re-creaza lista ingredientelor retetei lol
+     ***/
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class tempReteteInsert : ContentPage
     {
@@ -70,7 +76,7 @@ namespace CookingApp_v1
 
             await App.Database.tempAddUpdateReteteAsync(m_reteta);
 
-            await Navigation.PopAsync();
+            //await Navigation.PopAsync();
         }
         async void OnIngredientAddItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
@@ -113,7 +119,10 @@ namespace CookingApp_v1
                 foreach (Ingrediente i in m_reteta.R_ingrediente)
                     System.Diagnostics.Debug.WriteLine(">>>2INGLISTing: " + i.N_nume);
 
-                await Navigation.PopAsync();
+                //NU activa pop, basically cum functioneaza prostia asta e ca tre sa alegi ingredientele
+                // fiecare pe rand FARA sa iesi de pe pg asta, de fiecare data cand dai click pe o reteta
+                // se re-creaza lista ingredientelor retetei lol
+                //await Navigation.PopAsync();
             }
         }
     }
