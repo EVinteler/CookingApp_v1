@@ -87,7 +87,9 @@ namespace CookingApp_v1
 
 
                 //await DisplayAlert(">>>Alerta:", "before getFrig", "okae");
-                List<Ingrediente> m_lista_ingr_1 = App.Database.GetFrigiderIngredientListAsync(m_frigider);
+                // vom crea o categorie nula
+                string categorie = null;
+                List<Ingrediente> m_lista_ingr_1 = App.Database.GetFrigiderIngredientListAsync(m_frigider,categorie);
 
                 //foreach (Ingrediente ing in m_lista_ingr_1)
                 //    System.Diagnostics.Debug.WriteLine(">>>ing: " + ing.N_nume);

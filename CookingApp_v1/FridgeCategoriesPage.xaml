@@ -9,7 +9,11 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Fridge Categories List"/>
-            <Button Text="Fridge List Item" Clicked="OnFridgeListItemButtonClicked" />
+            <Button Text="Fridge List" Clicked="OnFridgeListButtonClicked" />
+            <!--<Button Text="Fridge List Item" Clicked="OnFridgeListItemButtonClicked" />-->
+
+            <RadioButton Content="Cat" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

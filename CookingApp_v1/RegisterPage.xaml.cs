@@ -58,7 +58,7 @@ namespace CookingApp_v1
                 await DisplayAlert("SUCCES!","Inregistrarea a avut succes!","Ok.");
 
                 // vom iesi de pe pagina de register
-                //await Navigation.PopAsync();
+                await Navigation.PopAsync();
 
                 // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
                 // adaugam o pagina de tipul Fridge pentru Frigider deoarece initial dupa reg/login ne va trimite la pagina cu ingredientele

@@ -21,11 +21,13 @@ namespace CookingApp_v1
     {
         Utilizatori m_utilizator;
         Frigidere m_frigider;
-        public FridgeListPage(Utilizatori utilizator, Frigidere frigider)
+        string m_categorie;
+        public FridgeListPage(Utilizatori utilizator, Frigidere frigider, string categorie)
         {
             InitializeComponent();
             m_utilizator = utilizator;
             m_frigider = frigider;
+            m_categorie = categorie;
         }
         protected override void OnAppearing()
         {
@@ -43,8 +45,10 @@ namespace CookingApp_v1
             // luam utilizatorul transmis prin binding context de la pagina de Login
             // folosim functia getFrigiderFromUtilizator sa selectam frigiderul care corespunde utilizatorului curent
             // si il transmitem la functia care ne afiseaza ingredientele din frigider
-
-            listViewIngredient.ItemsSource = App.Database.GetFrigiderIngredientListAsync(m_frigider);
+            
+            // daca m_categorie e null, va scoate toate ingredientele
+            // daca m_categorie este numele unei categorii, va scoate doar categoria respectiva
+            listViewIngredient.ItemsSource = App.Database.GetFrigiderIngredientListAsync(m_frigider,m_categorie);
 
             /*
             // convertim lista la collection pentru ca sa se updatateze automat cand o modificam
@@ -71,11 +75,7 @@ namespace CookingApp_v1
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul FridgeCategories care ne arata categoriile de ingrediente
 
-            await Navigation.PushAsync(new FridgeCategoriesPage
-            {
-                // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
-                BindingContext = m_utilizator
-            });
+            await Navigation.PushAsync(new FridgeCategoriesPage(m_utilizator,m_frigider));
         }
         async void OnSearchListButtonClicked(object sender, EventArgs e)
         {

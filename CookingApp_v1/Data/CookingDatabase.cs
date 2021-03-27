@@ -315,17 +315,21 @@ namespace CookingApp_v1.Data
             return m_frigider;
         }
 
-        /*public Task<List<Frigidere>> GetFrigiderIngredientCategorieListAsync(string categorie)
+        public List<Ingrediente> GetFrigiderIngredientCategorieListAsync(Frigidere frigider, string categorie)
         {
             // returneaza o lista de obiecte Frigider din categoria trimisa
             // teoretic ai o lista de liste deci o sa ai un fel de double query (foloseste afisarea unei liste pe elemente de la Ingrediente v)
         
             //!toreview! + schimba tipul de return, ar trebui sa fie o lista de ingrediente
-        }*/
-        public List<Ingrediente> GetFrigiderIngredientListAsync(Frigidere frigider)
+
+            return frigider.F_ingrediente;
+        }
+        public List<Ingrediente> GetFrigiderIngredientListAsync(Frigidere frigider, string categorie)
         {
             // returneaza o lista de obiecte Ingredient
-            
+            // daca string e null, atunci returnam toate ingredientele
+            // daca string nu e null, returnam doar cele din categoria corespunzatoare
+
             /*
             var m_ingredient = new Ingrediente()
             {
@@ -346,14 +350,16 @@ namespace CookingApp_v1.Data
             // apoi vom returna lista de ingrediente salvata in frigider
             /*
             var m_ingrediente = frigider.F_ingrediente;
-*/
+            */
             /*if (frigider.F_ingrediente != null)
             {
                 foreach (Ingrediente ing in frigider.F_ingrediente)
                     System.Diagnostics.Debug.WriteLine(">>>GETing: " + ing.N_nume);
             }*/
-
-            return frigider.F_ingrediente;
+            if (categorie == null)
+                return frigider.F_ingrediente;
+            else
+                return frigider.F_ingrediente;
         }
 
 

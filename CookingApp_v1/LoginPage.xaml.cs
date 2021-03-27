@@ -60,12 +60,16 @@ namespace CookingApp_v1
                 //await DisplayAlert("ONAPP FRIDGE", "m_frigider id: " + m_frigider.F_id, "oke.");
 
                 //foreach (Ingrediente ing in m_frigider.F_ingrediente)
-                    //System.Diagnostics.Debug.WriteLine(">>>2LOGing: " + ing.N_nume);
+                //System.Diagnostics.Debug.WriteLine(">>>2LOGing: " + ing.N_nume);
 
                 //var first = m_frigider.F_ingrediente.First();
                 //await DisplayAlert("ONAPP FRIDGE", "m_frigider id: " + m_frigider.F_id + " " + first.N_id, "oke.");
-                
-                await Navigation.PushAsync(new FridgeListPage(m_utilizator,m_frigider));
+
+                // vom transmite initial o lista nula la pagina FridgeList, ceea ce o va face sa afiseze
+                // toate ingredientele in pagina
+                string m_categorie = null;
+
+                await Navigation.PushAsync(new FridgeListPage(m_utilizator,m_frigider,m_categorie));
             }
             else if (result == 0)
             {
