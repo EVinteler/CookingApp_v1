@@ -356,10 +356,28 @@ namespace CookingApp_v1.Data
                 foreach (Ingrediente ing in frigider.F_ingrediente)
                     System.Diagnostics.Debug.WriteLine(">>>GETing: " + ing.N_nume);
             }*/
+
+            // daca nu avem categorie, returnam toate ingredientele
             if (categorie == null)
                 return frigider.F_ingrediente;
             else
-                return frigider.F_ingrediente;
+            {
+                // daca avem categorie, returnam doar ingredientele care apartin categoriei respective
+                // cream o lista noua
+                var ingredienete_cat = new List<Ingrediente> { };
+
+                // verificam daca fiecare ingredient are categoria dorita
+                foreach (Ingrediente ing in frigider.F_ingrediente)
+                    if (ing.N_categorie == categorie)//!toreview! - change to an sql LIKE situation
+                    {
+                        // daca da, atunci il adaugam in lista dinainte
+                        ingredienete_cat.Add(ing);
+                        //System.Diagnostics.Debug.WriteLine(">>>GETing: " + ing.N_nume);
+                    }
+
+                // returnam lista
+                return ingredienete_cat;
+            }
         }
 
 
