@@ -41,6 +41,8 @@
                 </ListView.ItemTemplate>
             </ListView>
 
+            <Label Text="ATENTIE: nu are rost sa inserezi ingrediente cand creezi reteta pt ca lista noua e facuta la
+                         modificare sry bestie"/>
             <Button Text="Submit" Clicked="OnSubmitButtonClicked" />
 
             <Label Text="INGREDIENTE Continute"/>

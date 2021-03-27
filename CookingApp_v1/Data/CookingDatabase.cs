@@ -434,8 +434,8 @@ namespace CookingApp_v1.Data
         {
             // returneaza o lista de obiecte Ingredient
 
-            foreach (Ingrediente i in m_reteta.R_ingrediente)
-                System.Diagnostics.Debug.WriteLine(">>>1INGLISTing: " + i.N_nume);
+            //foreach (Ingrediente i in reteta.R_ingrediente)
+            //System.Diagnostics.Debug.WriteLine(">>>1INGLISTing: " + i.N_nume);
 
             return reteta.R_ingrediente;
         }

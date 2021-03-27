@@ -86,6 +86,7 @@ namespace CookingApp_v1
             {
                 ing = e.SelectedItem as Ingrediente;
 
+                /*
                 List<Ingrediente> m_lista_ingr_1 = App.Database.GetRetetaIngredientListAsync(m_reteta);
                 foreach (Ingrediente i in m_lista_ingr_1)
                     System.Diagnostics.Debug.WriteLine(">>>1INGLISTing: " + i.N_nume);
@@ -98,20 +99,21 @@ namespace CookingApp_v1
                 List<Ingrediente> m_lista_ingr_2 = App.Database.GetRetetaIngredientListAsync(m_reteta);
                 foreach (Ingrediente i in m_lista_ingr_2)
                     System.Diagnostics.Debug.WriteLine(">>>2INGLISTing: " + i.N_nume);
+                */
 
-
-
-                /*
                 await DisplayAlert(">>>Alerta:", "before getReteta", "okae");
+                // dc nu se copiaza in lista asta? :(
+                List<Ingrediente> m_lista_ingr_1 = App.Database.GetRetetaIngredientListAsync(m_reteta);
                 await DisplayAlert(">>>Alerta:", "before NewIng", "okae");
                 List<Ingrediente> m_lista_ingr_2 = new List<Ingrediente> { ing };
                 await DisplayAlert(">>>Alerta:", "before Concat", "okae");
                 m_reteta.R_ingrediente = m_lista_ingr_1.Concat(m_lista_ingr_2).ToList();
-                */
+                await App.Database.tempAddUpdateReteteAsync(m_reteta);
 
-                //await App.Database.tempAddUpdateReteteAsync(m_reteta);
+                foreach (Ingrediente i in m_reteta.R_ingrediente)
+                    System.Diagnostics.Debug.WriteLine(">>>2INGLISTing: " + i.N_nume);
 
-                //await Navigation.PopAsync();
+                await Navigation.PopAsync();
             }
         }
     }

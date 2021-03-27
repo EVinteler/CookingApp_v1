@@ -38,7 +38,13 @@ namespace CookingApp_v1
             if (e.SelectedItem != null)
             {
                 var m_reteta = e.SelectedItem as Retete;
-                //m_reteta.R_ingrediente = App.Database.GetRetetaIngredientListAsync(m_reteta);
+                // cream o lista noua pt ca nu exista una in reteta luata din binding context 
+                // ii aceiasi situatie cu utilizatorul
+                
+                //m_reteta.R_ingrediente = new List<Ingrediente> { }; ;
+
+                //foreach (Ingrediente i in m_reteta.R_ingrediente)
+                    //System.Diagnostics.Debug.WriteLine(">>>TVATing: " + i.N_nume);
 
                 //await DisplayAlert(">>>Alerta:", "before ModReteta", "okae");
 
