@@ -7,17 +7,24 @@
         <ToolbarItem  Priority="1" Text="Recipes" Clicked="OnRecipesButtonClicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <FlexLayout Direction="Column"
-                AlignItems="Center"
-                JustifyContent="SpaceEvenly">
-            <Label Text="Fridge Categories List"/>
+        <StackLayout>
             <Button Text="Fridge List" Clicked="OnFridgeListButtonClicked" />
-            <!--<Button Text="Fridge List Item" Clicked="OnFridgeListItemButtonClicked" />-->
+            <Label Text="Fridge Categories List"/>
+            <FlexLayout Direction="Column"
+                    AlignItems="Center"
+                    JustifyContent="SpaceEvenly">
+                <!--<Button Text="Fridge List Item" Clicked="OnFridgeListItemButtonClicked" />-->
 
-            <Button Text="Lactate" x:Name="lactate" Clicked="OnFridgeListItemButtonClicked" />
-            <Button Text="Făinoase" x:Name="fainoase" Clicked="OnFridgeListItemButtonClicked" />
-            <Button Text="Dulciuri" x:Name="dulciuri" Clicked="OnFridgeListItemButtonClicked" />
+                <Button Text="Fructe" Clicked="OnFructeButtonClicked" />
+                <Button Text="Legume" Clicked="OnLegumeButtonClicked" />
+                <Button Text="Carne" Clicked="OnCarneButtonClicked" />
+                <Button Text="Făinoase" Clicked="OnFainoaseButtonClicked" />
+                <Button Text="Sosuri" Clicked="OnSosuriButtonClicked" />
+                <Button Text="Condimente" Clicked="OnCondimenteButtonClicked" />
+                <Button Text="Lactate" Clicked="OnLactateButtonClicked" />
+                <Button Text="Dulciuri" Clicked="OnDulciuriButtonClicked" />
 
-        </FlexLayout>
+            </FlexLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

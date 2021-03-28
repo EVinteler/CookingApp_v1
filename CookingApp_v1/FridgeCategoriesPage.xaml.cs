@@ -47,16 +47,60 @@ namespace CookingApp_v1
             string m_categorie = null;
             await Navigation.PushAsync(new FridgeListPage(m_utilizator,m_frigider,m_categorie));
         }
-        async void OnFridgeListItemButtonClicked(object sender, EventArgs e)
+        void OnFructeButtonClicked(object sender, EventArgs e)
+        {
+            // preluam categoria de la buton
+            string m_categorie = "fructe";
+            NewFridgePageByCategory(m_categorie);
+        }
+        void OnLegumeButtonClicked(object sender, EventArgs e)
+        {
+            // preluam categoria de la buton
+            string m_categorie = "legume";
+            NewFridgePageByCategory(m_categorie);
+        }
+        void OnCarneButtonClicked(object sender, EventArgs e)
+        {
+            // preluam categoria de la buton
+            string m_categorie = "carne";
+            NewFridgePageByCategory(m_categorie);
+        }
+        void OnFainoaseButtonClicked(object sender, EventArgs e)
+        {
+            // preluam categoria de la buton
+            string m_categorie = "fainoase";
+            NewFridgePageByCategory(m_categorie);
+        }
+        void OnSosuriButtonClicked(object sender, EventArgs e)
+        {
+            // preluam categoria de la buton
+            string m_categorie = "sosuri";
+            NewFridgePageByCategory(m_categorie);
+        }
+        void OnCondimenteButtonClicked(object sender, EventArgs e)
+        {
+            // preluam categoria de la buton
+            string m_categorie = "condimente";
+            NewFridgePageByCategory(m_categorie);
+        }
+        void OnLactateButtonClicked(object sender, EventArgs e)
+        {
+            // preluam categoria de la buton
+            string m_categorie = "lactate";
+            NewFridgePageByCategory(m_categorie);
+        }
+        void OnDulciuriButtonClicked(object sender, EventArgs e)
+        {
+            // preluam categoria de la buton
+            string m_categorie = "dulciuri";
+            NewFridgePageByCategory(m_categorie);
+        }
+        async void NewFridgePageByCategory(string n_categorie)
         {
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul FridgeList care va arata ingredientele sub forma de lista
-            // mai tarziu o vom modifica astfel ca aceasta lista sa contina numai ingredientele din categoria aleasa
-
-            // preluam categoria de la buton
-            string m_categorie = "lactate";
-
-            await Navigation.PushAsync(new FridgeListPage(m_utilizator, m_frigider, m_categorie));
+            // in cazul de fata, vom arata doar elementele din categoria preluata
+            await Navigation.PushAsync(new FridgeListPage(m_utilizator, m_frigider, n_categorie));
         }
     }
 }

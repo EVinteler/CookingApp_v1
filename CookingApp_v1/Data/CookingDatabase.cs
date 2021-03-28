@@ -27,7 +27,7 @@ namespace CookingApp_v1.Data
             _database.DropTableAsync<Utilizatori>().Wait();
             _database.DropTableAsync<Frigidere>().Wait();*/
 
-            //_database.ExecuteAsync("DELETE FROM Retete");
+            //_database.ExecuteAsync("DELETE FROM Ingrediente");
 
             _database.CreateTableAsync<Filtre>().Wait();
             _database.CreateTableAsync<Frigidere>().Wait();
@@ -368,7 +368,7 @@ namespace CookingApp_v1.Data
 
                 // verificam daca fiecare ingredient are categoria dorita
                 foreach (Ingrediente ing in frigider.F_ingrediente)
-                    if (ing.N_categorie == categorie)//!toreview! - change to an sql LIKE situation
+                    if (ing.N_categorie == categorie)
                     {
                         // daca da, atunci il adaugam in lista dinainte
                         ingredienete_cat.Add(ing);
