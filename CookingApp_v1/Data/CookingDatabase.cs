@@ -388,7 +388,6 @@ namespace CookingApp_v1.Data
                 return true;
         }
 
-
         /*** INGREDIENTE 
         // functii pt ingrediente: afisam toate ingredientele ca lista; afisam toate ingredientele dintr-o categorie
         // returnam un singur ingredient (pt a il adauga la un frigider)
