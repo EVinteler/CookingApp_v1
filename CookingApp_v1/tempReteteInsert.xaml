@@ -41,23 +41,24 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Label Text="ATENTIE: nu are rost sa inserezi ingrediente cand creezi reteta pt ca lista noua e facuta la
-                         modificare sry bestie"/>
+            <Label Text="ATENTIE: nu are rost sa inserezi ingrediente cand creezi reteta pt ca lista noua e facuta la modificare sry bestie"/>
             <Button Text="Submit" Clicked="OnSubmitButtonClicked" />
 
-            <Label Text="INGREDIENTE Continute"/>
+            <!--<Label Text="INGREDIENTE Continute"/>
+                // partea asta nu se vede oricum pt ca s-ar vedea numa cand reintrii pe pg or sth lol
             <ListView x:Name="listViewRetetaIngredient" BackgroundColor="LightSalmon" Margin="20" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
-                                <!--<Label Grid.Column="5" Text="{Binding N_link_imagine}" />-->
+                                <Label Grid.Column="5" Text="{Binding N_link_imagine}" />
                                 <Label Grid.Column="1" Text="{Binding N_nume}" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </ListView>-->
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

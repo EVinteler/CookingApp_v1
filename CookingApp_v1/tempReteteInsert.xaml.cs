@@ -45,7 +45,7 @@ namespace CookingApp_v1
 
             listViewIngredient.ItemsSource = await App.Database.GetIngredientListAsync();
             Retete m_reteta = (Retete)BindingContext;
-            listViewRetetaIngredient.ItemsSource = App.Database.GetRetetaIngredientListAsync(m_reteta);
+            //listViewRetetaIngredient.ItemsSource = App.Database.GetRetetaIngredientListAsync(m_reteta);
 
             // vom afisa informatiile luate din m_reteta (daca exista)
             //showRetetaInfo(m_reteta);
@@ -107,12 +107,11 @@ namespace CookingApp_v1
                     System.Diagnostics.Debug.WriteLine(">>>2INGLISTing: " + i.N_nume);
                 */
 
-                await DisplayAlert(">>>Alerta:", "before getReteta", "okae");
-                // dc nu se copiaza in lista asta? :(
+                //await DisplayAlert(">>>Alerta:", "before getReteta", "okae");
                 List<Ingrediente> m_lista_ingr_1 = App.Database.GetRetetaIngredientListAsync(m_reteta);
-                await DisplayAlert(">>>Alerta:", "before NewIng", "okae");
+                //await DisplayAlert(">>>Alerta:", "before NewIng", "okae");
                 List<Ingrediente> m_lista_ingr_2 = new List<Ingrediente> { ing };
-                await DisplayAlert(">>>Alerta:", "before Concat", "okae");
+                //await DisplayAlert(">>>Alerta:", "before Concat", "okae");
                 m_reteta.R_ingrediente = m_lista_ingr_1.Concat(m_lista_ingr_2).ToList();
                 await App.Database.tempAddUpdateReteteAsync(m_reteta);
 
