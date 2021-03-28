@@ -79,11 +79,10 @@ namespace CookingApp_v1
                 // verificam daca mai exista ingredientul (cu id-ul respectiv) in lista frigiderului nostru
                 // daca mai exista, nu il adaugam
                 // daca nu mai exista, il adaugam
-                bool adaugam = false;
+                bool exista = App.Database.CheckIngredientInFridgeAsync(m_frigider,m_ingredient.N_id);
 
-                adaugam = !(await App.Database.CheckIngredientInFridgeAsync(m_frigider,m_ingredient.N_id));
 
-                if (adaugam)
+                if (!exista)
                 {
                     //await DisplayAlert("Alerta:", "nume: " + m_ingredient.N_nume, "okae");
 

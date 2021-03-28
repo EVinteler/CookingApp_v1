@@ -371,14 +371,16 @@ namespace CookingApp_v1.Data
             }
         }
 
-        public async Task<bool> CheckIngredientInFridgeAsync(Frigidere frigider, int id)
+        public bool CheckIngredientInFridgeAsync(Frigidere frigider, int id)
         {
-            // returneaza true daca mai exista ingredientul
+            // returneaza true daca mai exista ingredientul in frigider
             // si false daca nu mai exista
 
-            List<Ingrediente> ingrediente_gasite = await _database.QueryAsync<Ingrediente>("select * from Ingrediente where N_id = " + id);
+            int numar_ingrediente = 0;
 
-            int numar_ingrediente = ingrediente_gasite.Count;
+            foreach (Ingrediente ing in frigider.F_ingrediente)
+                if (ing.N_id == id)
+                    numar_ingrediente++;
 
             if (numar_ingrediente == 0)
                 return false;
