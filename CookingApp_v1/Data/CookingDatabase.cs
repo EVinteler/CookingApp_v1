@@ -315,15 +315,6 @@ namespace CookingApp_v1.Data
             return m_frigider;
         }
 
-        public List<Ingrediente> GetFrigiderIngredientCategorieListAsync(Frigidere frigider, string categorie)
-        {
-            // returneaza o lista de obiecte Frigider din categoria trimisa
-            // teoretic ai o lista de liste deci o sa ai un fel de double query (foloseste afisarea unei liste pe elemente de la Ingrediente v)
-        
-            //!toreview! + schimba tipul de return, ar trebui sa fie o lista de ingrediente
-
-            return frigider.F_ingrediente;
-        }
         public List<Ingrediente> GetFrigiderIngredientListAsync(Frigidere frigider, string categorie)
         {
             // returneaza o lista de obiecte Ingredient
@@ -380,6 +371,20 @@ namespace CookingApp_v1.Data
             }
         }
 
+        public async Task<bool> CheckIngredientInFridgeAsync(Frigidere frigider, int id)
+        {
+            // returneaza true daca mai exista ingredientul
+            // si false daca nu mai exista
+
+            List<Ingrediente> ingrediente_gasite = await _database.QueryAsync<Ingrediente>("select * from Ingrediente where N_id = " + id);
+
+            int numar_ingrediente = ingrediente_gasite.Count;
+
+            if (numar_ingrediente == 0)
+                return false;
+            else
+                return true;
+        }
 
 
         /*** INGREDIENTE 
