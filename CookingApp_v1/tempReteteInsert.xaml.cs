@@ -43,7 +43,11 @@ namespace CookingApp_v1
 
             // elementele de la listViewIngredient vor avea valorile primite din GetIngredientListAsync, metoda din CookingDatabase
 
-            listViewIngredient.ItemsSource = await App.Database.GetIngredientListAsync();
+            // selectam toate ingredientele deci search si categorie vor fi null
+            string m_search = null;
+            string m_categorie = null;
+
+            listViewIngredient.ItemsSource = await App.Database.GetIngredientListAsync(m_search,m_categorie);
             Retete m_reteta = (Retete)BindingContext;
             //listViewRetetaIngredient.ItemsSource = App.Database.GetRetetaIngredientListAsync(m_reteta);
 

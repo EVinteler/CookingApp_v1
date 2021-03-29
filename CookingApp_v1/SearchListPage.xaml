@@ -4,7 +4,7 @@
              x:Class="CookingApp_v1.SearchListPage">
     <ContentPage.Content>
         <StackLayout>
-            
+            <SearchBar Placeholder="Caută" CancelButtonColor="Orange" TextChanged="OnTextChanged" />
             <ListView x:Name="listViewIngrediente" ItemSelected="OnIngredientAddItemSelected" Margin="10" >
                 <ListView.ItemTemplate>
                     <DataTemplate>

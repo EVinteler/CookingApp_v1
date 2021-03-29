@@ -78,7 +78,9 @@ namespace CookingApp_v1
             // initial, ne trimite spre o lista generala de ingrediente
 
             // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
-            await Navigation.PushAsync(new SearchListPage(m_utilizator,m_frigider));
+            // initial, nu avem nimic la categorie, deci le trimitem ambele ca null
+            string m_categorie = null;
+            await Navigation.PushAsync(new SearchListPage(m_utilizator,m_frigider,m_categorie));
         }
         async void OnIngredientDeleteItemSelected(object sender, SelectedItemChangedEventArgs e)
         {

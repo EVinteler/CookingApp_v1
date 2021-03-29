@@ -26,9 +26,12 @@ namespace CookingApp_v1
             // care ne returneaza elemente de tip world, character si story
 
             // elementele de la listViewIngredient vor avea valorile primite din GetIngredientListAsync, metoda din CookingDatabase
-
+            
+            // selectam toate ingredientele deci search si categorie vor fi null
+            string m_search = null;
+            string m_categorie = null;
+            listViewIngrediente.ItemsSource = await App.Database.GetIngredientListAsync(m_search,m_categorie);
             listViewUtilizatori.ItemsSource = await App.Database.GetUtilizatoriListAsync();
-            listViewIngrediente.ItemsSource = await App.Database.GetIngredientListAsync();
             listViewFiltre.ItemsSource = await App.Database.GetFiltruListAsync();
             listViewRetete.ItemsSource = await App.Database.GetRetetaListAsync();
             listViewFrigidere.ItemsSource = await App.Database.GetFrigiderListAsync();

@@ -20,21 +20,33 @@ namespace CookingApp_v1
     {
         Utilizatori m_utilizator;
         Frigidere m_frigider;
-        string m_search, m_categorie;
-        public SearchListPage(Utilizatori utilizator, Frigidere frigider, string search, string categorie)
+        string m_categorie;
+        public SearchListPage(Utilizatori utilizator, Frigidere frigider, string categorie)
         {
             InitializeComponent();
             m_utilizator = utilizator;
             m_frigider = frigider;
-            m_search = search;
             m_categorie = categorie;
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ShowPageData();
+            // initial, nu cautam nimic
+            string m_search = null;
+            ShowPageData(m_search);
         }
-        protected async void ShowPageData()
+        void OnTextChanged(object sender, EventArgs e)
+        {
+            SearchBar searchBar = (SearchBar)sender;
+            string m_search = searchBar.Text;
+
+            // daca stergem textul din search bar dorim ca search sa fie considerat null si sa ne arate iar tot
+            if (searchBar.Text == "" || searchBar.Text == " ")
+                m_search = null;
+
+            ShowPageData(m_search);
+        }
+        protected async void ShowPageData(string m_search)
         {
             // pentru ca listView din .xaml sa stie care lista sa o afiseze, folosim functia din CookingDatabase
             // elementele de la listViewIngredient vor avea valorile primite din GetIngredientListAsync, metoda din CookingDatabase
@@ -54,6 +66,7 @@ namespace CookingApp_v1
             Navigation.PopAsync();
             await Navigation.PushAsync(new SearchCategoriesPage());
         }
+
         async void OnIngredientAddItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             //await DisplayAlert("OnIngredientAddItemSelected", "Opened [OnIngredientAddItemSelected].", "Ok.");

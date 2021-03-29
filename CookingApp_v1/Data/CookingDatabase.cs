@@ -451,6 +451,7 @@ namespace CookingApp_v1.Data
                 lista_ingrediente = _database.Table<Ingrediente>()
                                      .Where(i => i.N_nume == search || i.N_subcategorie == search)
                                      .ToListAsync();
+                                     //!toreview! add breaking the N_desc by " " and comparing each w search
             }
 
             return lista_ingrediente;
