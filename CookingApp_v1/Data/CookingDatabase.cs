@@ -459,20 +459,37 @@ namespace CookingApp_v1.Data
                     // descrierea ingredientului au macar 3 litere in comun cu ce a cautat utilizatorul
                     foreach (Ingrediente ingredient in lista_ingrediente)
                     {
-                        var cond_1 = ingredient.N_nume.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 3;
-                        var cond_2 = ingredient.N_subcategorie.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 3;
+                        bool cond_1 = ingredient.N_nume.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 3;
                         // uneori subcategorie poate sa fie null, deci pentru a nu avea erori, daca este null consideram ca
                         // conditia este falsa
-                        System.Diagnostics.Debug.WriteLine(">>>>>>>>>>" + cond_1 + " " + cond_2 + " = " + (cond_1 || cond_2));
-                        if (cond_1 || (ingredient.N_subcategorie == null) ? (false) : (cond_2))
-                        {
-                            System.Diagnostics.Debug.WriteLine(">>>>>>>>>>ADDED: " + cond_1 + " " + cond_2);
-                            ingrediente_rezultate.Add(ingredient);
-                        }
-                        else
-                        {
-                            System.Diagnostics.Debug.WriteLine(">>>>>>>>>>NOTADDED: " + cond_1 + " " + cond_2);
+                        bool cond_2 = (ingredient.N_subcategorie == null) ? (false) : (ingredient.N_subcategorie.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 3);
 
+                        // vom prelua lista din N_descriere care contine alte metode de scriere a cuvantului cat si typos
+                        // si o vom sparge intr-un array de string-uri (dupa spatiu) pe care apoi le vom verifica pe rand
+                        // sa vedem daca cuvantul cautat are macar 3 litere comune cu vreunul dintre string-uri
+
+                        // daca descrierea e nula, vom considera conditia falsa
+                        string phrase = ingredient.N_descriere;
+                        bool cond_3 = false;
+
+                        if (phrase != null)
+                        {
+                            string[] words = phrase.Split(' ');
+
+                            foreach (string word in words)
+                                if (word.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 3)
+                                {
+                                    cond_3 = true;
+                                    break;
+                                    // daca gasim macar un cuvant care corespunde conditiei, atunci putem iesi din for
+                                }
+                        }
+
+                        //System.Diagnostics.Debug.WriteLine(">>>>>>>>>>" + cond_1 + " " + cond_2 +" " + cond_3 + " = " + (cond_1 || cond_2 || cond_3));
+                        
+                        if (cond_1 || cond_2 || cond_3)
+                        {
+                            ingrediente_rezultate.Add(ingredient);
                         }
                     }
 
