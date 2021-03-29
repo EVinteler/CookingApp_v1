@@ -436,10 +436,24 @@ namespace CookingApp_v1.Data
             .Where(i => i.N_categorie == categorie)
             .ToListAsync();
         }*/
-        public Task<List<Ingrediente>> GetIngredientListAsync()
+        public Task<List<Ingrediente>> GetIngredientListAsync(string search, string categorie)
         {
             // returneaza o lista de obiecte Ingredient
-            return _database.Table<Ingrediente>().ToListAsync();
+            // daca categorie e null, returnam toata lista
+            // daca categorie nu e null, returnam doar ingredientele din categoria respectiva
+            // separat, daca search e null, returnam toata lista (cu conditiile de la categorie, daca exista)
+            // daca search nu e null, returnam doar ingredientele cu numele, subcategoria sau categoria din search
+
+            var lista_ingrediente = _database.Table<Ingrediente>().ToListAsync();
+
+            if (search != null)
+            {
+                lista_ingrediente = _database.Table<Ingrediente>()
+                                     .Where(i => i.N_nume == search || i.N_subcategorie == search)
+                                     .ToListAsync();
+            }
+
+            return lista_ingrediente;
         }
 
 

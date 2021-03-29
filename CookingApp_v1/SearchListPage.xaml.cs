@@ -20,11 +20,14 @@ namespace CookingApp_v1
     {
         Utilizatori m_utilizator;
         Frigidere m_frigider;
-        public SearchListPage(Utilizatori utilizator, Frigidere frigider)
+        string m_search, m_categorie;
+        public SearchListPage(Utilizatori utilizator, Frigidere frigider, string search, string categorie)
         {
             InitializeComponent();
             m_utilizator = utilizator;
             m_frigider = frigider;
+            m_search = search;
+            m_categorie = categorie;
         }
         protected override void OnAppearing()
         {
@@ -36,7 +39,9 @@ namespace CookingApp_v1
             // pentru ca listView din .xaml sa stie care lista sa o afiseze, folosim functia din CookingDatabase
             // elementele de la listViewIngredient vor avea valorile primite din GetIngredientListAsync, metoda din CookingDatabase
 
-            listViewIngrediente.ItemsSource = await App.Database.GetIngredientListAsync();
+            // vom trimite un string numit search care initial e null (adica nu se cauta nimic)
+            // si un string numit categorie care initial e tot null (adica se cauta prin toata lista, nu doar cea din categoria resp)
+            listViewIngrediente.ItemsSource = await App.Database.GetIngredientListAsync(m_search,m_categorie);
         }
 
         async void OnSearchCategoriesButtonClicked(object sender, EventArgs e)
