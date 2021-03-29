@@ -463,7 +463,7 @@ namespace CookingApp_v1.Data
 
             try
             {
-                if (search == null && categorie != null)
+                if (search == null)
                 {
                         ingrediente_rezultate = lista_ingrediente;
                 }
