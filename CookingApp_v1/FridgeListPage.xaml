@@ -9,6 +9,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Fridge List Page" />
+            <Label Text="ADAUGA culori diferite pe paginile generale si pe paginile specifice fiecarei categorii" />
             <!--<Label Text="{Binding U_nume}" />-->
 
             <ListView x:Name="listViewIngredient" ItemSelected="OnIngredientDeleteItemSelected" Margin="10">
