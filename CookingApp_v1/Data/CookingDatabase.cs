@@ -436,7 +436,8 @@ namespace CookingApp_v1.Data
             .Where(i => i.N_categorie == categorie)
             .ToListAsync();
         }*/
-        public Task<List<Ingrediente>> GetIngredientListAsync(string search, string categorie)
+
+        public async Task<List<Ingrediente>> GetIngredientListAsync(string search, string categorie)
         {
             // returneaza o lista de obiecte Ingredient
             // daca categorie e null, returnam toata lista
@@ -444,17 +445,48 @@ namespace CookingApp_v1.Data
             // separat, daca search e null, returnam toata lista (cu conditiile de la categorie, daca exista)
             // daca search nu e null, returnam doar ingredientele cu numele, subcategoria sau categoria din search
 
-            var lista_ingrediente = _database.Table<Ingrediente>().ToListAsync();
+            // intai copiem tabelul bazei de date intr-o lista, si nu o modificam pt ca ne da erori daca facem asta, lol
+            List<Ingrediente> lista_ingrediente = await _database.Table<Ingrediente>().ToListAsync();
+            List<Ingrediente> ingrediente_rezultate = new List<Ingrediente> { };
 
-            if (search != null)
+            try
             {
-                lista_ingrediente = _database.Table<Ingrediente>()
-                                     .Where(i => i.N_nume == search || i.N_subcategorie == search)
-                                     .ToListAsync();
-                                     //!toreview! add breaking the N_desc by " " and comparing each w search
-            }
+                if (search == null)
+                    ingrediente_rezultate = lista_ingrediente;
+                else if (search != null)
+                {
+                    // in functia de cautare vom verifica daca numele, subcategoria sau orice cuvant din
+                    // descrierea ingredientului au macar 3 litere in comun cu ce a cautat utilizatorul
+                    foreach (Ingrediente ingredient in lista_ingrediente)
+                    {
+                        var cond_1 = ingredient.N_nume.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 3;
+                        var cond_2 = ingredient.N_subcategorie.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 3;
+                        // uneori subcategorie poate sa fie null, deci pentru a nu avea erori, daca este null consideram ca
+                        // conditia este falsa
+                        System.Diagnostics.Debug.WriteLine(">>>>>>>>>>" + cond_1 + " " + cond_2 + " = " + (cond_1 || cond_2));
+                        if (cond_1 || (ingredient.N_subcategorie == null) ? (false) : (cond_2))
+                        {
+                            System.Diagnostics.Debug.WriteLine(">>>>>>>>>>ADDED: " + cond_1 + " " + cond_2);
+                            ingrediente_rezultate.Add(ingredient);
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine(">>>>>>>>>>NOTADDED: " + cond_1 + " " + cond_2);
 
-            return lista_ingrediente;
+                        }
+                    }
+
+                    //!toreview! add breaking the N_desc by " " and comparing each w search
+                }
+                return ingrediente_rezultate;
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(">>>Exception: " + e);
+                // daca ne apare o eroare, returnam o lista nula pentru ca sa nu ne dea crash aplicatia
+                //ingrediente_rezultate = new List<Ingrediente> { };
+                return lista_ingrediente;
+            }
         }
 
 
