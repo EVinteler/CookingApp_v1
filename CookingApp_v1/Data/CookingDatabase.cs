@@ -446,13 +446,27 @@ namespace CookingApp_v1.Data
             // daca search nu e null, returnam doar ingredientele cu numele, subcategoria sau categoria din search
 
             // intai copiem tabelul bazei de date intr-o lista, si nu o modificam pt ca ne da erori daca facem asta, lol
-            List<Ingrediente> lista_ingrediente = await _database.Table<Ingrediente>().ToListAsync();
+
+            List<Ingrediente> lista_ingrediente = new List<Ingrediente> { };
+            
+            // daca categoria e nula, vom selecta ingredientele ce le dorim din toata lista
+            // daca nu e nula, vom selecta din tabel doar ingredientele cu categoria trimisa
+            // si vom prelucra mai apoi search-ul pe lista rezultata de aici
+            if (categorie == null)
+                lista_ingrediente = await _database.Table<Ingrediente>().ToListAsync();
+            else
+                lista_ingrediente = await _database.Table<Ingrediente>()
+                                    .Where(i => i.N_categorie == categorie)
+                                    .ToListAsync();
+
             List<Ingrediente> ingrediente_rezultate = new List<Ingrediente> { };
 
             try
             {
-                if (search == null)
-                    ingrediente_rezultate = lista_ingrediente;
+                if (search == null && categorie != null)
+                {
+                        ingrediente_rezultate = lista_ingrediente;
+                }
                 else if (search != null)
                 {
                     //https://stackoverflow.com/questions/36526414/how-to-check-if-a-string-contains-some-part-of-another-string-in-c
@@ -489,14 +503,14 @@ namespace CookingApp_v1.Data
 
                         //System.Diagnostics.Debug.WriteLine(">>>>>>>>>>" + cond_1 + " " + cond_2 +" " + cond_3 + " = " + (cond_1 || cond_2 || cond_3));
                         
+                        // daca oricare din aceste conditii e indeplinita, adaugam la lista ingredientelor rezultate
                         if (cond_1 || cond_2 || cond_3)
                         {
                             ingrediente_rezultate.Add(ingredient);
                         }
                     }
-
-                    //!toreview! add breaking the N_desc by " " and comparing each w search
                 }
+                
                 return ingrediente_rezultate;
             }
             catch (Exception e)
