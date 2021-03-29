@@ -4,10 +4,22 @@
              x:Class="CookingApp_v1.SearchCategoriesPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Search Categories"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Button Text="Search List" Clicked="OnSearchListButtonClicked" />
+            <!--<Button Text="Search List" Clicked="OnSearchListButtonClicked" />-->
+            <Label Text="Search Categories"/>
+            <FlexLayout Direction="Column"
+                    AlignItems="Center"
+                    JustifyContent="SpaceEvenly">
+
+                <Button Text="Fructe" Clicked="OnFructeButtonClicked" />
+                <Button Text="Legume" Clicked="OnLegumeButtonClicked" />
+                <Button Text="Carne" Clicked="OnCarneButtonClicked" />
+                <Button Text="Făinoase" Clicked="OnFainoaseButtonClicked" />
+                <Button Text="Sosuri" Clicked="OnSosuriButtonClicked" />
+                <Button Text="Condimente" Clicked="OnCondimenteButtonClicked" />
+                <Button Text="Lactate" Clicked="OnLactateButtonClicked" />
+                <Button Text="Dulciuri" Clicked="OnDulciuriButtonClicked" />
+
+            </FlexLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

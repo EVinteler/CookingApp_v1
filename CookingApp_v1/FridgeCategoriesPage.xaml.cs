@@ -100,6 +100,7 @@ namespace CookingApp_v1
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul FridgeList care va arata ingredientele sub forma de lista
             // in cazul de fata, vom arata doar elementele din categoria preluata
+            Navigation.PopAsync();
             await Navigation.PushAsync(new FridgeListPage(m_utilizator, m_frigider, n_categorie));
         }
     }

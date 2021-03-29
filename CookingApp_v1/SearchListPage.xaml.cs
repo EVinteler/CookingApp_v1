@@ -63,8 +63,9 @@ namespace CookingApp_v1
 
             // facem Pop pentru a nu intra intr-un loop de Search Pages
             // nu facem await pt ca atunci nu continua cu Push
+
             Navigation.PopAsync();
-            await Navigation.PushAsync(new SearchCategoriesPage());
+            await Navigation.PushAsync(new SearchCategoriesPage(m_utilizator,m_frigider));
         }
 
         async void OnIngredientAddItemSelected(object sender, SelectedItemChangedEventArgs e)

@@ -455,14 +455,16 @@ namespace CookingApp_v1.Data
                     ingrediente_rezultate = lista_ingrediente;
                 else if (search != null)
                 {
+                    //https://stackoverflow.com/questions/36526414/how-to-check-if-a-string-contains-some-part-of-another-string-in-c
+
                     // in functia de cautare vom verifica daca numele, subcategoria sau orice cuvant din
                     // descrierea ingredientului au macar 3 litere in comun cu ce a cautat utilizatorul
                     foreach (Ingrediente ingredient in lista_ingrediente)
                     {
-                        bool cond_1 = ingredient.N_nume.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 3;
+                        bool cond_1 = ingredient.N_nume.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 4;
                         // uneori subcategorie poate sa fie null, deci pentru a nu avea erori, daca este null consideram ca
                         // conditia este falsa
-                        bool cond_2 = (ingredient.N_subcategorie == null) ? (false) : (ingredient.N_subcategorie.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 3);
+                        bool cond_2 = (ingredient.N_subcategorie == null) ? (false) : (ingredient.N_subcategorie.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 4);
 
                         // vom prelua lista din N_descriere care contine alte metode de scriere a cuvantului cat si typos
                         // si o vom sparge intr-un array de string-uri (dupa spatiu) pe care apoi le vom verifica pe rand
@@ -477,7 +479,7 @@ namespace CookingApp_v1.Data
                             string[] words = phrase.Split(' ');
 
                             foreach (string word in words)
-                                if (word.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 3)
+                                if (word.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 4)
                                 {
                                     cond_3 = true;
                                     break;
@@ -502,7 +504,7 @@ namespace CookingApp_v1.Data
                 System.Diagnostics.Debug.WriteLine(">>>Exception: " + e);
                 // daca ne apare o eroare, returnam o lista nula pentru ca sa nu ne dea crash aplicatia
                 //ingrediente_rezultate = new List<Ingrediente> { };
-                return lista_ingrediente;
+                return new List<Ingrediente> { };
             }
         }
 
