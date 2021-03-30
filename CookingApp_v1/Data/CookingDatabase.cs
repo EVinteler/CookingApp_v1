@@ -157,16 +157,21 @@ namespace CookingApp_v1.Data
                 if (result_r != null)
                 {
                     // functia SQL va selecta utilizatorul cu numele si parola trimise
-                    var result_p = _database.Table<Utilizatori>()
+                    /*var result_p = _database.Table<Utilizatori>()
                                             .Where(i => i.U_nume == utilizator.U_nume && i.U_parola == utilizator.U_parola)
-                                            .FirstAsync();
+                                            .FirstAsync();*/
+
+                    // verificam daca parola luata de la formular (utilizator.U_p) este aceiasi cu cea gasita
+                    // in baza de date pentru utilizatorul cu numele dat
+                    bool result_p = (result_r.U_parola == utilizator.U_parola);
+
                     // pentru criptare:
                     // c_parola = fct_cript(utilizator.U_parola)
                     //.Where(i => i.U_nume == utilizator.U_nume && i.U_parola == c_parola)
 
 
                     // daca exista utilizator cu numele si parola trimise vom return 1 (succes)
-                    if (result_p != null)
+                    if (result_p == true)
                         return 1;
                     // altfel vom returna -1, care ne va da un mesaj de eroare
                     // specific pe pagina login
