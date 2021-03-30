@@ -534,7 +534,7 @@ namespace CookingApp_v1.Data
             //foreach (Ingrediente i in ingrediente_detinute)
                 //System.Diagnostics.Debug.WriteLine(">>>GRRLISTing: " + i.N_nume);
 
-            List<Retete> lista_retete = new List<Retete> { };
+            List<Retete> rezultat_retete = new List<Retete> { };
             List<Retete> toate_retetele = await _database.Table<Retete>().ToListAsync();
 
             foreach(Retete r in toate_retetele)
@@ -544,7 +544,56 @@ namespace CookingApp_v1.Data
                     System.Diagnostics.Debug.WriteLine(">>>>>>INGREDIENT: " + i.N_nume);
             }
 
-            return lista_retete;
+            //!toreview! - vezi daca nu poti face functia mai buna / cu sql (poate cu cv select si unions idk)
+
+            // vom lua fiecare reteta care exista pe rand si ii vom verifica toate ingredientele
+            // cu cele care le detinem in frigider
+            // daca apare macar un ingredient in reteta pe care noi nu il avem, atunci facem break
+            // si trecem la urmatoarea reteta
+            // daca toate ingredientele retetei apar in ingredientele noastre, atunci o adaugam in lista_retete
+
+            // r_i e ingredientul din reteta
+            // f_i e ingredientul din frigider
+            foreach (Retete r in toate_retetele)
+            {
+                // vom presupune ca reteta curenta are toate ingredientele
+                bool are_ing = true;
+                foreach (Ingrediente r_i in r.R_ingrediente)
+                {
+                    // !toreview! pe viitor: pt filtrul de "fara condimente", daca categoria ingredientului din
+                    // reteta este cea de condiment atunci vom sari peste pasul de cautare si ing_gasit va fi automat
+                    // true
+
+                    // intai, ing_gasit va avea valoarea false, adica ingredientul nu a fost gasit
+                    bool ing_gasit = false;
+                    foreach (Ingrediente f_i in ingrediente_detinute)
+                        if (r_i == f_i)
+                        {
+                            // daca ingredientul r_i este egal cu oricare din f_i inseamna ca a fost gasit
+                            // deci ing_gasit devine true si iesim din functia de cautare
+                            ing_gasit = true;
+                            break;
+                        }
+                    // repetam aceasta cautare pentru toate ingredientele
+                    // decat in cazul in care ing_gasit are valoarea false si la final
+                    // ceea ce inseamna ca nu a fost gasit ingredientul in frigider
+                    // moment in care are_ing va deveni false, deoarece reteta curenta nu are
+                    // toate ingredientele, si vom iesi si din acest for
+                    if (ing_gasit == false)
+                    {
+                        are_ing = false;
+                        break;
+                    }
+                }
+                // daca reteta are toate ingredientele printre cele din frigider (adica are_ing = true)
+                // o vom adauga in lista retetelor rezultate
+                rezultat_retete.Add(r);
+            }
+
+
+            // de-comenteaza rezultat_retete
+            //return rezultat_retete;
+            return toate_retetele;
         }
 
 

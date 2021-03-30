@@ -17,6 +17,8 @@ namespace CookingApp_v1.Models
         public string R_cultura { get; set; }
         public string R_descriere { get; set; }
 
+        //public string R_link_imagine { get; set; }
+
         // daca nu merge cu 1:M, schimba in string si converteste la cautare
         [OneToMany]
         public List<Ingrediente> R_ingrediente { get; set; }
