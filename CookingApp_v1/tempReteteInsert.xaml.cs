@@ -29,6 +29,8 @@ namespace CookingApp_v1
         public tempReteteInsert(Retete reteta)
         {
             InitializeComponent();
+
+
             //m_reteta = reteta;
 
             //foreach (Ingrediente i in m_reteta.R_ingrediente)
@@ -36,10 +38,18 @@ namespace CookingApp_v1
         }
         protected override async void OnAppearing()
         {
+            // comenteaza pt inserare retete
+            // de aici
+            Retete m_reteta = (Retete)BindingContext;
+            Retete n_reteta = await App.Database.GetRetetaAsync(m_reteta.R_id);
+            System.Diagnostics.Debug.WriteLine(">>>UP: " + n_reteta.R_nume);
+            foreach (Ingrediente i in m_reteta.R_ingrediente)
+                System.Diagnostics.Debug.WriteLine(">>>UPING: " + i.N_nume);
+            // aici
+
             base.OnAppearing();
 
             // pentru ca listView din .xaml sa stie care lista sa o afiseze, folosim functia din CookingDatabase
-            // care ne returneaza elemente de tip world, character si story
 
             // elementele de la listViewIngredient vor avea valorile primite din GetIngredientListAsync, metoda din CookingDatabase
 
@@ -52,14 +62,6 @@ namespace CookingApp_v1
             //listViewRetetaIngredient.ItemsSource = App.Database.GetRetetaIngredientListAsync(m_reteta);
 
             // vom afisa informatiile luate din m_reteta (daca exista)
-            //showRetetaInfo(m_reteta);
-        }
-        public void showRetetaInfo(Retete reteta)
-        {
-            e_nume.Text = reteta.R_nume;
-            e_link.Text = reteta.R_link;
-            e_cultura.Text = reteta.R_cultura;
-            e_descriere.Text = reteta.R_descriere;
         }
         async void OnSubmitButtonClicked(object sender, EventArgs e)
         {
@@ -128,12 +130,14 @@ namespace CookingApp_v1
                 Retete n_reteta = await App.Database.GetRetetaAsync(m_reteta.R_id);
                 System.Diagnostics.Debug.WriteLine(">>>2RETETA: " + n_reteta.R_nume);
                 foreach (Ingrediente i in m_reteta.R_ingrediente)
-                    System.Diagnostics.Debug.WriteLine(">>>2TEMPRINing: " + i.N_nume);
+                    System.Diagnostics.Debug.WriteLine(">>>2RETETAing: " + i.N_nume);
 
                 //NU activa pop, basically cum functioneaza prostia asta e ca tre sa alegi ingredientele
                 // fiecare pe rand FARA sa iesi de pe pg asta, de fiecare data cand dai click pe o reteta
                 // se re-creaza lista ingredientelor retetei lol
                 //await Navigation.PopAsync();
+
+                // de ce nu mi se salveaza reteta in DB cand ies de pe pagina? :'O
             }
         }
     }

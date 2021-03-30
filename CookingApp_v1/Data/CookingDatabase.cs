@@ -500,7 +500,7 @@ namespace CookingApp_v1.Data
         {
             // returneaza o lista de obiecte Ingredient
 
-            System.Diagnostics.Debug.WriteLine(">>>1ING RETETA: " + reteta.R_nume);
+            //System.Diagnostics.Debug.WriteLine(">>>1ING RETETA: " + reteta.R_nume);
 
             //foreach (Ingrediente i in reteta.R_ingrediente)
                 //System.Diagnostics.Debug.WriteLine(">>>1INGLISTing: " + i.N_nume);
@@ -580,7 +580,7 @@ namespace CookingApp_v1.Data
             else
                 return _database.InsertAsync(reteta);
         }
-        public Retete tempGetNewReteta(Retete reteta)
+        /*public Retete tempGetNewReteta(Retete reteta)
         {
             reteta.R_ingrediente = new List<Ingrediente> { 
                 new Ingrediente{ N_id=5, N_nume="aaa"}
@@ -590,7 +590,7 @@ namespace CookingApp_v1.Data
                 System.Diagnostics.Debug.WriteLine(">>>TGNRing: " + i.N_nume);
 
             return reteta;
-        }
+        }*/
         public Task<int> tempAddIngredienteAsync(Ingrediente ingredient)
         {
             return _database.InsertAsync(ingredient);
