@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using CookingApp_v1.Models;
+
 namespace CookingApp_v1
 {
     /*
@@ -18,6 +20,14 @@ namespace CookingApp_v1
         public RecipeDetailPage()
         {
             InitializeComponent();
+        }
+        protected override /*async*/ void OnAppearing()
+        {
+            base.OnAppearing();
+
+            //afisam ingredientele retetei
+            Retete m_reteta = (Retete)BindingContext;
+            //listViewRetetaIngredient.ItemsSource = await App.Database.GetRetetaIngredientVar2ListAsync(m_reteta);
         }
     }
 }

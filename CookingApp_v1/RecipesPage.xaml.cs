@@ -17,38 +17,42 @@ namespace CookingApp_v1
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RecipesPage : ContentPage
     {
-        public RecipesPage()
+        Utilizatori m_utilizator;
+        Frigidere m_frigider;
+        Filtre m_filtru;
+        public RecipesPage(Utilizatori utilizator, Frigidere frigider)
         {
             InitializeComponent();
+            m_utilizator = utilizator;
+            m_frigider = frigider;
         }
-        void OnFridgeListButtonClicked(object sender, EventArgs e)
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            //afisam rezultatele retetelor
+            //toate retetele: listViewReteteResults.ItemsSource = await App.Database.GetRetetaListAsync();
+
+            listViewReteteResults.ItemsSource = await App.Database.GetReteteResultsListAsync(m_frigider);
+        }
+        async void OnFridgeButtonClicked(object sender, EventArgs e)
         {
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
-            // adaugam o pagina de tipul FridgeCategories care ne arata categoriile de ingrediente
+            // mergem la pagina generala pentru frigider, adica cea fara nicio categorie
 
-            Utilizatori m_utilizator = (Utilizatori)BindingContext;
-            /*await Navigation.PushAsync(new FridgeListPage
-            {
-                // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
-                BindingContext = m_utilizator
-            });*/
+            string m_categorie = null;
+            await Navigation.PushAsync(new FridgeListPage(m_utilizator, m_frigider, m_categorie));
         }
-        async void OnRecipeDetailButtonClicked(object sender, EventArgs e)
+        async void OnRecipeDetailButtonClicked(object sender, SelectedItemChangedEventArgs e)
         {
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
-            // adaugam o pagina de tipul RecipeDetailPage pentru detalii despre o reteta
-            // mai tarziu o vom schimba sa ne arate detailul in functie de reteta anume aleasa
-            /*await Navigation.PushAsync(new ListPage
-                {
-                    BindingContext = new World()
-                });
-            */
+            // adaugam o pagina de tipul RecipeDetailPage pentru detalii despre reteta transmisa
 
-            Utilizatori m_utilizator = (Utilizatori)BindingContext;
+            Retete reteta = e.SelectedItem as Retete;
+
             await Navigation.PushAsync(new RecipeDetailPage
             {
-                // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
-                BindingContext = m_utilizator
+                BindingContext = reteta
             });
         }
     }

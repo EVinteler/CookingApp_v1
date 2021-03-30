@@ -64,13 +64,9 @@ namespace CookingApp_v1
         async void OnRecipesButtonClicked(object sender, EventArgs e)
         {
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
-            // adaugam o pagina de tipul Recipes care ne arat lista de retete disponibile
+            // adaugam o pagina de tipul Recipes care ne arata lista de retete disponibile
 
-            await Navigation.PushAsync(new RecipesPage
-            {
-                // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
-                BindingContext = m_utilizator
-            });
+            await Navigation.PushAsync(new RecipesPage(m_utilizator, m_frigider));
         }
         async void OnFridgeCategoriesButtonClicked(object sender, EventArgs e)
         {

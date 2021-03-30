@@ -500,10 +500,51 @@ namespace CookingApp_v1.Data
         {
             // returneaza o lista de obiecte Ingredient
 
+            System.Diagnostics.Debug.WriteLine(">>>1ING RETETA: " + reteta.R_nume);
+
             //foreach (Ingrediente i in reteta.R_ingrediente)
-            //System.Diagnostics.Debug.WriteLine(">>>1INGLISTing: " + i.N_nume);
+                //System.Diagnostics.Debug.WriteLine(">>>1INGLISTing: " + i.N_nume);
 
             return reteta.R_ingrediente;
+        }
+        public async Task<List<Ingrediente>> GetRetetaIngredientVar2ListAsync(Retete reteta)
+        {
+            // returneaza o lista de obiecte Ingredient
+
+            System.Diagnostics.Debug.WriteLine(">>>1ING RETETA: " + reteta.R_id);
+
+            // vom selecta o lista de reteta care au id-ul retetei transmise
+            var m_retete = await _database.QueryAsync<Retete>("select * FROM Retete where R_id = " + reteta.R_id);
+
+            // deoarece stim ca exista doar o reteta, o putem selecta pe aceasta
+            var m_reteta = m_retete.First();
+
+            foreach (Ingrediente i in m_reteta.R_ingrediente)
+                System.Diagnostics.Debug.WriteLine(">>>1INGLISTing: " + i.N_nume);
+
+            return m_reteta.R_ingrediente;
+        }
+
+        public async Task<List<Retete>> GetReteteResultsListAsync(Frigidere frigider)
+        {
+            List<Ingrediente> ingrediente_detinute = frigider.F_ingrediente;
+
+            //System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>TEST frigider id: " + frigider.F_id);
+
+            //foreach (Ingrediente i in ingrediente_detinute)
+                //System.Diagnostics.Debug.WriteLine(">>>GRRLISTing: " + i.N_nume);
+
+            List<Retete> lista_retete = new List<Retete> { };
+            List<Retete> toate_retetele = await _database.Table<Retete>().ToListAsync();
+
+            foreach(Retete r in toate_retetele)
+            {
+                System.Diagnostics.Debug.WriteLine(">>>RETETA: " + r.R_nume);
+                foreach (Ingrediente i in r.R_ingrediente)
+                    System.Diagnostics.Debug.WriteLine(">>>>>>INGREDIENT: " + i.N_nume);
+            }
+
+            return lista_retete;
         }
 
 

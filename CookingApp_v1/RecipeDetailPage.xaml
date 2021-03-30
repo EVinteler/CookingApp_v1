@@ -4,9 +4,30 @@
              x:Class="CookingApp_v1.RecipeDetailPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Recipe Detail Page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Recipe Detail Page"/>
+            <Label Text="PUNE DIRECT LINK SPRE PAGINA WEB?" FontAttributes="Bold"/>
+
+            <Label Text="{Binding R_id}" FontAttributes="Bold" />
+            <Label Text="{Binding R_nume}" />
+            <Label Text="{Binding R_link}" />
+            <Label Text="{Binding R_cultura}" />
+            <Label Text="{Binding R_descriere}" />
+
+            <!--<Label Text="Inserare INGREDIENTE"/>
+            <ListView x:Name="listViewRetetaIngredient" BackgroundColor="LightGreen" Margin="20" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Label Grid.Column="5" Text="{Binding N_link_imagine}" />
+                                <Label Grid.Column="1" Text="{Binding N_nume}" />
+                                <Label Grid.Column="2" Text="+" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

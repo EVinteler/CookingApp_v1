@@ -48,7 +48,7 @@ namespace CookingApp_v1
             string m_categorie = null;
 
             listViewIngredient.ItemsSource = await App.Database.GetIngredientListAsync(m_search,m_categorie);
-            Retete m_reteta = (Retete)BindingContext;
+            //Retete m_reteta = (Retete)BindingContext;
             //listViewRetetaIngredient.ItemsSource = App.Database.GetRetetaIngredientListAsync(m_reteta);
 
             // vom afisa informatiile luate din m_reteta (daca exista)
@@ -113,6 +113,8 @@ namespace CookingApp_v1
 
                 //await DisplayAlert(">>>Alerta:", "before getReteta", "okae");
                 List<Ingrediente> m_lista_ingr_1 = App.Database.GetRetetaIngredientListAsync(m_reteta);
+                foreach (Ingrediente i in m_lista_ingr_1)
+                    System.Diagnostics.Debug.WriteLine(">>>M_LTEMPRINing: " + i.N_nume);
                 //await DisplayAlert(">>>Alerta:", "before NewIng", "okae");
                 List<Ingrediente> m_lista_ingr_2 = new List<Ingrediente> { ing };
                 //await DisplayAlert(">>>Alerta:", "before Concat", "okae");
@@ -120,7 +122,13 @@ namespace CookingApp_v1
                 await App.Database.tempAddUpdateReteteAsync(m_reteta);
 
                 foreach (Ingrediente i in m_reteta.R_ingrediente)
-                    System.Diagnostics.Debug.WriteLine(">>>2INGLISTing: " + i.N_nume);
+                    System.Diagnostics.Debug.WriteLine(">>>TEMPRINing: " + i.N_nume);
+
+
+                Retete n_reteta = await App.Database.GetRetetaAsync(m_reteta.R_id);
+                System.Diagnostics.Debug.WriteLine(">>>2RETETA: " + n_reteta.R_nume);
+                foreach (Ingrediente i in m_reteta.R_ingrediente)
+                    System.Diagnostics.Debug.WriteLine(">>>2TEMPRINing: " + i.N_nume);
 
                 //NU activa pop, basically cum functioneaza prostia asta e ca tre sa alegi ingredientele
                 // fiecare pe rand FARA sa iesi de pe pg asta, de fiecare data cand dai click pe o reteta

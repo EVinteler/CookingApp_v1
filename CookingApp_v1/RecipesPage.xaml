@@ -3,15 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CookingApp_v1.RecipesPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem  Priority="0" Text="Fridge" Clicked="OnFridgeListButtonClicked"/>
+        <ToolbarItem  Priority="0" Text="Fridge" Clicked="OnFridgeButtonClicked"/>
         <ToolbarItem  Priority="1" Text="Recipes"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Recipes Page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Button Text="Recipe Detail" Clicked="OnRecipeDetailButtonClicked" />
+            <Label Text="Recipes Page"/>
+
+            <ListView x:Name="listViewReteteResults" ItemSelected="OnRecipeDetailButtonClicked" BackgroundColor="PaleGreen" Margin="20">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Label Text="{Binding R_id}" FontAttributes="Bold" />
+                                <Label Grid.Column="1" Text="{Binding R_nume}" />
+                                <Label Grid.Column="2" Text="{Binding R_link}" />
+                                <Label Grid.Column="3" Text="{Binding R_cultura}" />
+                                <Label Grid.Column="4" Text="{Binding R_descriere}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
