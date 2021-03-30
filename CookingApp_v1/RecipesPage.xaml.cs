@@ -21,6 +21,18 @@ namespace CookingApp_v1
         {
             InitializeComponent();
         }
+        void OnFridgeListButtonClicked(object sender, EventArgs e)
+        {
+            // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
+            // adaugam o pagina de tipul FridgeCategories care ne arata categoriile de ingrediente
+
+            Utilizatori m_utilizator = (Utilizatori)BindingContext;
+            /*await Navigation.PushAsync(new FridgeListPage
+            {
+                // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
+                BindingContext = m_utilizator
+            });*/
+        }
         async void OnRecipeDetailButtonClicked(object sender, EventArgs e)
         {
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
@@ -38,18 +50,6 @@ namespace CookingApp_v1
                 // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
                 BindingContext = m_utilizator
             });
-        }
-        void OnFridgeListButtonClicked(object sender, EventArgs e)
-        {
-            // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
-            // adaugam o pagina de tipul FridgeCategories care ne arata categoriile de ingrediente
-
-            Utilizatori m_utilizator = (Utilizatori)BindingContext;
-            /*await Navigation.PushAsync(new FridgeListPage
-            {
-                // vom transmite informatiile din utilizator (luate inca de la logare) in continuare
-                BindingContext = m_utilizator
-            });*/
         }
     }
 }

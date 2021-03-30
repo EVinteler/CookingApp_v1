@@ -388,54 +388,10 @@ namespace CookingApp_v1.Data
                 return true;
         }
 
-        /*** INGREDIENTE 
+        /*** INGREDIENTE ***/
         // functii pt ingrediente: afisam toate ingredientele ca lista; afisam toate ingredientele dintr-o categorie
         // returnam un singur ingredient (pt a il adauga la un frigider)
         // cautare dupa nume, categorie si/sau subcategorie cu LIKE
-
-        
-        public async Task<int> AddIngredientAsync (Ingrediente ingredient)
-        {
-            return await _database.InsertAsync(ingredient);
-        }
-        // Task returneaza un obiect async, in cazul nostru de tip Ingredient
-        public Task<Ingrediente> SearchIngredientAsync(string nume_inserat)
-        {
-            // !toreview!
-            // returneaza un obiect de tip Ingredient dupa nume, categorie, subcategorie sau descriere
-
-            // substring comparisons nu ==
-            return _database.Table<Ingrediente>()
-            .Where(i => i.N_nume == nume_inserat || i.N_categorie == nume_inserat || i.N_subcategorie == nume_inserat ||
-            i.N_descriere == nume_inserat) // !toreview! nume inserat e un string cu mai multe cuvinte, trebuie delimitat dupa caracterul space
-           .FirstOrDefaultAsync();
-        }
-        public Task<Ingrediente> SearchIngredientCategorieAsync(string categorie, string nume_inserat)
-        {
-            // !toreview!
-            // returneaza un obiect de tip Ingredient dupa nume/etc, dar doar din categoria dorita
-        
-            // substring comparisons nu ==
-            return _database.Table<Ingrediente>()
-            .Where(i => i.N_categorie == categorie && ( i.N_nume == nume_inserat || i.N_categorie == nume_inserat 
-            || i.N_subcategorie == nume_inserat || i.N_descriere == nume_inserat)) 
-            // !toreview! nume inserat e un string cu mai multe cuvinte, trebuie delimitat dupa caracterul space
-           .FirstOrDefaultAsync();
-        }
-        public Task<Ingrediente> GetIngredientAsync(int id)
-        {
-            // returneaza un obiect de tip Ingredient dupa id
-            return _database.Table<Ingrediente>()
-            .Where(i => i.N_id == id)
-           .FirstOrDefaultAsync();
-        }
-        public Task<List<Ingrediente>> GetIngredientCategorieListAsync(string categorie)
-        {
-            // returneaza o lista de obiecte Ingredient din categoria trimisa
-            return _database.Table<Ingrediente>()
-            .Where(i => i.N_categorie == categorie)
-            .ToListAsync();
-        }*/
 
         public async Task<List<Ingrediente>> GetIngredientListAsync(string search, string categorie)
         {
@@ -475,10 +431,10 @@ namespace CookingApp_v1.Data
                     // descrierea ingredientului au macar 3 litere in comun cu ce a cautat utilizatorul
                     foreach (Ingrediente ingredient in lista_ingrediente)
                     {
-                        bool cond_1 = ingredient.N_nume.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 4;
+                        bool cond_1 = ingredient.N_nume.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 3;
                         // uneori subcategorie poate sa fie null, deci pentru a nu avea erori, daca este null consideram ca
                         // conditia este falsa
-                        bool cond_2 = (ingredient.N_subcategorie == null) ? (false) : (ingredient.N_subcategorie.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 4);
+                        bool cond_2 = (ingredient.N_subcategorie == null) ? (false) : (ingredient.N_subcategorie.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 3);
 
                         // vom prelua lista din N_descriere care contine alte metode de scriere a cuvantului cat si typos
                         // si o vom sparge intr-un array de string-uri (dupa spatiu) pe care apoi le vom verifica pe rand
@@ -493,7 +449,7 @@ namespace CookingApp_v1.Data
                             string[] words = phrase.Split(' ');
 
                             foreach (string word in words)
-                                if (word.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 4)
+                                if (word.ToCharArray().Intersect(search.ToCharArray()).ToList().Count() >= 3)
                                 {
                                     cond_3 = true;
                                     break;

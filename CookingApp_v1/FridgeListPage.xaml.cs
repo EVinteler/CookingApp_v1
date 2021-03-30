@@ -53,6 +53,14 @@ namespace CookingApp_v1
             //await DisplayAlert("Alerta:","ID:" + m_utilizator.U_nume,"ok??");
             //App.Database.GetFrigiderIngredientListAsync(m_utilizator);
         }
+        async void OnFridgeButtonClicked(object sender, EventArgs e)
+        {
+            // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
+            // revenim la pagina generala pentru frigider, adica fara nicio categorie
+
+            m_categorie = null;
+            await Navigation.PushAsync(new FridgeListPage(m_utilizator,m_frigider,m_categorie));
+        }
         async void OnRecipesButtonClicked(object sender, EventArgs e)
         {
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare

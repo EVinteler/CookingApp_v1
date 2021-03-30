@@ -38,12 +38,11 @@ namespace CookingApp_v1
                 BindingContext = m_utilizator
             });
         }
-        async void OnFridgeListButtonClicked(object sender, EventArgs e)
+        async void OnFridgeButtonClicked(object sender, EventArgs e)
         {
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
-            // adaugam o pagina de tipul FridgeCategories care ne arata categoriile de ingrediente
+            // revenim la pagina generala pentru frigider, adica fara nicio categorie
 
-            // cream o categorie nulla
             string m_categorie = null;
             await Navigation.PushAsync(new FridgeListPage(m_utilizator,m_frigider,m_categorie));
         }
@@ -100,7 +99,9 @@ namespace CookingApp_v1
             // PUSHasync ne adauga o noua pagina pe stack-ul de pagini de navigare
             // adaugam o pagina de tipul FridgeList care va arata ingredientele sub forma de lista
             // in cazul de fata, vom arata doar elementele din categoria preluata
-            Navigation.PopAsync();
+
+            // nu facem pop pentru ca vrem sa putem reveni la pagina asta daca alegem categoria gresita si dam back
+            //Navigation.PopAsync();
             await Navigation.PushAsync(new FridgeListPage(m_utilizator, m_frigider, n_categorie));
         }
     }
