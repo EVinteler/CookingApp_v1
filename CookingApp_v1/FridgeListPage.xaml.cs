@@ -90,42 +90,48 @@ namespace CookingApp_v1
         }
         async void OnIngredientDeleteItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            //await DisplayAlert("OnIngredientDeleteItemSelected", "Opened [OnIngredientDeleteItemSelected].", "Ok.");
-
-            // sterge elementul selectat din FRIGIDERul virtual, nu din toata lista de ingrediente
-
-            // cautam elementul in lista si facem o lista noua fara el
-            // pe care apoi o copiem in lista initiala si updatam this.frigiderul in baza de date
-            // am incercat numai sa sterg elementul dar da eroare lol, nu cred ca pot "lucra"
-            // pe lista in sine, si doar sa ii atribui la final o noua valoare
-            // pt ca aveam erori similare si la adaugarea unui nou element, si nu am mai avut
-            // erori doar in momentul in care am facut tot asa (pagina SearchListPage)
-
             Ingrediente ingredient = e.SelectedItem as Ingrediente;
-            List<Ingrediente> n_frigider_ingrediente = new List<Ingrediente> { };
+            var action = await DisplayAlert("ATENTIE!", "Doriți sa să ștergeți " + ingredient.N_nume, "Da.", "Nu.");
 
-            foreach (Ingrediente m_ingredient in m_frigider.F_ingrediente)
-                if (m_ingredient.N_id != ingredient.N_id)
-                {
-                    n_frigider_ingrediente.Add(m_ingredient);
-                }
+            if (action)
+            { 
+                //await DisplayAlert("OnIngredientDeleteItemSelected", "Opened [OnIngredientDeleteItemSelected].", "Ok.");
 
-            m_frigider.F_ingrediente = n_frigider_ingrediente;
+                // sterge elementul selectat din FRIGIDERul virtual, nu din toata lista de ingrediente
 
-            await App.Database.AddUpdateFrigiderAsync(m_frigider);
-
-
-            // cream o pagina noua si o adaugam inainte de aceasta, si apoi ii facem pop la pagina curenta
-            // pentru a o updata si sa dispara ingredientul sters din frigider
-            var n_FridgeListPage = new FridgeListPage(m_utilizator,m_frigider,m_categorie); 
-            Navigation.InsertPageBefore(n_FridgeListPage, this);
-            Navigation.PopAsync();
+                // cautam elementul in lista si facem o lista noua fara el
+                // pe care apoi o copiem in lista initiala si updatam this.frigiderul in baza de date
+                // am incercat numai sa sterg elementul dar da eroare lol, nu cred ca pot "lucra"
+                // pe lista in sine, si doar sa ii atribui la final o noua valoare
+                // pt ca aveam erori similare si la adaugarea unui nou element, si nu am mai avut
+                // erori doar in momentul in care am facut tot asa (pagina SearchListPage)
 
 
-            /*
-             m_frigider = App.Database.DeleteIngredientFromFridgeAsync(m_frigider, m_ingredient);
-             await App.Database.AddUpdateFrigiderAsync(m_frigider);
-             */
+                List<Ingrediente> n_frigider_ingrediente = new List<Ingrediente> { };
+
+                foreach (Ingrediente m_ingredient in m_frigider.F_ingrediente)
+                    if (m_ingredient.N_id != ingredient.N_id)
+                    {
+                        n_frigider_ingrediente.Add(m_ingredient);
+                    }
+
+                m_frigider.F_ingrediente = n_frigider_ingrediente;
+
+                await App.Database.AddUpdateFrigiderAsync(m_frigider);
+
+
+                // cream o pagina noua si o adaugam inainte de aceasta, si apoi ii facem pop la pagina curenta
+                // pentru a o updata si sa dispara ingredientul sters din frigider
+                var n_FridgeListPage = new FridgeListPage(m_utilizator, m_frigider, m_categorie);
+                Navigation.InsertPageBefore(n_FridgeListPage, this);
+                Navigation.PopAsync();
+
+
+                /*
+                 m_frigider = App.Database.DeleteIngredientFromFridgeAsync(m_frigider, m_ingredient);
+                 await App.Database.AddUpdateFrigiderAsync(m_frigider);
+                 */
+            }
         }
     }
 }
